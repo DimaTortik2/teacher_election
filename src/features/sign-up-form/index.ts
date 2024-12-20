@@ -1,0 +1,1 @@
+export { SignUpForm } from './ui/sighn-up-form'
