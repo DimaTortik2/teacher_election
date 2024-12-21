@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import { SignUpPage } from './pages/sign-up'
 import { Layout } from './app'
 import { SignInPage } from './pages/sign-in'
+import { AdminPage } from './pages/adminPanel'
+import { AdminSubjectsPage } from './pages/admin-page/insex'
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
@@ -12,7 +14,9 @@ createRoot(document.getElementById('root')!).render(
 			<Routes>
 				<Route element={<Layout />}>
 					<Route path='/' element={<SignUpPage />} />
-					<Route path='/sign-in' element={<SignInPage/>} />
+					<Route path='/sign-in' element={<SignInPage />} />
+					<Route path='/admin' element={<AdminPage />}></Route>
+					<Route path='/admin/subjects' element={<AdminSubjectsPage />}></Route>
 				</Route>
 			</Routes>
 		</BrowserRouter>

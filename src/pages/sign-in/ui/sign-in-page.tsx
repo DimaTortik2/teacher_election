@@ -1,5 +1,5 @@
 import { SignInForm } from '../../../features/sign-in-form'
-import { AuthTitle } from '../../../shared/auth-title'
+import { AuthTitle } from '../../../shared'
 
 export function SignInPage() {
 	return (

@@ -1,9 +1,12 @@
 import clsx from 'clsx'
 import { Outlet } from 'react-router'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 
 export function Layout() {
+	const queryClient = new QueryClient()
+
 	return (
-		<>
+		<QueryClientProvider client={queryClient}>
 			<div
 				className={clsx(
 					'flex items-center justify-center',
@@ -14,6 +17,6 @@ export function Layout() {
 			>
 				<Outlet />
 			</div>
-		</>
+		</QueryClientProvider>
 	)
 }

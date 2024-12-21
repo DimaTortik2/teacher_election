@@ -1,20 +1,17 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { Button } from '../../../widgets/button'
-
-interface IForm {
-	email: string
-	password: number
-	codeWord: string
-}
+import { Button } from '../../../shared/ui/button'
+import { ISignIn, usePostSignIn } from '../../../shared'
 
 export function SignInForm() {
+	const { signIn, signInIsLoading, signInIsSuccess } = usePostSignIn()
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<IForm>()
+	} = useForm<ISignIn>()
 
-	const onSumbit: SubmitHandler<IForm> = data => console.log(data)
+	const onSumbit: SubmitHandler<ISignIn> = data => signIn(data)
 
 	const INPUT_CLASSNAME =
 		'w-[calc((1vh_+_1vw)*24)] sm:w-[calc((1vh_+_1vw)*21)] md:w-[calc((1vh_+_1vw)*17)] xl:w-[350px] h-[2.5rem] text-xl rounded-xl  text-black'
@@ -36,6 +33,7 @@ export function SignInForm() {
 			<div className='mb-4'>
 				<p>Пароль</p>
 				<input
+					type='password'
 					{...register('password', { required: true })}
 					className={INPUT_CLASSNAME}
 				/>
