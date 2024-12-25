@@ -1,9 +1,15 @@
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { Button } from '../../../shared/ui/button'
-import { ISignUp, usePostSignUp } from '../../../shared'
+import { Button } from '../../../shared/ui/button/button'
+import { ISignUp } from '../../../shared'
+import { useForm } from 'react-hook-form'
+import { SubmitHandler } from 'react-hook-form'
 
-export function SignUpForm() {
-	const { signUp, signUpIsLoading, signUpIsSuccess } = usePostSignUp()
+interface IProps {
+	onSignUp: (data: ISignUp) => void
+}
+
+export function SignUpForm({ onSignUp }: IProps) {
+	const INPUT_CLASSNAME =
+		'w-[calc((1vh_+_1vw)*24)] sm:w-[calc((1vh_+_1vw)*21)] md:w-[calc((1vh_+_1vw)*17)] xl:w-[350px] h-[2.5rem] text-xl rounded-xl  text-black'
 
 	const {
 		register,
@@ -11,10 +17,7 @@ export function SignUpForm() {
 		formState: { errors },
 	} = useForm<ISignUp>()
 
-	const onSumbit: SubmitHandler<ISignUp> = data => signUp(data)
-
-	const INPUT_CLASSNAME =
-		'w-[calc((1vh_+_1vw)*24)] sm:w-[calc((1vh_+_1vw)*21)] md:w-[calc((1vh_+_1vw)*17)] xl:w-[350px] h-[2.5rem] text-xl rounded-xl  text-black'
+	const onSumbit: SubmitHandler<ISignUp> = data => onSignUp(data)
 
 	return (
 		<form
@@ -47,7 +50,6 @@ export function SignUpForm() {
 				/>
 				{errors.codeWord && <p className='text-red-500'>Неправильный ответ</p>}
 			</div>
-
 			<Button type='submit' className='mt-5'>
 				Принять
 			</Button>

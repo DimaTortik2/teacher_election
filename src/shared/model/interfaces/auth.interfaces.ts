@@ -10,6 +10,5 @@ export interface ISignIn {
 }
 
 export interface IAuthResponse {
-	id: string
-	email: string
+	message : string
 }

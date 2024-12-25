@@ -1,13 +1,15 @@
 import { useMutation } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../../model/constants'
 import { authService } from '../services/auth.service'
-import { ISignIn, ISignUp } from '../../model/interfaces/auth.interfaces'
+import type { ISignIn, ISignUp } from '../../model/interfaces/auth.interfaces'
 
 export const usePostSignUp = () => {
 	const {
 		mutate: signUp,
 		isPending: signUpIsLoading,
 		isSuccess: signUpIsSuccess,
+		isError: signUpIsError,
+	
 	} = useMutation({
 		mutationKey: [QUERY_KEYS.auth],
 		mutationFn: async (data: ISignUp) => await authService.signUp(data),
@@ -17,6 +19,7 @@ export const usePostSignUp = () => {
 		signUp,
 		signUpIsLoading,
 		signUpIsSuccess,
+		signUpIsError,
 	}
 }
 
@@ -25,6 +28,7 @@ export const usePostSignIn = () => {
 		mutate: signIn,
 		isPending: signInIsLoading,
 		isSuccess: signInIsSuccess,
+		isError: signInIsError,
 	} = useMutation({
 		mutationKey: [QUERY_KEYS.auth],
 		mutationFn: async (data: ISignIn) => await authService.signIn(data),
@@ -34,5 +38,6 @@ export const usePostSignIn = () => {
 		signIn,
 		signInIsLoading,
 		signInIsSuccess,
+		signInIsError,
 	}
 }

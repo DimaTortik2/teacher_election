@@ -16,3 +16,14 @@
   background: rgb(82 82 91 / var(--tw-bg-opacity, 1));
   border-radius: 8px;
 }
+
+.my-wrap-text{
+
+
+  overflow: hidden; 
+  word-wrap: break-word;
+  word-break: break-word; 
+  display: -webkit-box; 
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical; 
+}
