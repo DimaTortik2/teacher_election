@@ -15,11 +15,10 @@ createRoot(document.getElementById('root')!).render(
 		<BrowserRouter>
 			<Routes>
 				<Route element={<Layout />}>
-					<Route path='/' element={<SignUpPage />} />
+					<Route path='/' element={<AdminSubjectsPage />} />
 					<Route path='/sign-in' element={<SignInPage />} />
 					<Route path='/admin' element={<AdminPage />}></Route>
-					<Route path='/admin/subjects' element={<AdminSubjectsPage />}></Route>
-
+					<Route path='/admin/subjects' element={<SignUpPage />}></Route>
 					<Route path='/teachers' element={<TeachersPage />}></Route>
 				</Route>
 			</Routes>
