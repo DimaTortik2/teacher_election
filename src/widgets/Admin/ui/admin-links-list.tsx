@@ -11,6 +11,7 @@ export function AdminLinksList({className}:IProps){
 			<AdminLink href='/admin/review'>Проверить комменты</AdminLink>
 			<AdminLink href='/admin/teachers'>Управлять учителями</AdminLink>
 			<AdminLink href='/admin/subjects'>Управлять предметами</AdminLink>
+			
 		</ul>
 	)
 }

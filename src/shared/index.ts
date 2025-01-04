@@ -1,5 +1,8 @@
-export { AuthTitle } from './ui/auth-title/auth-title'
+export { AuthTitle } from './ui/auth-titles/auth-title'
+export { AuthBackLink } from './ui/auth-titles/auth-link'
 export { Button } from './ui/button/button'
+export { TeacherInfo } from './ui/teacher/teacher-info'
+export { BasicModal } from './ui/modal/basic-modal'
 export { Notification } from './ui/notification/notification'
 export { instance } from './api/api.instance'
 export type { ISignUp, ISignIn } from './model/interfaces/auth.interfaces'
@@ -18,3 +21,18 @@ export type {
 	ISubjectsResponse,
 } from './model/interfaces/subject.interfaces'
 export { subjectService } from './api/services/subject.service'
+export { RoleWrapper } from './ui/wrappers/role-check'
+export type { InfinityResponse } from './model/interfaces/infinity.interface'
+export {
+	useDeleteTeacher,
+	useGetTeachers,
+	usePostTeacher,
+} from './api/queries/teachers.queries'
+export type {
+	ICreateTeacher,
+	ITeacherResponce,
+	ITeachers,
+	ITeachersResponse,
+} from './model/interfaces/teacher.interface'
+export type { ITeacherForm } from './model/interfaces/teacher-form.interface'
+export { FilePicker } from './ui/file-picker/file-picker'

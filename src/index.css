@@ -2,28 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+	width: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background:  rgb(63 63 70 / var(--tw-bg-opacity, 1));
-  border-radius: 8px;
+	background: rgb(63 63 70 / var(--tw-bg-opacity, 1));
+	border-radius: 8px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgb(82 82 91 / var(--tw-bg-opacity, 1));
-  border-radius: 8px;
+	background: rgb(82 82 91 / var(--tw-bg-opacity, 1));
+	border-radius: 0px;
 }
 
-.my-wrap-text{
+.custom-scrollbar.rounded-scrollbar::-webkit-scrollbar-track {
+	border-radius: 8px;
+}
+.custom-scrollbar {
+	position: relative;
+	overflow: auto;
+	border-radius: 8px; /* Закругление границ */
+	-webkit-mask-image: linear-gradient(to bottom, black 100%, transparent);
+	-webkit-mask-composite: destination-in;
+	mask-image: linear-gradient(to bottom, black 100%, transparent);
+	mask-composite: exclude;
+}
 
-
-  overflow: hidden; 
-  word-wrap: break-word;
-  word-break: break-word; 
-  display: -webkit-box; 
-  -webkit-line-clamp: 3; 
-  -webkit-box-orient: vertical; 
+.my-wrap-text {
+	overflow: hidden;
+	word-wrap: break-word;
+	word-break: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
 }

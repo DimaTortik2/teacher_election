@@ -12,3 +12,7 @@ export interface ISignIn {
 export interface IAuthResponse {
 	message : string
 }
+export interface IRole {
+	email : string
+	role : string
+}

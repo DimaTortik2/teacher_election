@@ -1,12 +1,11 @@
+import { InfinityResponse } from './infinity.interface'
+
 export interface ISubject {
 	title: string
-	id: string
+	id : string
 	createdAt: string
 }
 
 export type ISubjects = ISubject[]
 
-export interface ISubjectsResponse {
-	data: ISubjects
-	nextCursor: number | null
-}
+export type ISubjectsResponse = InfinityResponse<ISubject>

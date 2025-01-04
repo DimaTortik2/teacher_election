@@ -16,7 +16,7 @@ export const usePostSubject = () => {
 		onSettled: () =>
 			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
 		mutationKey: [QUERY_KEYS.subjects],
-		mutationFn: async (data: Omit<ISubject, 'id' | 'createdAt'>) =>
+		mutationFn: async (data: Pick<ISubject, 'title'>) =>
 			await subjectService.createOne(data),
 	})
 

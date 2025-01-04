@@ -1,7 +1,8 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../../model/constants'
 import { authService } from '../services/auth.service'
 import type { ISignIn, ISignUp } from '../../model/interfaces/auth.interfaces'
+import { userService } from '../services/user.service'
 
 export const usePostSignUp = () => {
 	const {
@@ -39,5 +40,23 @@ export const usePostSignIn = () => {
 		signInIsLoading,
 		signInIsSuccess,
 		signInIsError,
+	}
+}
+
+export const useGetRole = () => {
+	const {
+		data,
+		isError: isRoleError,
+		isLoading: isRoleLoading,
+		isSuccess: isRoleSuccess,
+	} = useQuery({
+		queryKey: [QUERY_KEYS.role],
+		queryFn: async () => await userService.index(),
+	})
+	return {
+		data,
+		isRoleError,
+		isRoleLoading,
+		isRoleSuccess,
 	}
 }

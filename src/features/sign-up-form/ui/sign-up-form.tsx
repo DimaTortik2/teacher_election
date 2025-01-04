@@ -1,7 +1,6 @@
 import { Button } from '../../../shared/ui/button/button'
-import { ISignUp } from '../../../shared'
-import { useForm } from 'react-hook-form'
-import { SubmitHandler } from 'react-hook-form'
+import { AuthBackLink, ISignUp } from '../../../shared'
+import { useForm, SubmitHandler } from 'react-hook-form'
 
 interface IProps {
 	onSignUp: (data: ISignUp) => void
@@ -53,6 +52,8 @@ export function SignUpForm({ onSignUp }: IProps) {
 			<Button type='submit' className='mt-5'>
 				Принять
 			</Button>
+			<div className='h-px w-[300px] bg-[rgba(255,255,255,0.4)] mt-[4vh]'></div>
+			<AuthBackLink className='mt-4' type='signIn' />
 		</form>
 	)
 }

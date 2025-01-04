@@ -5,7 +5,6 @@ import {
 	SubjectForm,
 } from '../../../features/admin-features'
 
-
 import { ChangeEvent } from 'react'
 
 import { usePostSubject, useGetSubjects } from '../../../shared'
@@ -16,12 +15,10 @@ export function AdminSubjects() {
 		hasNextPage,
 		refetchSubjects,
 		fetchNextPage,
+		getSubjectsIsSuccess,
 	} = useGetSubjects()
 
-	const {
-		postSubject,
-		postSubjectIsSuccess,
-	} = usePostSubject()
+	const { postSubject, postSubjectIsSuccess } = usePostSubject()
 
 	const [inputText, setInputText] = useState('')
 
@@ -53,7 +50,13 @@ export function AdminSubjects() {
 		data,
 		hasNextPage,
 	])
-
+	if (getSubjectsIsSuccess)
+		console.log(
+			'falt = ',
+			data?.pages.flatMap(item => item.data)
+		)
+	if (getSubjectsIsSuccess) console.log('', data?.pages)
+		
 	return (
 		<div
 			className='w-screen md:w-[80vw]
@@ -68,9 +71,14 @@ export function AdminSubjects() {
 
 			<AdminSubjectCardsList
 				refetchSubjects={refetchSubjects}
-				subjectsArray={data?.pages}
+				subjectsArray={data?.pages
+					.flatMap(item => item.data)
+					.sort(
+						(a, b) =>
+							new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+					)}
 			>
-				<li ref={ref}></li>
+				<li ref={ref}>⠀</li>
 			</AdminSubjectCardsList>
 		</div>
 	)

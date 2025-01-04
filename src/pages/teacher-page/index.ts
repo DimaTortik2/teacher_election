@@ -1,0 +1,1 @@
+export { TeacherPage } from './ui/teacher-page'
