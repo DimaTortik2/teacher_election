@@ -1,15 +1,15 @@
 import { Outlet } from 'react-router'
-import { useGetRole } from '../../api/queries/auth.queries'
 import { useEffect } from 'react'
+import { useGetRole } from '../../api/queries/user.queries'
 
 export function RoleWrapper() {
-	// const { isRoleError, isRoleLoading, isRoleSuccess } = useGetRole()
+	const {data, isRoleError, isRoleLoading, isRoleSuccess } = useGetRole()
 
-	// useEffect(() => {
-	// 	if (isRoleSuccess) {
-	// 		console.log()
-	// 	}
-	// }, [isRoleSuccess])
+	useEffect(() => {
+		if (isRoleSuccess || isRoleError) {
+			console.log('role data = ', data)
+		}
+	}, [isRoleSuccess,isRoleError, data])
 
 	return <Outlet />
 }

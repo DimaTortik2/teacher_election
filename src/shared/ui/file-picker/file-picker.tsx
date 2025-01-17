@@ -19,7 +19,7 @@ const VisuallyHiddenInput = styled('input')({
 
 interface IProps {
 	register: UseFormRegister<ITeacherForm>
-	onChange : (e: ChangeEvent<HTMLInputElement>) =>void
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export function FilePicker({ register, onChange }: IProps) {
@@ -29,9 +29,21 @@ export function FilePicker({ register, onChange }: IProps) {
 			role={undefined}
 			variant='contained'
 			tabIndex={-1}
-			startIcon={<CloudUploadIcon />}
+			sx={{
+				backgroundColor: 'rgb(63 63 70)',
+				borderRadius: '0.75rem',
+				fontSize: '0.8rem',
+				lineHeight: '1.75rem',
+				paddingTop: '0.5rem',
+				paddingBottom: '0.5rem',
+				paddingLeft: '0.5rem',
+				paddingRight: '0.5rem',
+				fontFamily: 'inherit',
+				boxShadow :'none'
+				
+			}}
 		>
-			Upload files
+			Добавить фото
 			<VisuallyHiddenInput
 				{...register('photo', { required: true })}
 				type='file'

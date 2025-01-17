@@ -1,13 +1,20 @@
 import clsx from 'clsx'
 import crossIcon from '../../../../public/cross-icon.svg'
+import editIcon from '../../../../public/edit-icon.svg'
 
 interface IProps {
 	teacherName: string
 	className?: string
 	onDelete: () => void
+	onEdit: () => void
 }
 
-export function AdminTeacherCard({ teacherName, className, onDelete }: IProps) {
+export function AdminTeacherCard({
+	teacherName,
+	className,
+	onDelete,
+	onEdit,
+}: IProps) {
 	return (
 		<li
 			className={clsx(
@@ -17,9 +24,15 @@ export function AdminTeacherCard({ teacherName, className, onDelete }: IProps) {
 		>
 			<div className='w-4/6 my-wrap-text'>{teacherName}</div>
 
-			<button onClick={onDelete}>
-				<img src={crossIcon} className='h-8' />
-			</button>
+			<div className='flex gap-3'>
+				<button onClick={onEdit}>
+					<img src={editIcon} className='h-8' />
+				</button>
+
+				<button onClick={onDelete}>
+					<img src={crossIcon} className='h-8' />
+				</button>
+			</div>
 		</li>
 	)
 }

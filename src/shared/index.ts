@@ -6,15 +6,20 @@ export { BasicModal } from './ui/modal/basic-modal'
 export { Notification } from './ui/notification/notification'
 export { instance } from './api/api.instance'
 export type { ISignUp, ISignIn } from './model/interfaces/auth.interfaces'
-export { authService } from './api/services/auth.service'
 export { QUERY_KEYS } from './model/constants'
-export { usePostSignUp, usePostSignIn } from './api/queries/auth.queries'
+export {
+	usePostSignUp,
+	usePostSignIn,
+	useSignOut,
+} from './api/queries/auth.queries'
+export { useGetRole } from './api/queries/user.queries'
+
 export {
 	usePostSubject,
 	useGetSubjects,
 	useDeleteSubject,
+	useEditSubject,
 } from './api/queries/subject.queries'
-
 export type {
 	ISubject,
 	ISubjects,
@@ -27,6 +32,7 @@ export {
 	useDeleteTeacher,
 	useGetTeachers,
 	usePostTeacher,
+	useEditTeacher,
 } from './api/queries/teachers.queries'
 export type {
 	ICreateTeacher,
@@ -36,3 +42,5 @@ export type {
 } from './model/interfaces/teacher.interface'
 export type { ITeacherForm } from './model/interfaces/teacher-form.interface'
 export { FilePicker } from './ui/file-picker/file-picker'
+export { tokenService } from './api/services/token.service'
+export { useRefreshTokens } from './api/queries/token.queries'

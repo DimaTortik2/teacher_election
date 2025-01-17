@@ -19,8 +19,16 @@ export function AdminSubjects() {
 	} = useGetSubjects()
 
 	const { postSubject, postSubjectIsSuccess } = usePostSubject()
-
 	const [inputText, setInputText] = useState('')
+	const [currentCardIdx, setCurrentCardIdx] = useState<number | null>(null)
+
+	const handleOpenEditTools = (idx: number) => {
+		setCurrentCardIdx(idx)
+	}
+
+	const handleCloseEditTools = () => {
+		setCurrentCardIdx(null)
+	}
 
 	const handleButtonClick = () => {
 		postSubject({ title: inputText })
@@ -56,7 +64,7 @@ export function AdminSubjects() {
 			data?.pages.flatMap(item => item.data)
 		)
 	if (getSubjectsIsSuccess) console.log('', data?.pages)
-		
+
 	return (
 		<div
 			className='w-screen md:w-[80vw]
@@ -70,6 +78,9 @@ export function AdminSubjects() {
 			/>
 
 			<AdminSubjectCardsList
+				onOpenEditTools={handleOpenEditTools}
+				onCloseEditTools={handleCloseEditTools}
+				visibleIdx={currentCardIdx}
 				refetchSubjects={refetchSubjects}
 				subjectsArray={data?.pages
 					.flatMap(item => item.data)

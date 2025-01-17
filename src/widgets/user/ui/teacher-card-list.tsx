@@ -11,7 +11,7 @@ interface IProps {
 
 export function TeacherCardList({children, teachersArray}:IProps) {
 
-	
+	console.log('ARAAAAAAAAAAAAAAY',teachersArray)
 
 	return (
 		<div className='w-full h-full custom-scrollbar flex flex-col items-center'>
@@ -21,7 +21,7 @@ export function TeacherCardList({children, teachersArray}:IProps) {
 						<TeacherCard
 							key={teacher.id}
 							imgSrc={clsx(
-								'https://teachers-election-backend.onrender.com/4282988808761354180.jpg'
+								'https://teachers-election-backend.onrender.com/', teacher.photo, '.jpg'
 							)}
 							teacherName={teacher.fullName}
 							subject={teacher.subject}

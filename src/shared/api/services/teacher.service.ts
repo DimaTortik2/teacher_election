@@ -9,12 +9,10 @@ import { instance } from '../api.instance'
 export const teacherService = {
 	axios: instance,
 
-	createOne: async function (
-		data: ITeacherForm
-	): Promise<ICreateTeacher> {
+	createOne: async function (data: ITeacherForm): Promise<ICreateTeacher> {
 		const formData = new FormData()
 		formData.append('subjectId', JSON.parse(data.subject).subjectId)
-		formData.append('photo', data.photo)
+		formData.append('photo', data.photo[0])
 		formData.append('fullName', data.fullName)
 
 		console.log(
@@ -41,5 +39,10 @@ export const teacherService = {
 
 	deleteOne: async function (id: string): Promise<void> {
 		return await this.axios.delete(`/${QUERY_KEYS.teacher}/${id}`)
+	},
+
+	editOne: async function (id: string): Promise<void> {
+		return await this.axios.put(`/${QUERY_KEYS.teacher}/${id}`)
+		//////////////////////////
 	},
 }

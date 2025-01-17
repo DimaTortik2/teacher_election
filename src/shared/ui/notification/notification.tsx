@@ -52,9 +52,7 @@ export function Notification({
 			setShowNotification(true)
 			setType('info')
 
-			const timer = setTimeout(() => setShowNotification(false), 100000)
-
-			return () => clearTimeout(timer)
+			return () => setShowNotification(false)
 		}
 	}, [isSuccess, isLoading, isError, setShowNotification, navigate])
 

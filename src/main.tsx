@@ -20,19 +20,13 @@ createRoot(document.getElementById('root')!).render(
 					<Route path='/sign-in' element={<SignInPage />} />
 
 					<Route element={<RoleWrapper />}>
-						<Route path='/admin' element={<AdminPage />}></Route>
-						<Route
-							path='/admin/subjects'
-							element={<AdminSubjectsPage />}
-						></Route>
-						<Route
-							path='/admin/teachers'
-							element={<AdminTeachersPage />}
-						></Route>
+						<Route path='/admin' element={<AdminPage />} />
+						<Route path='/admin/subjects' element={<AdminSubjectsPage />} />
+						<Route path='/admin/teachers' element={<AdminTeachersPage />} />
 					</Route>
 
-					<Route path='/teachers' element={<TeachersPage />}></Route>
-					<Route path='/teachers/about' element={<TeacherPage />}></Route>
+					<Route path='/teachers' element={<TeachersPage />} />
+					<Route path='/teachers/about' element={<TeacherPage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

@@ -69,13 +69,6 @@ export function TeacherForm({ onPost }: IProps) {
 				</div>
 				<div className='w-full flex gap-3 px-2'>
 					<SubjectsMenu register={register} buttonText='Выбрать предмет' />
-					{/* <Button
-						type='button'
-						className='py-2 px-3 text-lg'
-						onClick={handleBtnFileClick}
-					>
-						добавить фото
-					</Button> */}
 					<FilePicker onChange={handleFileChenge} register={register} />
 				</div>
 				<Button type='submit' className='m-3 absolute bottom-0'>

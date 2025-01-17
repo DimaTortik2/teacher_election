@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from 'react'
 import { AdminSubjectCard } from '../../../entities/subject/ui/admin-subject-card'
-import { ISubjectsResponse, useDeleteTeacher } from '../../../shared'
+import { ISubjectsResponse, useDeleteTeacher, useEditTeacher } from '../../../shared'
 import { OptimisticSubjects, OptimisticTeachers } from '../../../features/admin-features'
 
 import {
@@ -30,6 +30,8 @@ export function AdminTeacherCardsList({
 	children,
 }: IProps) {
 	const { deleteTeacher, deleteTeacherIsSuccess } = useDeleteTeacher()
+	const {editTeacher , editTeacherIsSuccess } = useEditTeacher()
+
 
 	useEffect(() => {
 		if (deleteTeacherIsSuccess) {
@@ -47,6 +49,7 @@ export function AdminTeacherCardsList({
 						className='mt-2 mb-2'
 						teacherName={teacher.fullName}
 						onDelete={() => deleteTeacher(teacher.id)}
+						onEdit={() => editTeacher(teacher.id)}
 					/>
 				))
 			)}

@@ -21,4 +21,10 @@ export const authService = {
 			.post(`/${QUERY_KEYS.auth}/signin`, data)
 			.then(res => res.data)
 	},
+
+	signOut: async function () {
+		return await this.axios
+			.delete(`/${QUERY_KEYS.auth}/signout`)
+			.then(res => res.data)
+	},
 }

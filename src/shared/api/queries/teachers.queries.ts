@@ -1,10 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../../model/constants'
 import { teacherService } from '../services/teacher.service'
-import type {
-	ICreateTeacher,
-} from '../../model/interfaces/teacher.interface'
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { ITeacherForm } from '../../model/interfaces/teacher-form.interface'
 
 export const usePostTeacher = () => {
 	const queryClient = useQueryClient()
@@ -18,7 +16,7 @@ export const usePostTeacher = () => {
 		onSettled: () =>
 			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
 		mutationKey: [QUERY_KEYS.teacher],
-		mutationFn: async (data: ICreateTeacher) =>
+		mutationFn: async (data: ITeacherForm) =>
 			await teacherService.createOne(data),
 	})
 
@@ -80,5 +78,28 @@ export const useDeleteTeacher = () => {
 		deleteTeacherIsLoading,
 		deleteTeacherIsSuccess,
 		deleteTeacherIsError,
+	}
+}
+
+export const useEditTeacher = () => {
+	const queryClient = useQueryClient()
+
+	const {
+		mutate: editTeacher,
+		isPending: editTeacherIsLoading,
+		isSuccess: editTeacherIsSuccess,
+		isError: editTeacherIsError,
+	} = useMutation({
+		onSettled: () =>
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
+		mutationKey: [QUERY_KEYS.teacher],
+		mutationFn: async (id: string) => await teacherService.editOne(id),
+	})
+
+	return {
+		editTeacher,
+		editTeacherIsLoading,
+		editTeacherIsSuccess,
+		editTeacherIsError,
 	}
 }

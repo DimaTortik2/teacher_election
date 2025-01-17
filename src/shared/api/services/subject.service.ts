@@ -29,4 +29,8 @@ export const subjectService = {
 	deleteOne: async function (id: string): Promise<void> {
 		return await this.axios.delete(`/${QUERY_KEYS.subjects}/${id}`)
 	},
+	editOne: async function (id: string): Promise<void> {
+		return await this.axios.delete(`/${QUERY_KEYS.subjects}/${id}`)
+	},
+	
 }

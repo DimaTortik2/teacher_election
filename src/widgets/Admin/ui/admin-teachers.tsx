@@ -44,6 +44,7 @@ export function AdminTeachers() {
 	])
 
 	const handlePostTeacher = (data: ITeacherForm) => {
+		console.log('ITEACHERDATA = ',data)
 			postTeacher(data)
 	}
 	return (

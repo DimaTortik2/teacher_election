@@ -80,3 +80,26 @@ export const useDeleteSubject = () => {
 		deleteSubjectIsError,
 	}
 }
+
+export const useEditSubject = () => {
+	const queryClient = useQueryClient()
+
+	const {
+		mutate: editSubject,
+		isPending: editSubjectIsLoading,
+		isSuccess: editSubjectIsSuccess,
+		isError: editSubjectIsError,
+	} = useMutation({
+		onSettled: () =>
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
+		mutationKey: [QUERY_KEYS.subjects],
+		mutationFn: async (id: string) => await subjectService.editOne(id),
+	})
+
+	return {
+		editSubject,
+		editSubjectIsLoading,
+		editSubjectIsSuccess,
+		editSubjectIsError,
+	}
+}
