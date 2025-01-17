@@ -93,7 +93,7 @@ export const useEditSubject = () => {
 		onSettled: () =>
 			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
 		mutationKey: [QUERY_KEYS.subjects],
-		mutationFn: async (id: string) => await subjectService.editOne(id),
+		mutationFn: async (args : {id: string, title : string}) => await subjectService.editOne(args),
 	})
 
 	return {

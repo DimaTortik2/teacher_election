@@ -34,13 +34,13 @@ export function AdminSubjectCardsList({
 	children,
 }: IProps) {
 	const { deleteSubject, deleteSubjectIsSuccess } = useDeleteSubject()
+	const { editSubject, editSubjectIsSuccess } = useEditSubject()
 
 	useEffect(() => {
-		if (deleteSubjectIsSuccess) {
+		if (deleteSubjectIsSuccess || editSubjectIsSuccess) {
 			refetchSubjects()
 		}
-	}, [deleteSubjectIsSuccess, refetchSubjects])
-	const { editSubject, editSubjectIsSuccess } = useEditSubject()
+	}, [deleteSubjectIsSuccess, refetchSubjects, editSubjectIsSuccess])
 
 	return (
 		<ul className='overflow-auto w-full h-[70vh] rounded-xl custom-scrollbar p-4 pb-20'>
@@ -55,7 +55,9 @@ export function AdminSubjectCardsList({
 					className='mt-2 mb-2'
 					title={subject.title}
 					onDelete={() => deleteSubject(subject.id)}
-					onEdit={() => editSubject(subject.id)}
+					onEdit={(title: string) =>
+						editSubject({ id: subject.id, title: title })
+					}
 				/>
 			))}
 			{children}

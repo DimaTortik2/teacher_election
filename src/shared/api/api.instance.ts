@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { tokenService } from './services/token.service'
 
 const instance = axios.create({
 	baseURL: 'https://teachers-election-backend.onrender.com',
@@ -10,7 +9,7 @@ instance.interceptors.response.use(
 	config => {
 		return config
 	},
-	error => {
+	async error => {
 		const originalRequest = error.config
 		if (
 			error.response.status == 401 &&
@@ -19,7 +18,7 @@ instance.interceptors.response.use(
 		) {
 			originalRequest._isRetry = true
 			try {
-				tokenService.refresh()
+				await instance.get(`/token`).then(res => res.data)
 				return instance.request(originalRequest)
 			} catch (e) {
 				console.log(e)

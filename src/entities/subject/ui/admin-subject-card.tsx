@@ -11,7 +11,7 @@ interface IProps {
 	title: string
 	className?: string
 	onDelete: () => void
-	onEdit: () => void
+	onEdit: (title: string) => void
 	currentIdx: number
 }
 
@@ -25,8 +25,12 @@ export function AdminSubjectCard({
 	onEdit,
 	currentIdx,
 }: IProps) {
+	const [inputText, setInputText] = useState<string>(title)
 
-const [inputText, setInputText] = useState<string>(title)
+	const handleEdit = (title: string) => {
+		onEdit(title)
+		onCloseEditTools()
+	}
 
 	return (
 		<li
@@ -52,7 +56,10 @@ const [inputText, setInputText] = useState<string>(title)
 					/>
 
 					<div className='flex gap-3 items-center justify-center'>
-						<button className='px-2 sm:px-4 py-1 bg-zinc-500 hover:bg-zinc-600 transition-colors rounded-xl'>
+						<button
+							className='px-2 sm:px-4 py-1 bg-zinc-500 hover:bg-zinc-600 transition-colors rounded-xl'
+							onClick={() => handleEdit(inputText)}
+						>
 							Ок
 						</button>
 						<button onClick={onCloseEditTools}>
