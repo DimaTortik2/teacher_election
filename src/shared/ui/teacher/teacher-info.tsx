@@ -12,7 +12,7 @@ interface IProps {
 export function TeacherInfo({ rating, subject, fullName, imgSrc }: IProps) {
 	const { id } = useParams()
 
-	const { data, getTeacherIsLoading, getTeacherIsSuccess, getTeacherIsError } =
+	const { getTeacherIsSuccess} =
 		useGetTeacher(id)
 
 	return (

@@ -4,7 +4,7 @@ import { OptimisticCard } from './optimistic-card'
 
 export function OptimisticTeachers() {
 	const pendingTeachers = useMutationState<ICreateTeacher>({
-		filters: { mutationKey: [`${QUERY_KEYS.subjects}`], status: 'pending' },
+		filters: { mutationKey: [`${QUERY_KEYS.teacher}`], status: 'pending' },
 		select: mutation => mutation.state.variables as ICreateTeacher,
 	})
 

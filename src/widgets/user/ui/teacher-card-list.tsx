@@ -1,7 +1,6 @@
-import { ReactNode, useEffect } from 'react'
+import { ReactNode } from 'react'
 import { TeacherCard } from '../../../entities/teacher'
 import { ITeachersResponse } from '../../../shared/model/interfaces/teacher.interface'
-import clsx from 'clsx'
 
 interface IProps {
 	children: ReactNode

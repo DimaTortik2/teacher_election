@@ -4,17 +4,13 @@ import { TeacherCardList } from '../../../widgets/user'
 
 import { useInView } from 'react-intersection-observer'
 import { useGetTeachers } from '../../../shared/api/queries/teachers.queries'
-import { ReactNode, useEffect } from 'react'
+import { useEffect } from 'react'
 
 export function TeachersPage() {
 	const {
 		data,
-		getTeachersIsLoading,
 		getTeachersIsSuccess,
-		getTeachersIsError,
 		hasNextPage,
-		isFetchingNextPage,
-		refetchTeachers,
 		fetchNextPage,
 	} = useGetTeachers()
 

@@ -1,7 +1,6 @@
 import { QUERY_KEYS } from '../../model/constants'
 import type {
 	IAuthResponse,
-	IRole,
 	ISignIn,
 	ISignUp,
 } from '../../model/interfaces/auth.interfaces'

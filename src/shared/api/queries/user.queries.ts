@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../../model/constants'
 import { userService } from '../services/user.service'
 

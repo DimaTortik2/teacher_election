@@ -1,6 +1,5 @@
 import { styled } from '@mui/material/styles'
 import Button from '@mui/material/Button'
-import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { UseFormRegister } from 'react-hook-form'
 import { ITeacherForm } from '../../model/interfaces/teacher-form.interface'
 import { ChangeEvent } from 'react'

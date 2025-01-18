@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../../model/constants'
 import { authService } from '../services/auth.service'
 import type { ISignIn, ISignUp } from '../../model/interfaces/auth.interfaces'

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '../../../shared/ui/button/button'
 import { useForm } from 'react-hook-form'

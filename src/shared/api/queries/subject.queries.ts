@@ -14,8 +14,8 @@ export const usePostSubject = () => {
 		isError: postSubjectIsError,
 	} = useMutation({
 		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
-		mutationKey: [QUERY_KEYS.subjects],
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
+		mutationKey: [QUERY_KEYS.subject],
 		mutationFn: async (data: Pick<ISubject, 'title'>) =>
 			await subjectService.createOne(data),
 	})
@@ -39,7 +39,7 @@ export const useGetSubjects = () => {
 		refetch: refetchSubjects,
 		fetchNextPage,
 	} = useInfiniteQuery({
-		queryKey: [QUERY_KEYS.subjects],
+		queryKey: [QUERY_KEYS.subject],
 		queryFn: async ({ pageParam }) =>
 			await subjectService.findMany(pageParam.toString()),
 		initialPageParam: 0,
@@ -68,8 +68,8 @@ export const useDeleteSubject = () => {
 		isError: deleteSubjectIsError,
 	} = useMutation({
 		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
-		mutationKey: [QUERY_KEYS.subjects],
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
+		mutationKey: [QUERY_KEYS.subject],
 		mutationFn: async (id: string) => await subjectService.deleteOne(id),
 	})
 
@@ -91,9 +91,10 @@ export const useEditSubject = () => {
 		isError: editSubjectIsError,
 	} = useMutation({
 		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
-		mutationKey: [QUERY_KEYS.subjects],
-		mutationFn: async (args : {id: string, title : string}) => await subjectService.editOne(args),
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
+		mutationKey: [QUERY_KEYS.subject],
+		mutationFn: async (args: { id: string; title: string }) =>
+			await subjectService.editOne(args),
 	})
 
 	return {

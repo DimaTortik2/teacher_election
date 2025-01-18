@@ -1,7 +1,6 @@
 import { ReactNode, useEffect } from 'react'
-import { AdminSubjectCard } from '../../../entities/subject/ui/admin-subject-card'
-import { ISubjectsResponse, useDeleteTeacher, useEditTeacher } from '../../../shared'
-import { OptimisticSubjects, OptimisticTeachers } from '../../../features/admin-features'
+import {useDeleteTeacher, useEditTeacher } from '../../../shared'
+import { OptimisticTeachers } from '../../../features/admin-features'
 
 import {
 	InfiniteData,
@@ -9,7 +8,7 @@ import {
 	RefetchOptions,
 } from '@tanstack/react-query'
 import { ITeachersResponse } from '../../../shared/model/interfaces/teacher.interface'
-import { AdminTeacherCard, TeacherCard } from '../../../entities/teacher'
+import { AdminTeacherCard } from '../../../entities/teacher'
 
 
 type refetchTeachersType = {
@@ -30,7 +29,7 @@ export function AdminTeacherCardsList({
 	children,
 }: IProps) {
 	const { deleteTeacher, deleteTeacherIsSuccess } = useDeleteTeacher()
-	const {editTeacher , editTeacherIsSuccess } = useEditTeacher()
+	const {editTeacher  } = useEditTeacher()
 
 
 	useEffect(() => {

@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useGetRole } from '../../api/queries/user.queries'
 
 export function RoleWrapper() {
-	const {data, isRoleError, isRoleLoading, isRoleSuccess } = useGetRole()
+	const {data, isRoleError, isRoleSuccess } = useGetRole()
 
 	useEffect(() => {
 		if (isRoleSuccess || isRoleError) {
