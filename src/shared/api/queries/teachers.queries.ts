@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../../model/constants'
 import { teacherService } from '../services/teacher.service'
 import { useInfiniteQuery } from '@tanstack/react-query'
@@ -14,7 +14,7 @@ export const usePostTeacher = () => {
 		isError: postTeacherIsError,
 	} = useMutation({
 		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
 		mutationKey: [QUERY_KEYS.teacher],
 		mutationFn: async (data: ITeacherForm) =>
 			await teacherService.createOne(data),
@@ -58,6 +58,26 @@ export const useGetTeachers = () => {
 	}
 }
 
+export const useGetTeacher = (id?: string) => {
+	const {
+		data,
+		isPending: getTeacherIsLoading,
+		isSuccess: getTeacherIsSuccess,
+		isError: getTeacherIsError,
+	} = useQuery({
+		queryKey: [QUERY_KEYS.teacher, id],
+		queryFn: async () => await teacherService.findOne(id),
+		enabled: !!id,
+	})
+
+	return {
+		data,
+		getTeacherIsLoading,
+		getTeacherIsSuccess,
+		getTeacherIsError,
+	}
+}
+
 export const useDeleteTeacher = () => {
 	const queryClient = useQueryClient()
 
@@ -68,7 +88,7 @@ export const useDeleteTeacher = () => {
 		isError: deleteTeacherIsError,
 	} = useMutation({
 		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
 		mutationKey: [QUERY_KEYS.teacher],
 		mutationFn: async (id: string) => await teacherService.deleteOne(id),
 	})
@@ -91,7 +111,7 @@ export const useEditTeacher = () => {
 		isError: editTeacherIsError,
 	} = useMutation({
 		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subjects }),
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
 		mutationKey: [QUERY_KEYS.teacher],
 		mutationFn: async (id: string) => await teacherService.editOne(id),
 	})

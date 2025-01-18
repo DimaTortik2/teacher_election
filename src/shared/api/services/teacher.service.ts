@@ -27,6 +27,10 @@ export const teacherService = {
 			.then(res => res.data)
 	},
 
+	findOne: async function (id?: string) {
+		return this.axios.get(`/${QUERY_KEYS.teacher}/${id}`)
+	},
+
 	findMany: async function (cursor: string): Promise<ITeachersResponse> {
 		const params = new URLSearchParams()
 		if (cursor) {

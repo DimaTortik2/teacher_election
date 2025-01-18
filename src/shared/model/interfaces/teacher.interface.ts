@@ -10,7 +10,8 @@ export interface ITeacherResponce {
 	id: string
 	fullName: string
 	subject: string
-	photo: File
+	subjectId: string
+	photo: string
 }
 
 export type ITeachers = ITeacherResponce[]

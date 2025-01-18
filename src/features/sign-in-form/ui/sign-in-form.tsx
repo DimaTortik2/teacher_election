@@ -1,6 +1,8 @@
 import { Button } from '../../../shared/ui/button/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { AuthBackLink, ISignIn } from '../../../shared'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { signinSchema } from '../../../shared/model/schemas/signin.schema'
 
 interface IProps {
 	onSignIn: (data: ISignIn) => void
@@ -14,7 +16,9 @@ export function SignInForm({ onSignIn }: IProps) {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<ISignIn>()
+	} = useForm<ISignIn>({
+		resolver: yupResolver(signinSchema),
+	})
 
 	const onSumbit: SubmitHandler<ISignIn> = data => onSignIn(data)
 
@@ -30,7 +34,7 @@ export function SignInForm({ onSignIn }: IProps) {
 					type='email'
 					className={INPUT_CLASSNAME}
 				/>
-				{errors.email && <p className='text-red-500'>Неправильная почта</p>}
+				{errors.email && <p className='text-red-500'>{errors.email.message}</p>}
 			</div>
 			<div className='mb-4'>
 				<p>Пароль</p>
@@ -39,7 +43,9 @@ export function SignInForm({ onSignIn }: IProps) {
 					{...register('password', { required: true })}
 					className={INPUT_CLASSNAME}
 				/>
-				{errors.password && <p className='text-red-500'>Неправильный пароль</p>}
+				{errors.password && (
+					<p className='text-red-500'>{errors.password.message}</p>
+				)}
 			</div>
 
 			<Button type='submit' className='mt-5'>

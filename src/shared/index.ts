@@ -33,6 +33,7 @@ export {
 	useGetTeachers,
 	usePostTeacher,
 	useEditTeacher,
+	useGetTeacher,
 } from './api/queries/teachers.queries'
 export type {
 	ICreateTeacher,
@@ -44,3 +45,5 @@ export type { ITeacherForm } from './model/interfaces/teacher-form.interface'
 export { FilePicker } from './ui/file-picker/file-picker'
 export { tokenService } from './api/services/token.service'
 export { useRefreshTokens } from './api/queries/token.queries'
+export { signinSchema } from './model/schemas/signin.schema'
+export { signupSchema } from './model/schemas/signup.schema'

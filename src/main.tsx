@@ -26,7 +26,7 @@ createRoot(document.getElementById('root')!).render(
 					</Route>
 
 					<Route path='/teachers' element={<TeachersPage />} />
-					<Route path='/teachers/about' element={<TeacherPage />} />
+					<Route path='/teacher/:id' element={<TeacherPage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

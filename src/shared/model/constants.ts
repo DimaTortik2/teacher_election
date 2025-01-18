@@ -1,6 +1,6 @@
 export const QUERY_KEYS = {
 	auth: 'auth',
-	subjects: 'subject',
+	subject: 'subject',
 	role : 'role',
 	teacher : 'teacher',
 	token : 'token',

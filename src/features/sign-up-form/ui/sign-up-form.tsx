@@ -2,6 +2,9 @@ import { Button } from '../../../shared/ui/button/button'
 import { AuthBackLink, ISignUp } from '../../../shared'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
+import { yupResolver } from '@hookform/resolvers/yup'
+import { signupSchema } from '../../../shared/model/schemas/signup.schema'
+
 interface IProps {
 	onSignUp: (data: ISignUp) => void
 }
@@ -14,7 +17,9 @@ export function SignUpForm({ onSignUp }: IProps) {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<ISignUp>()
+	} = useForm<ISignUp>({
+		resolver: yupResolver(signupSchema),
+	})
 
 	const onSumbit: SubmitHandler<ISignUp> = data => onSignUp(data)
 
@@ -30,7 +35,7 @@ export function SignUpForm({ onSignUp }: IProps) {
 					type='email'
 					className={INPUT_CLASSNAME}
 				/>
-				{errors.email && <p className='text-red-500'>Ошибка почта</p>}
+				{errors.email && <p className='text-red-500'>{errors.email.message}</p>}
 			</div>
 			<div className='mb-4'>
 				<p>Пароль</p>
@@ -39,7 +44,9 @@ export function SignUpForm({ onSignUp }: IProps) {
 					{...register('password', { required: true })}
 					className={INPUT_CLASSNAME}
 				/>
-				{errors.password && <p className='text-red-500'>Ошибка пароль</p>}
+				{errors.password && (
+					<p className='text-red-500'>{errors.password.message}</p>
+				)}
 			</div>
 			<div className='mb-4'>
 				<p>Тайная информация</p>
@@ -47,7 +54,7 @@ export function SignUpForm({ onSignUp }: IProps) {
 					{...register('codeWord', { required: true })}
 					className={INPUT_CLASSNAME}
 				/>
-				{errors.codeWord && <p className='text-red-500'>Неправильный ответ</p>}
+				{errors.codeWord && <p className='text-red-500'>{errors.codeWord.message}</p>}
 			</div>
 			<Button type='submit' className='mt-5'>
 				Принять

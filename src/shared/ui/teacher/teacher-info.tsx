@@ -1,4 +1,6 @@
 import { Rating } from '@mui/material'
+import { useParams } from 'react-router'
+import { useGetTeacher } from '../../api/queries/teachers.queries'
 
 interface IProps {
 	rating?: number
@@ -8,9 +10,15 @@ interface IProps {
 }
 
 export function TeacherInfo({ rating, subject, fullName, imgSrc }: IProps) {
+	const { id } = useParams()
+
+	const { data, getTeacherIsLoading, getTeacherIsSuccess, getTeacherIsError } =
+		useGetTeacher(id)
+
 	return (
 		<div className='w-full p-2 flex flex-col lg:flex-row items-start '>
 			<div className=' w-[200px] h-[200px] '>
+				{getTeacherIsSuccess && <p>{}</p>}
 				<img
 					src={imgSrc}
 					alt='Превью препода'

@@ -12,7 +12,7 @@ export const subjectService = {
 		data: Omit<ISubject, 'id' | 'createdAt'>
 	): Promise<ISubject> {
 		return await this.axios
-			.post(`/${QUERY_KEYS.subjects}`, data)
+			.post(`/${QUERY_KEYS.subject}`, data)
 			.then(res => res.data)
 	},
 
@@ -22,12 +22,12 @@ export const subjectService = {
 			params.append('cursor', cursor)
 		}
 		return await this.axios
-			.get(`/${QUERY_KEYS.subjects}?${params.toString()}&limit=5`)
+			.get(`/${QUERY_KEYS.subject}?${params.toString()}&limit=5`)
 			.then(res => res.data)
 	},
 
 	deleteOne: async function (id: string): Promise<void> {
-		return await this.axios.delete(`/${QUERY_KEYS.subjects}/${id}`)
+		return await this.axios.delete(`/${QUERY_KEYS.subject}/${id}`)
 	},
 	editOne: async function ({
 		id,
@@ -36,7 +36,7 @@ export const subjectService = {
 		id: string
 		title: string
 	}): Promise<void> {
-		return await this.axios.put(`/${QUERY_KEYS.subjects}/${id}`, {
+		return await this.axios.put(`/${QUERY_KEYS.subject}/${id}`, {
 			title: title,
 		})
 	},
