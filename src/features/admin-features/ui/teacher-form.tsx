@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react'
 import { Button } from '../../../shared/ui/button/button'
 import { useForm } from 'react-hook-form'
 import { ChangeEvent } from 'react'
-import { FilePicker, ITeacherForm, TeacherInfo } from '../../../shared'
+import { FilePicker, ITeacherForm } from '../../../shared'
 import { SubjectsMenu } from '../../../widgets/user'
+import { TeacherPreview } from './teacher-preview'
 
 interface IProps {
 	onPost: (data: ITeacherForm) => void
@@ -76,7 +77,7 @@ export function TeacherForm({ onPost }: IProps) {
 				</Button>
 
 				<div className='w-2/3 h-1/6'>
-					<TeacherInfo
+					<TeacherPreview
 						fullName={watch('fullName')}
 						subject={watch('subject') && JSON.parse(watch('subject')).title}
 						imgSrc={imagePreview}

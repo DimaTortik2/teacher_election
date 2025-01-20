@@ -28,6 +28,7 @@ createRoot(document.getElementById('root')!).render(
 					<Route path='/teachers' element={<TeachersPage />} />
 					<Route path='/teacher/:id' element={<TeacherPage />} />
 				</Route>
+				
 			</Routes>
 		</BrowserRouter>
 	</StrictMode>

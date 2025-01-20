@@ -5,6 +5,9 @@
 .custom-scrollbar::-webkit-scrollbar {
 	width: 8px;
 }
+.custom-scrollbar{
+	overflow-y: auto;
+}
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
 	background: rgb(63 63 70 / var(--tw-bg-opacity, 1));
@@ -14,6 +17,14 @@
 .custom-scrollbar::-webkit-scrollbar-track {
 	background: rgb(82 82 91 / var(--tw-bg-opacity, 1));
 	border-radius: 0px;
+}
+
+.custom-scrollbar.inverse-colors::-webkit-scrollbar-thumb {
+	background: rgb(82 82 91 / var(--tw-bg-opacity, 1));
+}
+
+.custom-scrollbar.inverse-colors::-webkit-scrollbar-track {
+	background: rgb(63 63 70 / var(--tw-bg-opacity, 1));
 }
 
 .custom-scrollbar.rounded-scrollbar::-webkit-scrollbar-track {
@@ -38,6 +49,11 @@
 	-webkit-box-orient: vertical;
 }
 
-*{
+::selection {
+    background-color: #a1a1aa; /* Цвет фона при выделении */
+    color: white; /* Цвет текста при выделении */
+}
+
+* {
 	box-sizing: border-box;
 }

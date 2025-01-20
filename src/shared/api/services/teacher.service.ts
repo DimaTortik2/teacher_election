@@ -3,6 +3,7 @@ import { ITeacherForm } from '../../model/interfaces/teacher-form.interface'
 import type {
 	ITeachersResponse,
 	ICreateTeacher,
+	ITeacherExtended,
 } from '../../model/interfaces/teacher.interface'
 import { instance } from '../api.instance'
 
@@ -27,8 +28,8 @@ export const teacherService = {
 			.then(res => res.data)
 	},
 
-	findOne: async function (id?: string) {
-		return this.axios.get(`/${QUERY_KEYS.teacher}/${id}`)
+	findOne: async function (id?: string): Promise<ITeacherExtended> {
+		return this.axios.get(`/${QUERY_KEYS.teacher}/${id}`).then(res => res.data)
 	},
 
 	findMany: async function (cursor: string): Promise<ITeachersResponse> {

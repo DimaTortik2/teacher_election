@@ -40,6 +40,7 @@ export type {
 	ITeacherResponce,
 	ITeachers,
 	ITeachersResponse,
+	ITeacherExtended,
 } from './model/interfaces/teacher.interface'
 export type { ITeacherForm } from './model/interfaces/teacher-form.interface'
 export { FilePicker } from './ui/file-picker/file-picker'

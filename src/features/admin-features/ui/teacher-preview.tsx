@@ -1,31 +1,18 @@
 import { Rating } from '@mui/material'
-import { useParams } from 'react-router'
-import { useGetTeacher } from '../../api/queries/teachers.queries'
-import { useEffect } from 'react'
 
 interface IProps {
 	rating?: number
+	subject: string
+	fullName: string
 	imgSrc: string
 }
 
-export function TeacherInfo({ rating, imgSrc }: IProps) {
-	const { id } = useParams()
-
-	const { data, getTeacherIsSuccess } = useGetTeacher(id)
-
-	useEffect(() => {
-		console.log('data === ', data)
-	}, [getTeacherIsSuccess, data])
-
+export function TeacherPreview({ rating, subject, fullName, imgSrc }: IProps) {
 	return (
 		<div className='w-full p-2 flex flex-col lg:flex-row items-start '>
 			<div className=' w-[200px] h-[200px] '>
 				<img
-					src={
-						data
-							? `https://teachers-election-backend.onrender.com/${data.photo}`
-							: imgSrc
-					}
+					src={imgSrc}
 					alt='Превью препода'
 					className='w-full h-full object-cover object-center rounded-2xl border-4 border-zinc-500 '
 				/>
@@ -46,9 +33,9 @@ export function TeacherInfo({ rating, imgSrc }: IProps) {
 					</div>
 				)}
 				<div className='flex flex-row lg:flex-col p-2 gap-2'>
-					<p className='text-left my-wrap-text'>{data && data.fullName}</p>
+					<p className='text-left my-wrap-text'>{fullName}</p>
 					<p className='text-left text-[rgba(255,255,255,0.5)] my-wrap-text'>
-						{data && data.subject}
+						{subject}
 					</p>
 				</div>
 			</div>

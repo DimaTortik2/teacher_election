@@ -17,3 +17,11 @@ export interface ITeacherResponce {
 export type ITeachers = ITeacherResponce[]
 
 export type ITeachersResponse = InfinityResponse<ITeacherResponce>
+
+export interface ITeacherExtended {
+	fullName: string
+	subject: string
+	id: string
+	photo: string
+	teacherReview : number
+}
