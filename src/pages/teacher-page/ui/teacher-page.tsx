@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { MesssageForm } from '../../../features/message'
 import { RatingForm } from '../../../features/rating-form'
-import { TeacherInfo } from '../../../shared'
+import { ITeacherReview, TeacherInfo } from '../../../shared'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 export function TeacherPage() {
 	const [inputHeight, setInputHeight] = useState<number>(0)
@@ -36,8 +37,20 @@ export function TeacherPage() {
 		}
 	}, [inputHeight])
 
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		control,
+		watch
+	} = useForm<ITeacherReview>()
+
+	const onSubmit: SubmitHandler<ITeacherReview> = data => console.log('data = ' ,data)
+
+	// console.log('watch = ',watch('message'))
+
 	return (
-		<>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<div
 				className='w-screen sm:w-[90vw] lg:w-[1000px] h-screen bg-zinc-600 flex flex-col gap-4 items-center justify-start sm:rounded-xl sm:border-4 sm:border-zinc-500 relative'
 				style={{ paddingBottom: `${inputHeight}px` }}
@@ -58,11 +71,12 @@ export function TeacherPage() {
 					<p>123</p>
 				</div>
 			</div>
-			{/* Форма, которая изменяет высоту */}
 			<MesssageForm
+				control={control}
+				register={register}
 				onHeightChange={height => setInputHeight(height)}
 				className='bottom-0 fixed w-full sm:w-[90vw] lg:w-[1000px] sm:border-zinc-500 sm:border-x-4 sm:border-b-4 sm:rounded-b-xl pb-4 pt-2 px-2 sm:px-5'
 			/>
-		</>
+		</form>
 	)
 }

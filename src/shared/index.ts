@@ -25,6 +25,7 @@ export type {
 	ISubjects,
 	ISubjectsResponse,
 } from './model/interfaces/subject.interfaces'
+export type { ITeacherReview } from './model/interfaces/teacher-review.interface'
 export { subjectService } from './api/services/subject.service'
 export { RoleWrapper } from './ui/wrappers/role-check'
 export type { InfinityResponse } from './model/interfaces/infinity.interface'

@@ -21,11 +21,11 @@ export function SignUpForm({ onSignUp }: IProps) {
 		resolver: yupResolver(signupSchema),
 	})
 
-	const onSumbit: SubmitHandler<ISignUp> = data => onSignUp(data)
+	const onSubmit: SubmitHandler<ISignUp> = data => onSignUp(data)
 
 	return (
 		<form
-			onSubmit={handleSubmit(onSumbit)}
+			onSubmit={handleSubmit(onSubmit)}
 			className='max-w-[350px] w-full flex flex-col items-center '
 		>
 			<div className='mb-4'>
@@ -54,7 +54,9 @@ export function SignUpForm({ onSignUp }: IProps) {
 					{...register('codeWord', { required: true })}
 					className={INPUT_CLASSNAME}
 				/>
-				{errors.codeWord && <p className='text-red-500'>{errors.codeWord.message}</p>}
+				{errors.codeWord && (
+					<p className='text-red-500'>{errors.codeWord.message}</p>
+				)}
 			</div>
 			<Button type='submit' className='mt-5'>
 				Принять
