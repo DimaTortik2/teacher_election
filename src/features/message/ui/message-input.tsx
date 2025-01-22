@@ -2,13 +2,19 @@ import { Control, Controller } from 'react-hook-form'
 import { ITeacherReview } from '../../../shared'
 import { useRef, useState } from 'react'
 import debounce from 'lodash.debounce'
+import clsx from 'clsx'
 
 interface IProps {
 	control: Control<ITeacherReview>
 	onTextAreaTouch: () => void
+	errorMessage: string
 }
 
-export function MessageInput({ control, onTextAreaTouch }: IProps) {
+export function MessageInput({
+	control,
+	onTextAreaTouch,
+	errorMessage,
+}: IProps) {
 	const inputRef = useRef<HTMLTextAreaElement | null>(null)
 	const [inputText, setInputText] = useState<string>('')
 
@@ -31,16 +37,20 @@ export function MessageInput({ control, onTextAreaTouch }: IProps) {
 		<Controller
 			name='message'
 			control={control}
+			rules={{ required: true }}
 			render={({ field }) => (
 				<textarea
 					{...field}
-					placeholder='Препод ващеее....'
+					placeholder={errorMessage ? errorMessage : 'Препод ващеее....'}
 					ref={inputRef}
 					name='postContent'
 					rows={1}
 					cols={1}
 					onInput={handleInput}
-					className=' bg-transparent border-0 transition-colors rounded-xl text-xl text-zinc-100 w-full flex items-start justify-center custom-scrollbar rounded-scrollbar inverse-colors resize-none placeholder:text-zinc-600 appearance-none focus:outline-none focus:ring-0 focus:border-none '
+					className={clsx(
+						' bg-transparent border-0 transition-colors rounded-xl text-xl text-zinc-100 w-full flex items-start justify-center custom-scrollbar rounded-scrollbar inverse-colors resize-none placeholder:text-zinc-600 appearance-none focus:outline-none focus:ring-0 focus:border-none ',
+						errorMessage && 'placeholder:text-red-400'
+					)}
 					id='messageInput'
 					onClick={onTextAreaTouch}
 				/>

@@ -1,7 +1,11 @@
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
 import sendIcon from '../../../../public/send-message-icon.svg'
-import { Control, Controller, UseFormRegister } from 'react-hook-form'
+import {
+	Control,
+	Controller,
+	FieldErrors,
+} from 'react-hook-form'
 import { ITeacherReview } from '../../../shared'
 
 import { MessageInput } from './message-input'
@@ -9,17 +13,17 @@ import { MessageInput } from './message-input'
 interface IProps {
 	className?: string
 	onHeightChange: (height: number) => void
-	register: UseFormRegister<ITeacherReview>
 	control: Control<ITeacherReview>
-	onTextAreaTouch : () => void
+	onTextAreaTouch: () => void
+	errors: FieldErrors<ITeacherReview>
 }
 
 export function MesssageForm({
 	className,
 	onHeightChange,
-	register,
 	control,
 	onTextAreaTouch,
+	errors,
 }: IProps) {
 	const formRef = useRef<HTMLDivElement | null>(null)
 
@@ -51,7 +55,7 @@ export function MesssageForm({
 			</div>
 			<div className='flex gap-3 items-end pt-2 w-full'>
 				<div className='border-b-zinc-400 border-b-2 px-1 w-full'>
-					<MessageInput onTextAreaTouch={onTextAreaTouch} control={control} />
+					<MessageInput errorMessage={errors.message?.message} onTextAreaTouch={onTextAreaTouch} control={control} />
 				</div>
 				<button type='submit' className=' text-white'>
 					<img src={sendIcon} alt='Ок' className='h-10' />

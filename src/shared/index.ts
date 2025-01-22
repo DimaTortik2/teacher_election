@@ -6,6 +6,7 @@ export { BasicModal } from './ui/modal/basic-modal'
 export { Notification } from './ui/notification/notification'
 export { instance } from './api/api.instance'
 export type { ISignUp, ISignIn } from './model/interfaces/auth.interfaces'
+export type { ICategories, ICategory } from './model/interfaces/rating.inerface'
 export { QUERY_KEYS } from './model/constants'
 export {
 	usePostSignUp,
@@ -49,3 +50,6 @@ export { tokenService } from './api/services/token.service'
 export { useRefreshTokens } from './api/queries/token.queries'
 export { signinSchema } from './model/schemas/signin.schema'
 export { signupSchema } from './model/schemas/signup.schema'
+export { createTeacherReviewSchema } from './model/schemas/create-review.schema'
+
+

@@ -1,14 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { MesssageForm } from '../../../features/message'
 import { RatingForm } from '../../../features/rating-form'
-import { ITeacherReview, TeacherInfo } from '../../../shared'
+import {
+	createTeacherReviewSchema,
+	ITeacherReview,
+	TeacherInfo,
+} from '../../../shared'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { MessageList } from '../../../entities/message'
 
 export function TeacherPage() {
 	const [inputHeight, setInputHeight] = useState<number>(0)
 	const contentRef = useRef<HTMLDivElement | null>(null)
 	const prevHeightRef = useRef<number>(0)
-	const isUserAtBottom = useRef<boolean>(false)
 
 	const [isTextareaTuched, setIsTextareaTuched] = useState<boolean>(false)
 
@@ -19,33 +24,18 @@ export function TeacherPage() {
 		}
 	}
 
-	// Определяем, внизу ли прокрутка
-	useEffect(() => {
-		if (contentRef.current) {
-			const { scrollHeight, clientHeight, scrollTop } = contentRef.current
-			isUserAtBottom.current = scrollHeight - scrollTop === clientHeight
-		}
-	}, [])
-
 	useEffect(() => {
 		if (
 			contentRef.current &&
 			prevHeightRef.current !== inputHeight &&
 			isTextareaTuched
 		) {
-			const { scrollHeight, clientHeight, scrollTop } = contentRef.current
+			const { scrollTop } = contentRef.current
 
-			if (isUserAtBottom.current) {
-				contentRef.current.scrollTo({
-					top: scrollHeight - clientHeight, //прокрутить на то ,что невидимо
-					behavior: 'smooth',
-				})
-			} else {
-				contentRef.current.scrollTo({
-					top: scrollTop + (inputHeight - prevHeightRef.current), //прокрутить на то ,что изменилось
-					behavior: 'smooth',
-				})
-			}
+			contentRef.current.scrollTo({
+				top: scrollTop + (inputHeight - prevHeightRef.current), //прокрутить на то ,что изменилось
+				behavior: 'smooth',
+			})
 			prevHeightRef.current = inputHeight
 		}
 	}, [inputHeight, isTextareaTuched])
@@ -56,13 +46,29 @@ export function TeacherPage() {
 		formState: { errors },
 		control,
 		watch,
-	} = useForm<ITeacherReview>()
+		setValue,
+	} = useForm<ITeacherReview>({
+		resolver: yupResolver(createTeacherReviewSchema),
+	})
 
 	const onSubmit: SubmitHandler<ITeacherReview> = data =>
 		console.log('data = ', data)
 
-			console.log('prevHeight2', prevHeightRef.current)
-
+	useEffect(() => {
+		if (
+			errors.experienced ||
+			errors.freebie ||
+			errors.frinedliness ||
+			errors.smartless ||
+			errors.strictness
+		)
+			if (contentRef.current)
+				contentRef.current.scrollTo({
+					top: 0,
+					behavior: 'smooth',
+				})
+		console.log('errors =', errors)
+	}, [errors])
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
@@ -75,22 +81,23 @@ export function TeacherPage() {
 					className='w-full h-full flex flex-col gap-4 items-center justify-start custom-scrollbar rounded-scrollbar overflow-y-auto'
 				>
 					<TeacherInfo rating={3} imgSrc='/undefined-person-icon.jpg' />
-					<RatingForm />
-					<RatingForm />
-					<RatingForm />
-					<RatingForm />
-					<RatingForm />
-					<RatingForm />
-					<RatingForm />
-					<RatingForm />
-					<p>123</p>
+					<RatingForm
+						errors={errors}
+						watch={watch}
+						register={register}
+						setValue={setValue}
+					/>
+					{/* <div className='w-full px-2 mt-2'>
+						<div className='w-full bg-zinc-500 rounded-2xl h-1'></div>
+					</div> */}
+					<MessageList className='mt-10' />
 				</div>
 			</div>
 			<MesssageForm
 				onTextAreaTouch={handleTextareaTouch}
 				control={control}
-				register={register}
 				onHeightChange={height => setInputHeight(height)}
+				errors={errors}
 				className='bottom-0 fixed w-full sm:w-[90vw] lg:w-[1000px] sm:border-zinc-500 sm:border-x-4 sm:border-b-4 sm:rounded-b-xl pb-4 pt-2 px-2 sm:px-5'
 			/>
 		</form>
