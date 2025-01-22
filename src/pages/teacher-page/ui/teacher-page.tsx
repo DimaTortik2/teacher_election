@@ -10,6 +10,15 @@ export function TeacherPage() {
 	const prevHeightRef = useRef<number>(0)
 	const isUserAtBottom = useRef<boolean>(false)
 
+	const [isTextareaTuched, setIsTextareaTuched] = useState<boolean>(false)
+
+	const handleTextareaTouch = () => {
+		if (!isTextareaTuched) {
+			setIsTextareaTuched(true)
+			prevHeightRef.current = inputHeight
+		}
+	}
+
 	// Определяем, внизу ли прокрутка
 	useEffect(() => {
 		if (contentRef.current) {
@@ -19,7 +28,11 @@ export function TeacherPage() {
 	}, [])
 
 	useEffect(() => {
-		if (contentRef.current && prevHeightRef.current !== inputHeight) {
+		if (
+			contentRef.current &&
+			prevHeightRef.current !== inputHeight &&
+			isTextareaTuched
+		) {
 			const { scrollHeight, clientHeight, scrollTop } = contentRef.current
 
 			if (isUserAtBottom.current) {
@@ -35,19 +48,21 @@ export function TeacherPage() {
 			}
 			prevHeightRef.current = inputHeight
 		}
-	}, [inputHeight])
+	}, [inputHeight, isTextareaTuched])
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		control,
-		watch
+		watch,
 	} = useForm<ITeacherReview>()
 
-	const onSubmit: SubmitHandler<ITeacherReview> = data => console.log('data = ' ,data)
+	const onSubmit: SubmitHandler<ITeacherReview> = data =>
+		console.log('data = ', data)
 
-	// console.log('watch = ',watch('message'))
+			console.log('prevHeight2', prevHeightRef.current)
+
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
@@ -72,6 +87,7 @@ export function TeacherPage() {
 				</div>
 			</div>
 			<MesssageForm
+				onTextAreaTouch={handleTextareaTouch}
 				control={control}
 				register={register}
 				onHeightChange={height => setInputHeight(height)}
