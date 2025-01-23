@@ -9,11 +9,12 @@ import {
 import { ITeacherReview } from '../../../shared'
 
 import { MessageInput } from './message-input'
+import { IPostTeacherReview } from '../../../shared/model/interfaces/teacher-review.interface'
 
 interface IProps {
 	className?: string
 	onHeightChange: (height: number) => void
-	control: Control<ITeacherReview>
+	control: Control<Omit<IPostTeacherReview, 'teacherId'>>
 	onTextAreaTouch: () => void
 	errors: FieldErrors<ITeacherReview>
 }

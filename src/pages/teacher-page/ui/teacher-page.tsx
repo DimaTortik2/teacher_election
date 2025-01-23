@@ -9,6 +9,8 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MessageList } from '../../../entities/message'
+import { usePostReview } from '../../../shared/api/queries/review.queries'
+import { IPostTeacherReview } from '../../../shared/model/interfaces/teacher-review.interface'
 
 export function TeacherPage() {
 	const [inputHeight, setInputHeight] = useState<number>(0)
@@ -47,11 +49,11 @@ export function TeacherPage() {
 		control,
 		watch,
 		setValue,
-	} = useForm<ITeacherReview>({
+	} = useForm<Omit<IPostTeacherReview, 'teacherId'>>({
 		resolver: yupResolver(createTeacherReviewSchema),
 	})
 
-	const onSubmit: SubmitHandler<ITeacherReview> = data =>
+	const onSubmit: SubmitHandler<Omit<IPostTeacherReview, 'teacherId'>> = data =>
 		console.log('data = ', data)
 
 	useEffect(() => {
@@ -69,6 +71,13 @@ export function TeacherPage() {
 				})
 		console.log('errors =', errors)
 	}, [errors])
+
+	const {
+		postReview,
+		postReviewIsLoading,
+		postReviewIsSuccess,
+		postReviewIsError,
+	} = usePostReview()
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>

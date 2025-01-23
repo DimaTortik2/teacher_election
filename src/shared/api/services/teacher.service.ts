@@ -1,4 +1,5 @@
 import { QUERY_KEYS } from '../../model/constants'
+import { InfinityResponce } from '../../model/interfaces/infinity.interface'
 import { ITeacherForm } from '../../model/interfaces/teacher-form.interface'
 import type {
 	ITeachersResponse,
@@ -32,7 +33,9 @@ export const teacherService = {
 		return this.axios.get(`/${QUERY_KEYS.teacher}/${id}`).then(res => res.data)
 	},
 
-	findMany: async function (cursor: string): Promise<ITeachersResponse> {
+	findMany: async function (
+		cursor: string
+	): InfinityResponce<ITeachersResponse> {
 		const params = new URLSearchParams()
 		if (cursor) {
 			params.append('cursor', cursor)

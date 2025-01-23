@@ -7,20 +7,20 @@ import {
 } from 'react-hook-form'
 import {
 	ICategory,
-	ITeacherReview,
 } from '../../../shared'
 import { CATEGORIES } from '../../../shared/model/constants'
+import { IPostTeacherReview } from '../../../shared/model/interfaces/teacher-review.interface'
 
 interface IProps {
-	register: UseFormRegister<ITeacherReview>
-	watch: UseFormWatch<ITeacherReview>
-	setValue: UseFormSetValue<ITeacherReview>
-	errors: FieldErrors<ITeacherReview>
+	register: UseFormRegister<Omit<IPostTeacherReview, 'teacherId'>>
+	watch: UseFormWatch<Omit<IPostTeacherReview, 'teacherId'>>
+	setValue: UseFormSetValue<Omit<IPostTeacherReview, 'teacherId'>>
+	errors: FieldErrors<Omit<IPostTeacherReview, 'teacherId'>>
 }
 
 export function RatingForm({ register, watch, setValue, errors }: IProps) {
 	const handleChange = (
-		engName: keyof ITeacherReview,
+		engName: keyof Omit<IPostTeacherReview, 'teacherId'>,
 		newValue: number | null
 	) => {
 		setValue(engName, newValue ?? 0, { shouldValidate: true })

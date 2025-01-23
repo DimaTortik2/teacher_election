@@ -26,10 +26,13 @@ export type {
 	ISubjects,
 	ISubjectsResponse,
 } from './model/interfaces/subject.interfaces'
-export type { ITeacherReview } from './model/interfaces/teacher-review.interface'
+export type {
+	ITeacherReview,
+} from './model/interfaces/teacher-review.interface'
 export { subjectService } from './api/services/subject.service'
 export { RoleWrapper } from './ui/wrappers/role-check'
-export type { InfinityResponse } from './model/interfaces/infinity.interface'
+export type { InfinityResponce } from './model/interfaces/infinity.interface'
+
 export {
 	useDeleteTeacher,
 	useGetTeachers,
@@ -37,6 +40,13 @@ export {
 	useEditTeacher,
 	useGetTeacher,
 } from './api/queries/teachers.queries'
+// export {
+// 	useDeleteTeacher,
+// 	useGetTeachers,
+// 	usePostTeacher,
+// 	useEditTeacher,
+// 	useGetTeacher,
+// } from './api/queries/teachers.queries'
 export type {
 	ICreateTeacher,
 	ITeacherResponce,
@@ -47,9 +57,8 @@ export type {
 export type { ITeacherForm } from './model/interfaces/teacher-form.interface'
 export { FilePicker } from './ui/file-picker/file-picker'
 export { tokenService } from './api/services/token.service'
+export { reviewService } from './api/services/review.service'
 export { useRefreshTokens } from './api/queries/token.queries'
 export { signinSchema } from './model/schemas/signin.schema'
 export { signupSchema } from './model/schemas/signup.schema'
 export { createTeacherReviewSchema } from './model/schemas/create-review.schema'
-
-

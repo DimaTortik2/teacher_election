@@ -6,6 +6,7 @@ export const QUERY_KEYS = {
 	role: 'role',
 	teacher: 'teacher',
 	token: 'token',
+	review: 'teacher-review',
 }
 
 export const CATEGORIES: ICategories = [

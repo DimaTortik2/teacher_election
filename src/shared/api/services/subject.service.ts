@@ -1,4 +1,5 @@
 import { QUERY_KEYS } from '../../model/constants'
+import { InfinityResponce } from '../../model/interfaces/infinity.interface'
 import type {
 	ISubject,
 	ISubjectsResponse,
@@ -16,7 +17,9 @@ export const subjectService = {
 			.then(res => res.data)
 	},
 
-	findMany: async function (cursor: string): Promise<ISubjectsResponse> {
+	findMany: async function (
+		cursor: string
+	): InfinityResponce<ISubjectsResponse> {
 		const params = new URLSearchParams()
 		if (cursor) {
 			params.append('cursor', cursor)

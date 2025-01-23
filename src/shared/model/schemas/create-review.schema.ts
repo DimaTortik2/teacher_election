@@ -26,5 +26,5 @@ export const createTeacherReviewSchema = yup.object({
 		.min(1, 'и это поле оцени')
 		.max(5)
 		.required('и это поле оцени'),
-	message: yup.string().required('забыл сказать пару ласковых'),
+	message: yup.string(),
 })

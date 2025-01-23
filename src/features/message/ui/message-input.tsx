@@ -1,13 +1,13 @@
 import { Control, Controller } from 'react-hook-form'
-import { ITeacherReview } from '../../../shared'
 import { useRef, useState } from 'react'
 import debounce from 'lodash.debounce'
 import clsx from 'clsx'
+import { IPostTeacherReview } from '../../../shared/model/interfaces/teacher-review.interface'
 
 interface IProps {
-	control: Control<ITeacherReview>
+	control: Control<Omit<IPostTeacherReview, 'teacherId'>>
 	onTextAreaTouch: () => void
-	errorMessage: string
+	errorMessage: string | undefined
 }
 
 export function MessageInput({
