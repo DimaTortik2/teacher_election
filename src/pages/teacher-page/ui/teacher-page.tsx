@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { MesssageForm } from '../../../features/message'
-import { RatingForm } from '../../../features/rating-form'
-import {
-	createTeacherReviewSchema,
-	ITeacherReview,
-	TeacherInfo,
-} from '../../../shared'
+import { ReviewForm } from '../../../features/review'
+import { createTeacherReviewSchema, TeacherInfo } from '../../../shared'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MessageList } from '../../../entities/message'
@@ -90,23 +85,20 @@ export function TeacherPage() {
 					className='w-full h-full flex flex-col gap-4 items-center justify-start custom-scrollbar rounded-scrollbar overflow-y-auto'
 				>
 					<TeacherInfo rating={3} imgSrc='/undefined-person-icon.jpg' />
-					<RatingForm
-						errors={errors}
-						watch={watch}
-						register={register}
-						setValue={setValue}
-					/>
 					{/* <div className='w-full px-2 mt-2'>
 						<div className='w-full bg-zinc-500 rounded-2xl h-1'></div>
 					</div> */}
 					<MessageList className='mt-10' />
 				</div>
 			</div>
-			<MesssageForm
+			<ReviewForm
 				onTextAreaTouch={handleTextareaTouch}
 				control={control}
+				watch={watch}
 				onHeightChange={height => setInputHeight(height)}
 				errors={errors}
+				register={register}
+				setValue={setValue}
 				className='bottom-0 fixed w-full sm:w-[90vw] lg:w-[1000px] sm:border-zinc-500 sm:border-x-4 sm:border-b-4 sm:rounded-b-xl pb-4 pt-2 px-2 sm:px-5'
 			/>
 		</form>

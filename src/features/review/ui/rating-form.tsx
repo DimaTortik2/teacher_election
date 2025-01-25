@@ -5,9 +5,7 @@ import {
 	UseFormSetValue,
 	UseFormWatch,
 } from 'react-hook-form'
-import {
-	ICategory,
-} from '../../../shared'
+import { ICategory } from '../../../shared'
 import { CATEGORIES } from '../../../shared/model/constants'
 import { IPostTeacherReview } from '../../../shared/model/interfaces/teacher-review.interface'
 
@@ -48,7 +46,9 @@ export function RatingForm({ register, watch, setValue, errors }: IProps) {
 							precision={1}
 						/>
 						{errors[el.engName] && (
-							<p className='text-red-400 transition-all'>{errors[el.engName]?.message}</p>
+							<p className='text-red-400 transition-all'>
+								{errors[el.engName]?.message}
+							</p>
 						)}
 					</div>
 				</div>
