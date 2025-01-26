@@ -1,18 +1,14 @@
 import { TeacherFilter } from '../../../features/filter'
 import { SettingsWidget } from '../../../widgets/settings'
-import { TeacherCardList } from '../../../widgets/user'
 
 import { useInView } from 'react-intersection-observer'
 import { useGetTeachers } from '../../../shared/api/queries/teachers.queries'
 import { useEffect } from 'react'
+import { TeacherCardList } from '../../../features/teacher'
 
 export function TeachersPage() {
-	const {
-		data,
-		getTeachersIsSuccess,
-		hasNextPage,
-		fetchNextPage,
-	} = useGetTeachers()
+	const { data, getTeachersIsSuccess, hasNextPage, fetchNextPage } =
+		useGetTeachers()
 
 	const [ref, inView] = useInView()
 	useEffect(() => {

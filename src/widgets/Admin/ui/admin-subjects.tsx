@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import {
-	AdminSubjectCardsList,
-	SubjectForm,
-} from '../../../features/admin-features'
+import { AdminSubjectCardsList, SubjectForm } from '../../../features/admin'
 
 import { ChangeEvent } from 'react'
 

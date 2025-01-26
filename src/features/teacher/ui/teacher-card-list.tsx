@@ -19,7 +19,6 @@ export function TeacherCardList({ children, teachersArray }: IProps) {
 							imgSrc={
 								`https://teachers-election-backend.onrender.com/
 								${teacher.photo}`}
-							// imgSrc={teacher.photo}
 							teacherName={teacher.fullName}
 							teacherId={teacher.id}
 							subject={teacher.subject}

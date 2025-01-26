@@ -1,4 +1,4 @@
-import { SubjectsMenu } from '../../../widgets/user'
+import { SubjectsMenu } from "../../../features/subject";
 
 export function TeacherFilter() {
 	return (

@@ -1,6 +1,6 @@
 import { AuthTitle, ISignIn, usePostSignIn } from '../../../shared'
-import { SignInForm } from '../../../features/sign-in-form'
 import { Notification } from '../../../shared/ui/notification/notification'
+import { SignInForm } from '../../../widgets/auth'
 
 export function SignInPage() {
 	const { signIn, signInIsLoading, signInIsSuccess, signInIsError } =

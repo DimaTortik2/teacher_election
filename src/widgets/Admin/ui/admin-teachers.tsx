@@ -6,7 +6,7 @@ import {
 	usePostTeacher,
 } from '../../../shared/api/queries/teachers.queries'
 import { AdminTeacherCardsList } from './admin-teacher-card-list'
-import { TeacherForm } from '../../../features/admin-features'
+import { TeacherForm } from '../../../features/admin'
 import { BasicModal, Button, ITeacherForm } from '../../../shared'
 
 export function AdminTeachers() {
@@ -44,8 +44,8 @@ export function AdminTeachers() {
 	])
 
 	const handlePostTeacher = (data: ITeacherForm) => {
-		console.log('ITEACHERDATA = ',data)
-			postTeacher(data)
+		console.log('ITEACHERDATA = ', data)
+		postTeacher(data)
 	}
 	return (
 		<div

@@ -3,15 +3,13 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { AuthBackLink, ISignIn } from '../../../shared'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { signinSchema } from '../../../shared/model/schemas/signin.schema'
+import { InputSignIn } from '../../../features/form-input'
 
 interface IProps {
 	onSignIn: (data: ISignIn) => void
 }
 
 export function SignInForm({ onSignIn }: IProps) {
-	const INPUT_CLASSNAME =
-		'w-[calc((1vh_+_1vw)*24)] sm:w-[calc((1vh_+_1vw)*21)] md:w-[calc((1vh_+_1vw)*17)] xl:w-[350px] h-[2.5rem] text-xl rounded-xl  text-black'
-
 	const {
 		register,
 		handleSubmit,
@@ -27,28 +25,19 @@ export function SignInForm({ onSignIn }: IProps) {
 			onSubmit={handleSubmit(onSumbit)}
 			className='max-w-[350px] w-full flex flex-col items-center'
 		>
-			<div className='mb-4'>
-				<p>почта</p>
-				<input
-					{...register('email', { required: true })}
-					type='email'
-					className={INPUT_CLASSNAME}
-				/>
-				{errors.email && <p className='text-red-500'>{errors.email.message}</p>}
-			</div>
-			<div className='mb-4'>
-				<p>Пароль</p>
-				<input
-					type='password'
-					{...register('password', { required: true })}
-					className={INPUT_CLASSNAME}
-				/>
-				{errors.password && (
-					<p className='text-red-500'>{errors.password.message}</p>
-				)}
-			</div>
-
-			<Button type='submit' className='mt-5'>
+			<InputSignIn
+				errors={errors}
+				register={register}
+				registerName='email'
+				type='email'
+			/>
+			<InputSignIn
+				errors={errors}
+				register={register}
+				registerName='password'
+				type='password'
+			/>
+			<Button type='submit' className='mt-5 bg-zinc-700  hover:bg-zinc-800'>
 				Войти
 			</Button>
 			<div className='h-px w-[300px] bg-[rgba(255,255,255,0.4)] mt-[4vh]'></div>
@@ -56,5 +45,3 @@ export function SignInForm({ onSignIn }: IProps) {
 		</form>
 	)
 }
-
-// sign in : email , password

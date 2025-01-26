@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from 'react'
 import { AdminSubjectCard } from '../../../entities/subject/ui/admin-subject-card'
 import { ISubjects, ISubjectsResponse, useEditSubject } from '../../../shared'
-import { OptimisticSubjects } from '../../../features/admin-features'
+import { OptimisticSubjects } from '../../../features/admin'
 
 import { useDeleteSubject } from '../../../shared'
 import {

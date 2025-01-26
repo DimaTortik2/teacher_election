@@ -1,7 +1,7 @@
 import { ISignUp, usePostSignUp, AuthTitle } from '../../../shared'
 
-import { SignUpForm } from '../../../features/sign-up-form'
 import { Notification } from '../../../shared/ui/notification/notification'
+import { SignUpForm } from '../../../widgets/auth'
 
 export function SignUpPage() {
 	const { signUp, signUpIsLoading, signUpIsSuccess, signUpIsError } =

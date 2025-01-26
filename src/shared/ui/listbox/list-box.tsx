@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { ISubjectsResponse, ITeacherForm } from '../../../shared'
+import { ISubjectsResponse, ITeacherForm } from '../..'
 import { UseFormRegister } from 'react-hook-form'
 
 interface IProps {

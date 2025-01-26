@@ -1,1 +1,1 @@
-export { TeacherFilter } from './ui/teachers-filter'
+export { TeacherFilter } from '../../widgets/teacher/ui/teachers-filter'

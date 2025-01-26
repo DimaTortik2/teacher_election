@@ -4,8 +4,8 @@ import { Button } from '../../../shared/ui/button/button'
 import { useForm } from 'react-hook-form'
 import { ChangeEvent } from 'react'
 import { FilePicker, ITeacherForm } from '../../../shared'
-import { SubjectsMenu } from '../../../widgets/user'
 import { TeacherPreview } from './teacher-preview'
+import { SubjectsMenu } from '../../subject'
 
 interface IProps {
 	onPost: (data: ITeacherForm) => void

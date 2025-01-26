@@ -1,5 +1,5 @@
 import { AdminLinksList } from '../../../widgets/Admin'
-import { AdminTitle } from '../../../features/admin-features'
+import { AdminTitle } from '../../../features/admin'
 
 export function AdminPage() {
 	return (

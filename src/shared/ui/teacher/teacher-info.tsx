@@ -1,15 +1,14 @@
 import { Rating } from '@mui/material'
-import { useParams } from 'react-router'
 import { useGetTeacher } from '../../api/queries/teachers.queries'
 import { useEffect } from 'react'
 
 interface IProps {
 	rating?: number
 	imgSrc: string
+	id : string | undefined
 }
 
-export function TeacherInfo({ rating, imgSrc }: IProps) {
-	const { id } = useParams()
+export function TeacherInfo({ rating, imgSrc, id }: IProps) {
 
 	const { data, getTeacherIsSuccess } = useGetTeacher(id)
 
