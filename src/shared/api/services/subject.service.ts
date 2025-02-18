@@ -1,5 +1,6 @@
 import { QUERY_KEYS } from '../../model/constants'
-import { InfinityResponce } from '../../model/interfaces/infinity.interface'
+import { InfinityResponse } from '../../model/interfaces/infinity.interface'
+import { WithPagination } from '../../model/interfaces/paginated.interface'
 import type {
 	ISubject,
 	ISubjectsResponse,
@@ -19,13 +20,39 @@ export const subjectService = {
 
 	findMany: async function (
 		cursor: string
-	): InfinityResponce<ISubjectsResponse> {
+	): InfinityResponse<ISubjectsResponse> {
 		const params = new URLSearchParams()
 		if (cursor) {
 			params.append('cursor', cursor)
 		}
 		return await this.axios
 			.get(`/${QUERY_KEYS.subject}?${params.toString()}&limit=5`)
+			.then(res => res.data)
+	},
+
+	findManyPaged: async function ({
+		page,
+		limit,
+		title,
+	}: {
+		page: number
+		limit: number
+		title?: string
+	}): WithPagination<ISubject> {
+		const params = new URLSearchParams()
+
+		if (title) {
+			params.append('title', title)
+		}
+		if (limit) {
+			params.append('limit', limit.toString())
+		}
+
+		if (page === 0 ? true : page) {
+			params.append('page', (page + 1).toString())
+		}
+		return await this.axios
+			.get(`/${QUERY_KEYS.subject}?${params.toString()}`)
 			.then(res => res.data)
 	},
 

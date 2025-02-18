@@ -4,4 +4,4 @@
 	nextCursor: number | null
 } 
 
-export type InfinityResponce<T> = Promise<InfinityData<T>>
+export type InfinityResponse<T> = Promise<InfinityData<T>>

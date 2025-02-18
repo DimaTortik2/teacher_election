@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../../model/constants'
 import { subjectService } from '../services/subject.service'
 import type { ISubject } from '../../model/interfaces/subject.interfaces'
@@ -58,6 +58,27 @@ export const useGetSubjects = () => {
 	}
 }
 
+export const useGetPaginatedSubjects = ({page, limit, title}:{page: number, limit: number, title? : string}) => {
+	const {
+		data,
+		isPending: getPaginatedSubjectsIsLoading,
+		isSuccess: getPaginatedSubjectsIsSuccess,
+		isError: getPaginatedSubjectsIsError,
+		refetch: refetchPaginatedSubjects,
+	} = useQuery({
+		queryKey: [QUERY_KEYS.adminSubject, page, limit],
+		queryFn: async () => await subjectService.findManyPaged({page, limit, title}),
+	})
+
+	return {
+		data,
+		getPaginatedSubjectsIsLoading,
+		getPaginatedSubjectsIsSuccess,
+		getPaginatedSubjectsIsError,
+		refetchPaginatedSubjects,
+	}
+}
+
 export const useDeleteSubject = () => {
 	const queryClient = useQueryClient()
 
@@ -104,3 +125,24 @@ export const useEditSubject = () => {
 		editSubjectIsError,
 	}
 }
+
+// export const useSubjects = () => {
+
+// 	const {
+// 		mutate: editSubject,
+// 		isPending: editSubjectIsLoading,
+// 		isSuccess: editSubjectIsSuccess,
+// 		isError: editSubjectIsError,
+// 	} = useMutation({
+// 		mutationKey: [QUERY_KEYS.adminSubject],
+// 		mutationFn: async (args: { id: string; title: string }) =>
+// 			await subjectService.editOne(args),
+// 	})
+
+// 	return {
+// 		editSubject,
+// 		editSubjectIsLoading,
+// 		editSubjectIsSuccess,
+// 		editSubjectIsError,
+// 	}
+// }

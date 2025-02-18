@@ -7,6 +7,7 @@ export const QUERY_KEYS = {
 	teacher: 'teacher',
 	token: 'token',
 	review: 'teacher-review',
+	adminSubject: 'admin-subject',
 }
 
 export const CATEGORIES: ICategories = [

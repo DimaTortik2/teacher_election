@@ -26,9 +26,7 @@ export type {
 	ISubjects,
 	ISubjectsResponse,
 } from './model/interfaces/subject.interfaces'
-export type {
-	ITeacherReview,
-} from './model/interfaces/teacher-review.interface'
+export type { ITeacherReview } from './model/interfaces/teacher-review.interface'
 export { subjectService } from './api/services/subject.service'
 export { RoleWrapper } from './ui/wrappers/role-check'
 export type { InfinityResponce } from './model/interfaces/infinity.interface'
@@ -63,3 +61,4 @@ export { signinSchema } from './model/schemas/signin.schema'
 export { signupSchema } from './model/schemas/signup.schema'
 export { createTeacherReviewSchema } from './model/schemas/create-review.schema'
 export { MyListBox } from './ui/listbox/list-box'
+
