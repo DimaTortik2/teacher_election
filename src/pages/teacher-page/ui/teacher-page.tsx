@@ -1,40 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
-import { ReviewForm } from '../../../features/review'
-import { TeacherInfo } from '../../../shared'
-import { MessageList } from '../../../entities/message'
 import { useParams } from 'react-router'
+import { Review } from '../../../widgets/review'
+import { TeacherInfo } from '../../../shared/ui/teacher/teacher-info'
+import { useHeightControl } from '../../../features/review'
+import { useState } from 'react'
+import { MessageList } from '../../../features/messages'
 
 export function TeacherPage() {
-	const [inputHeight, setInputHeight] = useState<number>(0)
-	const contentRef = useRef<HTMLDivElement | null>(null)
-	const prevHeightRef = useRef<number>(0)
-
-	const [isTextareaTuched, setIsTextareaTuched] = useState<boolean>(false)
-
 	const { id } = useParams()
 
-	const handleTextareaTouch = () => {
-		if (!isTextareaTuched) {
-			setIsTextareaTuched(true)
-			prevHeightRef.current = inputHeight
-		}
+	const [inputHeight, setInputHeight] = useState<number>(0)
+	const handleHeightChange = (height: number) => {
+		setInputHeight(height)
 	}
 
-	useEffect(() => {
-		if (
-			contentRef.current &&
-			prevHeightRef.current !== inputHeight &&
-			isTextareaTuched
-		) {
-			const { scrollTop } = contentRef.current
-
-			contentRef.current.scrollTo({
-				top: scrollTop + (inputHeight - prevHeightRef.current), //прокрутить на то ,что изменилось
-				behavior: 'smooth',
-			})
-			prevHeightRef.current = inputHeight
-		}
-	}, [inputHeight, isTextareaTuched])
+	const { contentRef, handleTextareaTouch, formRef } = useHeightControl({
+		handleHeightChange,
+		inputHeight,
+	})
 
 	return (
 		<>
@@ -50,11 +32,7 @@ export function TeacherPage() {
 					<MessageList className='mt-10' />
 				</div>
 			</div>
-			<ReviewForm
-				id={id}
-				onTextAreaTouch={handleTextareaTouch}
-				onHeightChange={height => setInputHeight(height)}
-			/>
+			<Review id={id} onTextAreaTouch={handleTextareaTouch} formRef={formRef} />
 		</>
 	)
 }

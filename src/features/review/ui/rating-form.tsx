@@ -5,9 +5,9 @@ import {
 	UseFormSetValue,
 	UseFormWatch,
 } from 'react-hook-form'
-import { ICategory } from '../../../shared'
 import { CATEGORIES } from '../../../shared/model/constants'
-import { IPostTeacherReview } from '../../../shared/model/interfaces/teacher-review.interface'
+import { IPostTeacherReview } from '../model/interfaces/teacher-review.interface'
+import { ICategory } from '../model/interfaces/rating.inerface'
 
 interface IProps {
 	register: UseFormRegister<Omit<IPostTeacherReview, 'teacherId'>>
@@ -28,7 +28,7 @@ export function RatingForm({ register, watch, setValue, errors }: IProps) {
 
 	return (
 		<div className='flex flex-col w-full p-2'>
-			{CATEGORIES.map((el: ICategory, index) => (
+			{CATEGORIES.map((el: ICategory, index:number) => (
 				<div key={index}>
 					<input
 						type='number'

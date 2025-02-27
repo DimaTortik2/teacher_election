@@ -1,19 +1,18 @@
-import { StrictMode} from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { BrowserRouter, Routes, Route} from 'react-router'
+import { BrowserRouter, Routes, Route } from 'react-router'
 import { SignUpPage } from './pages/sign-up'
 import { Layout } from './app'
 import { SignInPage } from './pages/sign-in'
-import { AdminPage } from './pages/adminPanel'
-import { AdminSubjectsPage, AdminTeachersPage } from './pages/admin-page'
+import {
+	AdminPage,
+	AdminSubjectsPage,
+	AdminTeachersPage,
+} from './pages/admin-page'
 import { TeachersPage } from './pages/teachers-page'
-import { RoleWrapper } from './shared'
 import { TeacherPage } from './pages/teacher-page'
-import { TestingComp } from './pages/test/test'
-
-
-
+import { RoleWrapper } from './features/auth'
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
@@ -30,11 +29,6 @@ createRoot(document.getElementById('root')!).render(
 					<Route path='/teachers' element={<TeachersPage />} />
 					<Route path='/teacher/:id' element={<TeacherPage />} />
 
-
-					<Route path='/test' element={<TestingComp />} />
-
-
-					
 				</Route>
 			</Routes>
 		</BrowserRouter>

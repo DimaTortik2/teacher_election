@@ -1,15 +1,14 @@
 import { Rating } from '@mui/material'
-import { useGetTeacher } from '../../api/queries/teachers.queries'
 import { useEffect } from 'react'
+import { useGetTeacher } from '../../api/queries/teachers.queries'
 
 interface IProps {
 	rating?: number
 	imgSrc: string
-	id : string | undefined
+	id: string | undefined
 }
 
 export function TeacherInfo({ rating, imgSrc, id }: IProps) {
-
 	const { data, getTeacherIsSuccess } = useGetTeacher(id)
 
 	useEffect(() => {

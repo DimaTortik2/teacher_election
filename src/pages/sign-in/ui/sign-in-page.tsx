@@ -1,4 +1,5 @@
-import { AuthTitle, ISignIn, usePostSignIn } from '../../../shared'
+import { ISignIn, usePostSignIn } from '../../../features/auth'
+import { AuthTitle } from '../../../shared/ui/auth-titles/auth-title'
 import { Notification } from '../../../shared/ui/notification/notification'
 import { SignInForm } from '../../../widgets/auth'
 

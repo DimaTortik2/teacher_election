@@ -2,7 +2,7 @@ import { Control, Controller } from 'react-hook-form'
 import { useRef, useState } from 'react'
 import debounce from 'lodash.debounce'
 import clsx from 'clsx'
-import { IPostTeacherReview } from '../../../shared/model/interfaces/teacher-review.interface'
+import { IPostTeacherReview } from '../model/interfaces/teacher-review.interface'
 
 interface IProps {
 	control: Control<Omit<IPostTeacherReview, 'teacherId'>>

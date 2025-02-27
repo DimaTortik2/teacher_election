@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
-import { ISubjectsResponse, ITeacherForm } from '../..'
 import { UseFormRegister } from 'react-hook-form'
+import { ISubjectsResponse } from '../../../features/subjects'
+import { ITeacherForm } from '../../../features/teachers'
 
 interface IProps {
 	subjectsArray?: ISubjectsResponse[]
@@ -21,7 +22,7 @@ export function MyListBox({ subjectsArray, children, register }: IProps) {
 			}}
 		>
 			{subjectsArray?.map(subjects =>
-				subjects.data?.map((subject, index) => (
+				subjects.data?.map((subject, index:number) => (
 					<option
 						key={index}
 						className='p-2 cursor-pointer hover:bg-zinc-800 transition-colors my-wrap-text'

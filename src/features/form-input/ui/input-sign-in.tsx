@@ -1,17 +1,24 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { ISignIn } from '../../../shared'
+import { ISignIn } from '../../auth/model/interfaces/auth.interfaces'
 
 interface IProps {
 	register: UseFormRegister<ISignIn>
 	errors: FieldErrors<ISignIn>
 	type: 'email' | 'password' | 'text' | 'number'
 	registerName: keyof ISignIn
+	title: string
 }
 
-export function InputSignIn({ register, errors, type, registerName }: IProps) {
+export function InputSignIn({
+	register,
+	errors,
+	type,
+	registerName,
+	title,
+}: IProps) {
 	return (
 		<div className='mb-4'>
-			<p>почта</p>
+			<p>{title}</p>
 			<input
 				{...register(registerName, { required: true })}
 				type={type}

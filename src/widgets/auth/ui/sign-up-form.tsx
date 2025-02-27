@@ -1,10 +1,9 @@
-import { Button } from '../../../shared/ui/button/button'
-import { AuthBackLink, ISignUp } from '../../../shared'
+import { Button } from '../../../shared/ui/buttons-links/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
-
 import { yupResolver } from '@hookform/resolvers/yup'
-import { signupSchema } from '../../../shared/model/schemas/signup.schema'
 import { InputSignUp } from '../../../features/form-input'
+import { AuthBackLink } from '../../../shared/ui/auth-titles/auth-link'
+import { ISignUp, signupSchema } from '../../../features/auth'
 
 interface IProps {
 	onSignUp: (data: ISignUp) => void
@@ -27,18 +26,21 @@ export function SignUpForm({ onSignUp }: IProps) {
 			className='max-w-[350px] w-full flex flex-col items-center '
 		>
 			<InputSignUp
+				title='почта'
 				errors={errors}
 				register={register}
 				registerName='email'
 				type='email'
 			/>
 			<InputSignUp
+				title='пароль'
 				errors={errors}
 				register={register}
 				registerName='password'
 				type='password'
 			/>
 			<InputSignUp
+				title='секретное слово'
 				errors={errors}
 				register={register}
 				registerName='codeWord'

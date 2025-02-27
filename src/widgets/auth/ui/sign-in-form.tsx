@@ -1,9 +1,9 @@
-import { Button } from '../../../shared/ui/button/button'
+import { Button } from '../../../shared/ui/buttons-links/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { AuthBackLink, ISignIn } from '../../../shared'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { signinSchema } from '../../../shared/model/schemas/signin.schema'
 import { InputSignIn } from '../../../features/form-input'
+import { AuthBackLink } from '../../../shared/ui/auth-titles/auth-link'
+import { ISignIn, signinSchema } from '../../../features/auth'
 
 interface IProps {
 	onSignIn: (data: ISignIn) => void
@@ -30,12 +30,14 @@ export function SignInForm({ onSignIn }: IProps) {
 				register={register}
 				registerName='email'
 				type='email'
+				title='почта'
 			/>
 			<InputSignIn
 				errors={errors}
 				register={register}
 				registerName='password'
 				type='password'
+				title='пароль'
 			/>
 			<Button type='submit' className='mt-5 bg-zinc-700  hover:bg-zinc-800'>
 				Войти

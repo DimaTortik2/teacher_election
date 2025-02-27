@@ -1,10 +1,9 @@
-import { TeacherFilter } from '../../../features/filter'
-import { SettingsWidget } from '../../../widgets/settings'
-
+import { SettingsButton } from '../../../widgets/settings'
 import { useInView } from 'react-intersection-observer'
-import { useGetTeachers } from '../../../shared/api/queries/teachers.queries'
 import { useEffect } from 'react'
-import { TeacherCardList } from '../../../features/teacher'
+import { TeacherFilter } from '../../../widgets/teachers/ui/teachers-filter'
+import { useGetTeachers } from '../../../shared/api/queries/teachers.queries'
+import { TeacherCardList } from '../../../features/teachers'
 
 export function TeachersPage() {
 	const { data, getTeachersIsSuccess, hasNextPage, fetchNextPage } =
@@ -19,11 +18,12 @@ export function TeachersPage() {
 	}, [inView, fetchNextPage, hasNextPage])
 
 	if (getTeachersIsSuccess) console.log('teachers = ', data?.pages)
+		
 	return (
 		<div className='h-full w-full flex flex-col items-center justify-center'>
 			<div className='w-full h-16 flex justify-between bg-zinc-800 py-2 relative '>
 				<TeacherFilter />
-				<SettingsWidget />
+				<SettingsButton />
 			</div>
 
 			{getTeachersIsSuccess && (

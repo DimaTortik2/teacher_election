@@ -1,5 +1,5 @@
-import { ISignUp, usePostSignUp, AuthTitle } from '../../../shared'
-
+import { ISignUp, usePostSignUp } from '../../../features/auth'
+import { AuthTitle } from '../../../shared/ui/auth-titles/auth-title'
 import { Notification } from '../../../shared/ui/notification/notification'
 import { SignUpForm } from '../../../widgets/auth'
 

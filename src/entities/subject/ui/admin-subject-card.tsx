@@ -1,7 +1,5 @@
 import clsx from 'clsx'
-
 import { useState } from 'react'
-
 import crossIcon from '../../../../public/cross-icon.svg'
 import editIcon from '../../../../public/edit-icon.svg'
 interface IProps {

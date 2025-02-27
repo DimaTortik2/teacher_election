@@ -1,0 +1,1 @@
+export { AdminSubjects } from './ui/admin-subjects'

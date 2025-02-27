@@ -1,1 +1,1 @@
-export { AdminSubjectCard } from './ui/admin-subject-card'
+export { AdminSubjectCardsList } from './ui/admin-subject-cards-list'
