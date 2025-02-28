@@ -1,10 +1,9 @@
 import { instance } from '../../../../shared/api/api.instance'
 import { QUERY_KEYS } from '../../../../shared/model/constants'
-import { InfinityResponse } from '../../../../shared/model/interfaces/interfaces'
 import { ITeacherForm } from '../../model/interfaces/teacher-form.interface'
 import {
 	ICreateTeacher,
-	ITeacherExtended,
+	ITeacher,
 	ITeachersResponse,
 } from '../../model/interfaces/teacher.interface'
 
@@ -29,13 +28,11 @@ export const teacherService = {
 			.then(res => res.data)
 	},
 
-	findOne: async function (id?: string): Promise<ITeacherExtended> {
+	findOne: async function (id?: string): Promise<ITeacher> {
 		return this.axios.get(`/${QUERY_KEYS.teacher}/${id}`).then(res => res.data)
 	},
 
-	findMany: async function (
-		cursor: string
-	): InfinityResponse<ITeachersResponse> {
+	findMany: async function (cursor: string): ITeachersResponse {
 		const params = new URLSearchParams()
 		if (cursor) {
 			params.append('cursor', cursor)

@@ -1,4 +1,4 @@
-import { InfinityResponse } from "../../../../shared/model/interfaces/interfaces"
+import { PromiseInfinity } from '../../../../shared/model/interfaces/interfaces'
 
 export interface ICreateTeacher {
 	fullName: string
@@ -6,22 +6,14 @@ export interface ICreateTeacher {
 	photo: File
 }
 
-export interface ITeacherResponce {
+export interface ITeacher {
 	id: string
 	fullName: string
 	subject: string
-	subjectId: string
 	photo: string
+	avgRating: number
 }
 
-export type ITeachers = ITeacherResponce[]
+export type ITeachersResponse = PromiseInfinity<ITeacher>
 
-export type ITeachersResponse = InfinityResponse<ITeacherResponce>
-
-export interface ITeacherExtended {
-	fullName: string
-	subject: string
-	id: string
-	photo: string
-	teacherReview : number
-}
+export type ITeachers = ITeacher[]

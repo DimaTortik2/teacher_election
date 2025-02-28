@@ -1,15 +1,13 @@
-
- interface InfinityData<T> {
+export interface InfinityData<T> {
 	data: T[]
 	nextCursor: number | null
 } 
 
-
-interface PaginationData<T> {
+export interface PaginationData<T> {
 	items: T[]
 	count: number
-	urrentPage: number
+	currentPage: number
 }
 
-export type InfinityResponse<T> = Promise<InfinityData<T>>
-export type WithPagination<T> = Promise<PaginationData<T>>
+export type PromiseInfinity<T> = Promise<InfinityData<T>>
+export type PromisePagination<T> = Promise<PaginationData<T>>

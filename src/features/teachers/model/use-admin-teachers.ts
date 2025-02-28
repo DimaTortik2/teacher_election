@@ -11,6 +11,7 @@ export function useAdminTeachers() {
 	useEffect(() => {
 		if (inView && hasNextPage) {
 			console.log('inview')
+			console.log('data', data)
 			fetchNextPage()
 		}
 		if (postTeacherIsSuccess) {

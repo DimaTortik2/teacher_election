@@ -5,21 +5,22 @@ import {
 	RefetchOptions,
 } from '@tanstack/react-query'
 import { OptimisticTeachers } from '../../optimistic'
-import { ITeachersResponse } from '../model/interfaces/teacher.interface'
+import {
+	ITeacher,
+} from '../model/interfaces/teacher.interface'
 import {
 	useDeleteTeacher,
 	useEditTeacher,
 } from '../api/queries/teachers.queries'
 import { AdminTeacherCard } from '../../../entities/teacher'
+import { InfinityData } from '../../../shared/model/interfaces/interfaces'
 
 type refetchTeachersType = {
-	(options?: RefetchOptions): Promise<
-		QueryObserverResult<InfiniteData<ITeachersResponse, unknown>, Error>
-	>
+	(options?: RefetchOptions) : Promise<QueryObserverResult<InfiniteData<InfinityData<ITeacher>, unknown>, Error>>
 }
 
 interface IProps {
-	teachersArray?: ITeachersResponse[]
+	teachersArray?: InfinityData<ITeacher>[]
 	children: ReactNode
 	refetchTeachers: refetchTeachersType
 }
