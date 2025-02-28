@@ -1,10 +1,11 @@
 import { ReactNode } from 'react'
 import { TeacherCard } from '../../../entities/teacher'
-import { ITeachersResponse } from '../model/interfaces/teacher.interface'
+import { InfinityData } from '../../../shared/model/interfaces/interfaces'
+import { ITeacher } from '../model/interfaces/teacher.interface'
 
 interface IProps {
 	children: ReactNode
-	teachersArray?: ITeachersResponse[]
+	teachersArray?: InfinityData<ITeacher>[]
 }
 
 export function TeacherCardList({ children, teachersArray }: IProps) {
