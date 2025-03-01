@@ -5,15 +5,17 @@ import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import { UseFormRegister } from 'react-hook-form'
 import { useGetSubjects } from '../../../shared/api/queries/subject.queries'
-import { MyListBox } from '../../../shared/ui/listbox/list-box'
+
 import { ITeacherForm } from '../../teachers'
+import { SubjectListBox } from './subject-list-box'
 
 interface IProps {
 	buttonText: string
 	register?: UseFormRegister<ITeacherForm>
+	isRequired?: boolean
 }
 
-export function SubjectsMenu({ buttonText, register }: IProps) {
+export function SubjectsMenu({ buttonText, register, isRequired }: IProps) {
 	const {
 		data,
 		hasNextPage,
@@ -36,11 +38,15 @@ export function SubjectsMenu({ buttonText, register }: IProps) {
 				{buttonText}
 			</MenuButton>
 			<Menu className='pt-3 z-[2]'>
-				<MyListBox subjectsArray={data?.pages} register={register}>
+				<SubjectListBox
+					subjectsArray={data?.pages}
+					register={register}
+					isRequired={isRequired}
+				>
 					<option disabled className='h-0 w-0' ref={ref}>
 						⠀
 					</option>
-				</MyListBox>
+				</SubjectListBox>
 			</Menu>
 		</Dropdown>
 	)

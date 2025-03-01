@@ -6,24 +6,53 @@ import { SubjectsMenu } from '../../../features/subjects'
 import { TeacherPreview } from '../../../features/admin'
 import { FilePicker } from '../../../shared/ui/file-picker/file-picker'
 import { ITeacherForm } from '../../../features/teachers'
+import { useGetTeacher } from '../../../shared/api/queries/teachers.queries'
+import resetIcon from '../../../../public/reset-icon.svg'
 
 interface IProps {
-	onPost: (data: ITeacherForm) => void
+	onSubmit: (editData: Partial<ITeacherForm>) => void
+	id: string
 }
 
-export function TeacherForm({ onPost }: IProps) {
-	const handleClick = (data: ITeacherForm) => {
-		onPost(data)
+export function EditTeacherForm({ onSubmit, id }: IProps) {
+	const handleClick = (editData: Partial<ITeacherForm>) => {
+		onSubmit(editData)
 	}
+
+	const { data } = useGetTeacher(id)
 
 	const {
 		handleSubmit,
 		register,
 		watch,
 		formState: { errors },
+		reset,
 	} = useForm<ITeacherForm>({
 		mode: 'onChange', // Валидировать при изменении
+		defaultValues: {
+			fullName: 'загрузка...',
+			subject: JSON.stringify({ title: 'загрузка...' }),
+		},
 	})
+
+	const resetPreviewInfo = () => {
+		if (data) {
+			reset({
+				fullName: data.fullName,
+				subject: JSON.stringify({
+					title: data.subject,
+					subjectId: undefined,
+				}),
+			})
+			setImagePreview(data.photo)
+		}
+	}
+
+	useEffect(() => {
+		if (data) {
+			resetPreviewInfo()
+		}
+	}, [data])
 
 	useEffect(() => {
 		console.log('errors', errors)
@@ -56,7 +85,6 @@ export function TeacherForm({ onPost }: IProps) {
 					<input
 						type='text'
 						{...register('fullName', {
-							required: 'имя забыл, емае',
 							minLength: {
 								value: 4,
 								message: 'имя учителя > 3 букв',
@@ -68,12 +96,27 @@ export function TeacherForm({ onPost }: IProps) {
 						<p className='mt-2 text-red-500'>{errors.fullName.message}</p>
 					)}
 				</div>
-				<div className='w-full flex gap-3 px-2'>
-					<SubjectsMenu register={register} buttonText='Выбрать предмет' />
-					<FilePicker onChange={handleFileChenge} register={register} />
+
+				<div className='w-full flex justify-between'>
+					<div className=' flex gap-3 px-2'>
+						<SubjectsMenu
+							isRequired={false}
+							register={register}
+							buttonText='Выбрать предмет'
+						/>
+						<FilePicker
+							isRequired={false}
+							onChange={handleFileChenge}
+							register={register}
+						/>
+					</div>
+					<button onClick={resetPreviewInfo}>
+						<img src={resetIcon} className='h-8 mr-4' />
+					</button>
 				</div>
+
 				<Button type='submit' className='m-3 absolute bottom-0'>
-					Добавить учителя
+					Сохранить изменения
 				</Button>
 
 				<div className='w-2/3 h-1/6'>

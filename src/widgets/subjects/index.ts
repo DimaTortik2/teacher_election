@@ -1,1 +1,1 @@
-export { AdminSubjects } from './ui/admin-subjects'
+export { SubjectForm } from './ui/admin-subject-form'

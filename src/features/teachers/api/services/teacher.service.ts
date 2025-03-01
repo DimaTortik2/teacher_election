@@ -3,6 +3,7 @@ import { QUERY_KEYS } from '../../../../shared/model/constants'
 import { ITeacherForm } from '../../model/interfaces/teacher-form.interface'
 import {
 	ICreateTeacher,
+	IEditTeacher,
 	ITeacher,
 	ITeachersResponse,
 } from '../../model/interfaces/teacher.interface'
@@ -13,15 +14,12 @@ export const teacherService = {
 	createOne: async function (data: ITeacherForm): Promise<ICreateTeacher> {
 		const formData = new FormData()
 		formData.append('subjectId', JSON.parse(data.subject).subjectId)
-		formData.append('photo', data.photo[0])
+		if (data.photo) formData.append('photo', data.photo[0])
 		formData.append('fullName', data.fullName)
 
-		console.log(
-			' data.photo',
-			typeof data.photo,
-			'data.fullName',
-			typeof data.fullName
-		)
+		console.log(' data.photo', data.photo, 'data.fullName', data.fullName)
+
+		console.log('we are here = ', formData)
 
 		return await this.axios
 			.post(`/${QUERY_KEYS.teacher}`, formData)
@@ -46,8 +44,16 @@ export const teacherService = {
 		return await this.axios.delete(`/${QUERY_KEYS.teacher}/${id}`)
 	},
 
-	editOne: async function (id: string): Promise<void> {
-		return await this.axios.put(`/${QUERY_KEYS.teacher}/${id}`)
-		//////////////////////////
+	editOne: async function ({ id, data }: IEditTeacher): Promise<void> {
+		const formData = new FormData()
+		if (data.subject)
+			formData.append('subjectId', JSON.parse(data.subject).subjectId)
+
+		if (data.photo) formData.append('photo', data.photo[0])
+
+		if (data.fullName) formData.append('fullName', data.fullName)
+
+
+		return await this.axios.put(`/${QUERY_KEYS.teacher}/${id}`, formData)
 	},
 }

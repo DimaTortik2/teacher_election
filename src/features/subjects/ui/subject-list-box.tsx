@@ -1,18 +1,25 @@
 import { ReactNode } from 'react'
 import { UseFormRegister } from 'react-hook-form'
-import { ISubjectsResponse } from '../../../features/subjects'
+import { ISubject } from '../../../features/subjects'
 import { ITeacherForm } from '../../../features/teachers'
+import { InfinityData } from '../../../shared/model/interfaces/interfaces'
 
 interface IProps {
-	subjectsArray?: ISubjectsResponse[]
+	subjectsArray?: InfinityData<ISubject>[]
 	children: ReactNode
 	register?: UseFormRegister<ITeacherForm>
+	isRequired?: boolean
 }
 
-export function MyListBox({ subjectsArray, children, register }: IProps) {
+export function SubjectListBox({
+	subjectsArray,
+	children,
+	register,
+	isRequired,
+}: IProps) {
 	return (
 		<select
-			{...(register ? register('subject', { required: true }) : {})}
+			{...(register ? register('subject', { required: isRequired }) : {})}
 			size={7}
 			className=' bg-[rgba(63,63,70,0.96)] w-40 rounded-2xl text-white text-center
 		 border-zinc-400 custom-scrollbar rounded-scrollbar border-2 overflow-auto overflow-x-hidden'
@@ -22,7 +29,7 @@ export function MyListBox({ subjectsArray, children, register }: IProps) {
 			}}
 		>
 			{subjectsArray?.map(subjects =>
-				subjects.data?.map((subject, index:number) => (
+				subjects.data?.map((subject: ISubject, index: number) => (
 					<option
 						key={index}
 						className='p-2 cursor-pointer hover:bg-zinc-800 transition-colors my-wrap-text'

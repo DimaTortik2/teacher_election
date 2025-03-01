@@ -1,4 +1,4 @@
-import { ICategories } from './interfaces/rating.inerface'
+import { ICategories } from "../../features/review"
 
 export const QUERY_KEYS = {
 	auth: 'auth',
@@ -8,6 +8,7 @@ export const QUERY_KEYS = {
 	token: 'token',
 	review: 'teacher-review',
 	adminSubject: 'admin-subject',
+	adminTeacher: 'admin-teacher',
 }
 
 export const CATEGORIES: ICategories = [

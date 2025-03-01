@@ -1,9 +1,8 @@
 import { instance } from '../../../../shared/api/api.instance'
 import { QUERY_KEYS } from '../../../../shared/model/constants'
-import { InfinityResponse, WithPagination } from '../../../../shared/model/interfaces/interfaces'
+import { PromiseInfinity, PromisePagination } from '../../../../shared/model/interfaces/interfaces'
 import {
 	ISubject,
-	ISubjectsResponse,
 } from '../../model/interfaces/subject.interfaces'
 
 export const subjectService = {
@@ -17,9 +16,7 @@ export const subjectService = {
 			.then(res => res.data)
 	},
 
-	findMany: async function (
-		cursor: string
-	): InfinityResponse<ISubjectsResponse> {
+	findMany: async function (cursor: string): PromiseInfinity<ISubject> {
 		const params = new URLSearchParams()
 		if (cursor) {
 			params.append('cursor', cursor)
@@ -37,7 +34,7 @@ export const subjectService = {
 		page: number
 		limit: number
 		title?: string
-	}): WithPagination<ISubject> {
+	}): PromisePagination<ISubject> {
 		const params = new URLSearchParams()
 
 		if (title) {

@@ -1,8 +1,8 @@
 import { styled } from '@mui/material/styles'
 import Button from '@mui/material/Button'
 import { UseFormRegister } from 'react-hook-form'
-import { ITeacherForm } from '../../model/interfaces/teacher-form.interface'
 import { ChangeEvent } from 'react'
+import { ITeacherForm } from '../../../features/teachers'
 
 const VisuallyHiddenInput = styled('input')({
 	clip: 'rect(0 0 0 0)',
@@ -18,10 +18,11 @@ const VisuallyHiddenInput = styled('input')({
 
 interface IProps {
 	register: UseFormRegister<ITeacherForm>
+	isRequired? : boolean
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export function FilePicker({ register, onChange }: IProps) {
+export function FilePicker({ register, onChange, isRequired }: IProps) {
 	return (
 		<Button
 			component='label'
@@ -38,13 +39,12 @@ export function FilePicker({ register, onChange }: IProps) {
 				paddingLeft: '0.5rem',
 				paddingRight: '0.5rem',
 				fontFamily: 'inherit',
-				boxShadow :'none'
-				
+				boxShadow: 'none',
 			}}
 		>
 			Добавить фото
 			<VisuallyHiddenInput
-				{...register('photo', { required: true })}
+				{...register('photo', { required: isRequired })}
 				type='file'
 				onChange={onChange}
 				multiple

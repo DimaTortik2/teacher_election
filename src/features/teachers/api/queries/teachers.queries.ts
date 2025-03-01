@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '../../../../shared/model/constants'
 import { ITeacherForm } from '../../model/interfaces/teacher-form.interface'
 import { teacherService } from '../services/teacher.service'
+import { IEditTeacher } from '../../model/interfaces/teacher.interface'
 
 export const usePostTeacher = () => {
 	const queryClient = useQueryClient()
@@ -13,7 +14,7 @@ export const usePostTeacher = () => {
 		isError: postTeacherIsError,
 	} = useMutation({
 		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.adminTeacher }),
 		mutationKey: [QUERY_KEYS.teacher],
 		mutationFn: async (data: ITeacherForm) =>
 			await teacherService.createOne(data),
@@ -37,7 +38,7 @@ export const useDeleteTeacher = () => {
 		isError: deleteTeacherIsError,
 	} = useMutation({
 		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.adminTeacher }),
 		mutationKey: [QUERY_KEYS.teacher],
 		mutationFn: async (id: string) => await teacherService.deleteOne(id),
 	})
@@ -60,9 +61,10 @@ export const useEditTeacher = () => {
 		isError: editTeacherIsError,
 	} = useMutation({
 		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.adminTeacher }),
 		mutationKey: [QUERY_KEYS.teacher],
-		mutationFn: async (id: string) => await teacherService.editOne(id),
+		mutationFn: async ({ id, data }: IEditTeacher) =>
+			await teacherService.editOne({ id, data }),
 	})
 
 	return {

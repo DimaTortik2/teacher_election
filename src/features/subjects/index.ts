@@ -9,5 +9,4 @@ export { subjectService } from './api/services/subject.service'
 export type {
 	ISubject,
 	ISubjects,
-	ISubjectsResponse,
 } from './model/interfaces/subject.interfaces'
