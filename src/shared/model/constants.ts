@@ -1,20 +1,22 @@
-import { ICategories } from "../../features/review"
+import { ICategoryNames } from '../../features/review'
 
 export const QUERY_KEYS = {
 	auth: 'auth',
-	subject: 'subject',
+	subject: 'subjects',
 	role: 'role',
-	teacher: 'teacher',
+	teacher: 'teachers',
 	token: 'token',
-	review: 'teacher-review',
+	comment: 'comment',
+	review: 'teacher-reviews',
 	adminSubject: 'admin-subject',
 	adminTeacher: 'admin-teacher',
+	postReview: 'post-review',
 }
 
-export const CATEGORIES: ICategories = [
+export const CATEGORIES: ICategoryNames = [
 	{
 		rusName: 'Дружелюбность',
-		engName: 'frinedliness',
+		engName: 'friendliness',
 	},
 	{
 		rusName: 'Халявность',

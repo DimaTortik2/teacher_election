@@ -18,7 +18,7 @@ export const usePostReview = () => {
 	} = useMutation({
 		onSettled: () =>
 			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
-		mutationKey: [QUERY_KEYS.review],
+		mutationKey: [QUERY_KEYS.postReview],
 		mutationFn: async (
 			data: Pick<IPostTeacherReview, 'message' | 'teacherId'>
 		) => await reviewService.createOne(data),
@@ -32,7 +32,7 @@ export const usePostReview = () => {
 	}
 }
 
-export const useGetReviews = () => {
+export const useGetReviews = (id: string) => {
 	const {
 		data,
 		isPending: getReviewIsLoading,
@@ -40,12 +40,12 @@ export const useGetReviews = () => {
 		isError: getReviewIsError,
 		hasNextPage,
 		isFetchingNextPage,
-		refetch: refetchSubjects,
+		refetch: refetchReviews,
 		fetchNextPage,
 	} = useInfiniteQuery({
-		queryKey: [QUERY_KEYS.review],
+		queryKey: [QUERY_KEYS.review, id],
 		queryFn: async ({ pageParam }) =>
-			await reviewService.findMany(pageParam.toString()),
+			await reviewService.findMany({ cursor: pageParam.toString(), id }),
 		initialPageParam: 0,
 		getNextPageParam: lastPage => lastPage.nextCursor,
 	})
@@ -57,7 +57,7 @@ export const useGetReviews = () => {
 		getReviewIsError,
 		hasNextPage,
 		isFetchingNextPage,
-		refetchSubjects,
+		refetchReviews,
 		fetchNextPage,
 	}
 }

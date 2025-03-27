@@ -23,7 +23,7 @@ export function AdminTeachersPage() {
 	}
 
 	const handleEditTeacher = (editData: Partial<ITeacherForm>) => {
-		if (editData.photo?.length === 0) editData.photo = undefined
+		if (editData.file?.length === 0) editData.file = undefined
 		console.log('editData', editData)
 		editTeacher({ data: editData, id: ediingTeacherId })
 	}

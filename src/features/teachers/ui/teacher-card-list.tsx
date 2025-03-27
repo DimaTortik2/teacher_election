@@ -17,11 +17,14 @@ export function TeacherCardList({ children, teachersArray }: IProps) {
 					teachers.data?.map(teacher => (
 						<TeacherCard
 							key={teacher.id}
-							imgSrc={`https://teachers-election-backend.onrender.com/
-								${teacher.photo}`}
+							imgSrc={`https://console-production-6cbd.up.railway.app/api/v1/buckets/teachers-bucket/objects/download?preview=true&prefix=${teacher.photo}&version_id=null`}
 							teacherName={teacher.fullName}
 							teacherId={teacher.id}
-							subject={teacher.subject}
+							subject={
+								typeof teacher.subject === 'string'
+									? teacher.subject
+									: teacher.subject.title
+							}
 						/>
 					))
 				)}

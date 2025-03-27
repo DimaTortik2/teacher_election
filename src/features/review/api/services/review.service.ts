@@ -1,10 +1,8 @@
 import { instance } from '../../../../shared/api/api.instance'
 import { QUERY_KEYS } from '../../../../shared/model/constants'
-import { InfinityResponse } from '../../../../shared/model/interfaces/interfaces'
-import {
-	IPostTeacherReview,
-	ITeacherReview,
-} from '../../model/interfaces/teacher-review.interface'
+import { PromiseInfinity } from '../../../../shared/model/interfaces/interfaces'
+import { IReviewResponse } from '../../model/interfaces/comment.sinterface'
+import { IPostTeacherReview } from '../../model/interfaces/teacher-review.interface'
 
 export const reviewService = {
 	axios: instance,
@@ -17,10 +15,19 @@ export const reviewService = {
 			.then(res => res.data)
 	},
 
-	findMany: async function (cursor: string): InfinityResponse<ITeacherReview> {
+	findMany: async function ({
+		cursor,
+		id,
+	}: {
+		cursor: string
+		id: string
+	}): PromiseInfinity<IReviewResponse> {
 		const params = new URLSearchParams()
 		if (cursor) {
 			params.append('cursor', cursor)
+		}
+		if (id) {
+			params.append('teacherId', id)
 		}
 		return await this.axios
 			.get(`/${QUERY_KEYS.review}?${params.toString()}&limit=5`)

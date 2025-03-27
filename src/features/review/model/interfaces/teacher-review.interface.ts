@@ -1,11 +1,8 @@
-export interface ITeacherReview {
+import { ICategories } from "./catigories.interface"
+
+export interface ITeacherReview extends ICategories {
 	id: string
-	freebie: number
-	frinedliness: number
-	strictness: number
-	smartless: number
-	experienced: number
-	message?: string
+	message?: string | null
 }
 
 export interface IPostTeacherReview extends Omit<ITeacherReview, 'id'> {

@@ -14,10 +14,10 @@ export const teacherService = {
 	createOne: async function (data: ITeacherForm): Promise<ICreateTeacher> {
 		const formData = new FormData()
 		formData.append('subjectId', JSON.parse(data.subject).subjectId)
-		if (data.photo) formData.append('photo', data.photo[0])
+		if (data.file) formData.append('file', data.file[0])
 		formData.append('fullName', data.fullName)
 
-		console.log(' data.photo', data.photo, 'data.fullName', data.fullName)
+		console.log(' data.photo', data.file, 'data.fullName', data.fullName)
 
 		console.log('we are here = ', formData)
 
@@ -49,7 +49,7 @@ export const teacherService = {
 		if (data.subject)
 			formData.append('subjectId', JSON.parse(data.subject).subjectId)
 
-		if (data.photo) formData.append('photo', data.photo[0])
+		if (data.file) formData.append('photo', data.file[0]) /// или же файл
 
 		if (data.fullName) formData.append('fullName', data.fullName)
 

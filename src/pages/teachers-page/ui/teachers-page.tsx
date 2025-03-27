@@ -25,7 +25,6 @@ export function TeachersPage() {
 				<TeacherFilter />
 				<SettingsButton />
 			</div>
-
 			{getTeachersIsSuccess && (
 				<TeacherCardList teachersArray={data?.pages}>
 					<li className='h-1 w-full' ref={ref}>

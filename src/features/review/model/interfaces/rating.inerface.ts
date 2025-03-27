@@ -1,8 +1,8 @@
 import { IPostTeacherReview } from './teacher-review.interface'
 
-export interface ICategory {
+export interface ICategoryName {
 	rusName: string
 	engName: keyof Omit<IPostTeacherReview, 'teacherId'>
 }
 
-export type ICategories = ICategory[]
+export type ICategoryNames = ICategoryName[]

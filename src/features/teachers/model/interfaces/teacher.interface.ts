@@ -15,7 +15,7 @@ export interface IEditTeacher {
 export interface ITeacher {
 	id: string
 	fullName: string
-	subject: string
+	subject: { title: string; id: string } | string
 	photo: string
 	avgRating: number
 }

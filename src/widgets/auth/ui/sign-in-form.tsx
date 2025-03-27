@@ -1,9 +1,8 @@
 import { Button } from '../../../shared/ui/buttons-links/button'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { InputSignIn } from '../../../features/form-input'
 import { AuthBackLink } from '../../../shared/ui/auth-titles/auth-link'
-import { ISignIn, signinSchema } from '../../../features/auth'
+import { InputSignIn, ISignIn, signinSchema } from '../../../features/auth'
 
 interface IProps {
 	onSignIn: (data: ISignIn) => void

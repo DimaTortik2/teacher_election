@@ -18,6 +18,9 @@ export function MessageInput({
 	const inputRef = useRef<HTMLTextAreaElement | null>(null)
 	const [inputText, setInputText] = useState<string>('')
 
+	console.log(inputText)//пока так 
+
+	
 	//функция обернута в debounce для оптимизации, она тут нужна!
 	const handleInput = debounce(
 		(event: React.FormEvent<HTMLTextAreaElement>) => {
@@ -40,7 +43,9 @@ export function MessageInput({
 			rules={{ required: true }}
 			render={({ field }) => (
 				<textarea
-					{...field}
+					value={field.value || ''} // Явно задаем значение с fallback
+					onChange={field.onChange} // Явно передаем onChange
+					onBlur={field.onBlur} // Явно передаем onBlur
 					placeholder={errorMessage ? errorMessage : 'Препод ващеее....'}
 					ref={inputRef}
 					name='postContent'

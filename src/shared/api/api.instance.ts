@@ -1,29 +1,30 @@
 import axios from 'axios'
+import errorCatch from './api.error'
 
 const instance = axios.create({
 	baseURL: 'https://teachers-election-backend.onrender.com',
 	withCredentials: true,
 })
+let retryCount = 0
 
 instance.interceptors.response.use(
-	config => {
-		return config
-	},
+	config => config,
 	async error => {
 		const originalRequest = error.config
 		if (
-			error.response.status == 401 &&
+			(error.response.status === 401 ||
+				errorCatch(error) === 'jwt expired ' ||
+				errorCatch(error) === 'jwt must be provided') &&
 			error.config &&
-			!error.config._isRetry
+			!error.config._isRetry &&
+			retryCount < 2
 		) {
 			originalRequest._isRetry = true
-			try {
-				await instance.get(`/token`).then(res => res.data)
-				return instance.request(originalRequest)
-			} catch (e) {
-				console.log(e)
-			}
+			retryCount += 1
+			return instance.get('/tokens')
 		}
+
+		throw error
 	}
 )
 

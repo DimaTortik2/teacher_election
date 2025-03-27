@@ -44,7 +44,7 @@ export function FilePicker({ register, onChange, isRequired }: IProps) {
 		>
 			Добавить фото
 			<VisuallyHiddenInput
-				{...register('photo', { required: isRequired })}
+				{...register('file', { required: isRequired })}
 				type='file'
 				onChange={onChange}
 				multiple

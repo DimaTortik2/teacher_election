@@ -110,7 +110,7 @@ export function EditTeacherForm({ onSubmit, id }: IProps) {
 							register={register}
 						/>
 					</div>
-					<button onClick={resetPreviewInfo}>
+					<button type='button' onClick={resetPreviewInfo}>
 						<img src={resetIcon} className='h-8 mr-4' />
 					</button>
 				</div>

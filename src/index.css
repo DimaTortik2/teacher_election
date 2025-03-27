@@ -48,6 +48,10 @@
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 }
+.word-wrap {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
 
 ::selection {
 	background-color: #a1a1aa; /* Цвет фона при выделении */

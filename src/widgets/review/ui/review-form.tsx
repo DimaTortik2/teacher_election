@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import crossIcon from '../../../../public/cross-icon.svg'
-import { MessageInput } from '../../../features/review/ui/message-input'
+import { MessageInput } from '../../../features/review/ui/review-input'
 import { RatingForm } from '../../../features/review/ui/rating-form'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -16,9 +16,10 @@ interface IProps {
 	onTextAreaTouch: () => void
 	id: string | undefined
 	formRef: React.MutableRefObject<HTMLDivElement | null>
+	onSubmit: () => void
 }
 
-export function Review({ onTextAreaTouch, id, formRef }: IProps) {
+export function ReviewForm({ onTextAreaTouch, id, formRef, onSubmit }: IProps) {
 	const [isRatingVisible, setIsRatingVisible] = useState<boolean>(false)
 	const [isInputVisible, setIsInputVisible] = useState<boolean>(false)
 
@@ -35,15 +36,16 @@ export function Review({ onTextAreaTouch, id, formRef }: IProps) {
 		resolver: yupResolver(createTeacherReviewSchema),
 	})
 
-	const onSubmit: SubmitHandler<
+	const handleFormSubmit: SubmitHandler<
 		Omit<IPostTeacherReview, 'teacherId'>
 	> = data => {
 		if (id) {
 			postReview({
 				...data,
-				message: data.message == '' ? undefined : data.message,
+				message: data.message == '' ? null : data.message,
 				teacherId: id,
 			})
+			onSubmit()
 		} else {
 			console.log('no id? can not post review')
 		}
@@ -59,9 +61,9 @@ export function Review({ onTextAreaTouch, id, formRef }: IProps) {
 		<form
 			className={clsx(
 				'bg-zinc-700 transition-colors text-white  text-xl flex items-start flex-col',
-				'bottom-0 fixed w-full sm:w-[90vw] lg:w-[1000px]'
+				'bottom-0 fixed w-full sm:w-[90vw] lg:w-[1000px] border-t-2 border-zinc-500 shadow-soft-up'
 			)}
-			onSubmit={handleSubmit(onSubmit)}
+			onSubmit={handleSubmit(handleFormSubmit)}
 		>
 			<div
 				className={clsx(
@@ -86,7 +88,7 @@ export function Review({ onTextAreaTouch, id, formRef }: IProps) {
 							className=' text-white'
 							onClick={resetFormState}
 						>
-							<img src={crossIcon} alt='Ок' className='h-8' />
+							<img src={crossIcon} alt='esc' className='h-8' />
 						</button>
 						<div className='w-full flex justify-between items-start mb-2'>
 							<RatingForm
@@ -95,7 +97,11 @@ export function Review({ onTextAreaTouch, id, formRef }: IProps) {
 								register={register}
 								setValue={setValue}
 							/>
-							<Button type='submit' className='w-full bg-zinc-600'>
+							<Button
+								type='submit'
+								className='w-full bg-zinc-600'
+								onClick={() => console.log(errors)}
+							>
 								Отправить
 							</Button>
 						</div>

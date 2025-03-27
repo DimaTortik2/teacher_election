@@ -11,7 +11,7 @@ export function useAdminSubjectTable({ setLimit, setPage }: IProps) {
 		setLimit(parseInt(event.target.value, 10))
 	}
 
-	const handleChangePage = (event: unknown, nextPage: number) => {
+	const handleChangePage = (_: unknown, nextPage: number) => {
 		setPage(nextPage)
 	}
 
