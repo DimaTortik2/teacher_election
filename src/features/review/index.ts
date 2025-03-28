@@ -1,6 +1,6 @@
 export { RatingForm } from '../review/ui/rating-form'
 export { MessageInput } from './ui/review-input'
-
+export {ReviewFilterSlider} from './ui/review-filter-slider'
 export { useHeightControl } from './model/use-height-control'
 
 export { usePostReview, useGetReviews } from './api/queries/review.queries'

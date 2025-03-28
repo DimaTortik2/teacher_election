@@ -2,6 +2,7 @@ import { useParams } from 'react-router'
 import { ReviewForm } from '../../../widgets/review'
 import { TeacherInfo } from '../../../shared/ui/teacher/teacher-info'
 import {
+	ReviewFilterSlider,
 	ReviewList,
 	useGetReviews,
 	useHeightControl,
@@ -68,11 +69,18 @@ export function TeacherPage() {
 					ref={contentRef}
 					className='w-full h-full flex flex-col gap-4 items-center justify-start custom-scrollbar rounded-scrollbar overflow-y-auto'
 				>
-					<TeacherInfo id={id} defaultImgSrc='/undefined-person-icon.jpg' />
+					<TeacherInfo
+						id={id}
+						defaultImgSrc='/undefined-person-icon.jpg'
+						className='bg-[rgba(0,0,0,0.2)] border-solid border-b-2 border-zinc-700 shadow-lg'
+					/>
 					{data && (
-						<ReviewList messages={messageDatas} className='mt-10'>
-							<li ref={ref}>⠀</li>
-						</ReviewList>
+						<>
+							<ReviewFilterSlider className='w-full p-2' />
+							<ReviewList messages={messageDatas} className='mt-10'>
+								<li ref={ref}>⠀</li>
+							</ReviewList>
+						</>
 					)}
 				</div>
 			</div>

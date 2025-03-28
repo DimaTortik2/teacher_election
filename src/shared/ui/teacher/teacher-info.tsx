@@ -2,13 +2,15 @@ import { Rating } from '@mui/material'
 import { useEffect } from 'react'
 import { useGetTeacher } from '../../api/queries/teachers.queries'
 import { getRatingColor } from '../../helpers/get-rating-color'
+import clsx from 'clsx'
 
 interface IProps {
 	defaultImgSrc: string
 	id: string | undefined
+	className?: string
 }
 
-export function TeacherInfo({ defaultImgSrc, id }: IProps) {
+export function TeacherInfo({ className, defaultImgSrc, id }: IProps) {
 	const { data, getTeacherIsSuccess } = useGetTeacher(id)
 
 	useEffect(() => {
@@ -16,7 +18,12 @@ export function TeacherInfo({ defaultImgSrc, id }: IProps) {
 	}, [getTeacherIsSuccess, data])
 
 	return (
-		<div className='w-full p-2 flex flex-col lg:flex-row items-start '>
+		<div
+			className={clsx(
+				'w-full p-2 flex flex-col lg:flex-row items-start',
+				className
+			)}
+		>
 			<div className=' w-[200px] h-[200px] rounded-b-2xl border-solid border-b-2 border-zinc-700 shadow-lg'>
 				<img
 					src={

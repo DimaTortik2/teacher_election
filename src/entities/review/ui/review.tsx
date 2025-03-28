@@ -29,7 +29,7 @@ export function Review({ text, onLikelick, ratingArr }: IProps) {
 	}
 
 	return (
-		<div className=' w-full flex flex-col gap-[5px] items-start text-xl sm:px-2'>
+		<div className='w-full flex flex-col gap-[5px] items-start text-xl sm:px-2'>
 			<Rating
 				readOnly={true}
 				value={rating}
@@ -54,7 +54,7 @@ export function Review({ text, onLikelick, ratingArr }: IProps) {
 							)}
 						</div>
 					</div>
-					<div className='flex justify-end w-full rounded-b-2xl border-solid border-b-2 border-zinc-700 bg-[#4c4c54] shadow-lg'>
+					<div className='flex justify-end w-full rounded-b-2xl border-solid border-b-2 border-zinc-700 shadow-lg bg-[#4c4c54]'>
 						{isLikesCountVisible && (
 							<span className='text-[1.1rem] text-[rgba(255,255,255,0.5)]'>
 								123k
