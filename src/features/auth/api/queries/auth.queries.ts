@@ -3,7 +3,7 @@ import { QUERY_KEYS } from '../../../../shared/model/constants'
 import { ISignIn, ISignUp } from '../../model/interfaces/auth.interfaces'
 import { authService } from '../services/auth.service'
 
-export const usePostSignUp = () => {
+export const useSignUp = () => {
 	const {
 		mutate: signUp,
 		isPending: signUpIsLoading,
@@ -22,7 +22,7 @@ export const usePostSignUp = () => {
 	}
 }
 
-export const usePostSignIn = () => {
+export const useSignIn = () => {
 	const {
 		mutate: signIn,
 		isPending: signInIsLoading,

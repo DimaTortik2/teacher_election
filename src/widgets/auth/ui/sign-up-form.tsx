@@ -1,55 +1,89 @@
-import { Button } from '../../../shared/ui/buttons-links/button'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { AuthBackLink } from '../../../shared/ui/auth-titles/auth-link'
-import { InputSignUp, ISignUp, signupSchema } from '../../../features/auth'
+import { useForm } from 'react-hook-form'
+
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { AuthButton } from '../../../shared/ui/buttons-links/auth-button'
+import { AuthBackLink } from '../../../shared/ui/auth/auth-link'
+import { AuthHeader } from '../../../shared/ui/auth/auth-header'
+import { ISignUpForm,ISignUp, InputSignUp, signUpSchema } from '../../../features/auth'
 
 interface IProps {
-	onSignUp: (data: ISignUp) => void
+	onSubmit: (data: ISignUp) => void
 }
 
-export function SignUpForm({ onSignUp }: IProps) {
+export function SignUpForm({ onSubmit }: IProps) {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<ISignUp>({
-		resolver: yupResolver(signupSchema),
+	} = useForm<ISignUpForm>({
+		resolver: zodResolver(signUpSchema),
+		mode: 'onChange',
 	})
 
-	const onSubmit: SubmitHandler<ISignUp> = data => onSignUp(data)
+	const handleFormSubmit = ({ email, password, codeWord }: ISignUpForm) => {
+		onSubmit({ email, password, codeWord })
+	}
 
 	return (
 		<form
-			onSubmit={handleSubmit(onSubmit)}
-			className='max-w-[350px] w-full flex flex-col items-center '
+			onSubmit={handleSubmit(handleFormSubmit)}
+			className='relative h-full w-full flex flex-col justify-center'
 		>
-			<InputSignUp
-				title='почта'
-				errors={errors}
-				register={register}
-				registerName='email'
-				type='email'
-			/>
-			<InputSignUp
-				title='пароль'
-				errors={errors}
-				register={register}
-				registerName='password'
-				type='password'
-			/>
-			<InputSignUp
-				title='секретное слово'
-				errors={errors}
-				register={register}
-				registerName='codeWord'
-				type='text'
-			/>
-			<Button type='submit' className='mt-5 bg-zinc-700 hover:bg-zinc-800'>
-				Принять
-			</Button>
-			<div className='h-px w-[300px] bg-[rgba(255,255,255,0.4)] mt-[4vh]'></div>
-			<AuthBackLink className='mt-4' type='signIn' />
+			<AuthHeader className='absolute top-0 rounded-b-none'>
+				Регистрация
+			</AuthHeader>
+
+			<div className='relative flex flex-col flex-1 w-full justify-center'>
+				<div className='w-full items-center flex flex-col gap-1'>
+					<InputSignUp
+						title={'Почта'}
+						errors={errors}
+						register={register}
+						registerName={'email'}
+						type={'text'}
+					/>
+
+					<InputSignUp
+						title={'Пароль'}
+						errors={errors}
+						register={register}
+						registerName={'password'}
+						type={'password'}
+					/>
+
+					<InputSignUp
+						title={'Повторите пароль'}
+						errors={errors}
+						register={register}
+						registerName={'password_repeat'}
+						type={'password'}
+					/>
+
+					<InputSignUp
+						title={'Тайная информация'}
+						errors={errors}
+						register={register}
+						registerName={'codeWord'}
+						type={'password'}
+					/>
+				</div>
+
+				<div className='w-full flex justify-center'>
+					<div className='h-px w-4/5 bg-cyan-100'></div>
+				</div>
+
+				<div className='w-full flex justify-center mt-2'>
+					<div className='w-3/4 flex gap-3'>
+						<span className='opacity-85 text-gray-100'>есть аккаунт?</span>
+						<AuthBackLink className='hover:text-cyan-200' type='tosignin' />
+					</div>
+				</div>
+			</div>
+
+			<AuthButton isSubmit={true} className='w-full rounded-t-none'>
+				Зарегаться
+			</AuthButton>
 		</form>
 	)
 }

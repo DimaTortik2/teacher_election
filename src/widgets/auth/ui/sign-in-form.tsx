@@ -1,48 +1,63 @@
-import { Button } from '../../../shared/ui/buttons-links/button'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { AuthBackLink } from '../../../shared/ui/auth-titles/auth-link'
-import { InputSignIn, ISignIn, signinSchema } from '../../../features/auth'
+import { useForm } from 'react-hook-form'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { AuthHeader } from '../../../shared/ui/auth/auth-header'
+import { AuthBackLink } from '../../../shared/ui/auth/auth-link'
+import { InputSignIn, ISignIn, signInSchema } from '../../../features/auth'
+import { AuthButton } from '../../../shared/ui/buttons-links/auth-button'
 
 interface IProps {
-	onSignIn: (data: ISignIn) => void
+	onSubmit: (data: ISignIn) => void
 }
 
-export function SignInForm({ onSignIn }: IProps) {
+export function SignInForm({ onSubmit }: IProps) {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<ISignIn>({
-		resolver: yupResolver(signinSchema),
+		resolver: zodResolver(signInSchema),
 	})
 
-	const onSumbit: SubmitHandler<ISignIn> = data => onSignIn(data)
 
 	return (
 		<form
-			onSubmit={handleSubmit(onSumbit)}
-			className='max-w-[350px] w-full flex flex-col items-center'
+			onSubmit={handleSubmit(onSubmit)}
+			className='relative h-full w-full flex flex-col justify-center'
 		>
-			<InputSignIn
-				errors={errors}
-				register={register}
-				registerName='email'
-				type='email'
-				title='почта'
-			/>
-			<InputSignIn
-				errors={errors}
-				register={register}
-				registerName='password'
-				type='password'
-				title='пароль'
-			/>
-			<Button type='submit' className='mt-5 bg-zinc-700  hover:bg-zinc-800'>
+			<AuthHeader className='absolute top-0 rounded-b-none'>Вход</AuthHeader>
+			<div className='relative flex flex-col flex-1 w-full justify-center'>
+				<div className='w-full items-center flex flex-col gap-1'>
+					<InputSignIn
+						title={'Почта'}
+						errors={errors}
+						register={register}
+						registerName={'email'}
+						type={'text'}
+					/>
+
+					<InputSignIn
+						title={'Пароль'}
+						errors={errors}
+						register={register}
+						registerName={'password'}
+						type={'password'}
+					/>
+				</div>
+				<div className='w-full flex justify-center'>
+					<div className='h-px w-4/5 bg-cyan-100'></div>
+				</div>
+
+				<div className='w-full flex justify-center mt-2'>
+					<div className='w-3/4 flex gap-3'>
+						<span className='opacity-85 text-gray-100'>нет аккаунта?</span>
+						<AuthBackLink className='hover:text-cyan-200' type='tosignup' />
+					</div>
+				</div>
+			</div>
+			<AuthButton isSubmit={true} className='mt-auto w-full rounded-t-none'>
 				Войти
-			</Button>
-			<div className='h-px w-[300px] bg-[rgba(255,255,255,0.4)] mt-[4vh]'></div>
-			<AuthBackLink className='mt-4' type='signUp' />
+			</AuthButton>
 		</form>
 	)
 }

@@ -1,33 +1,33 @@
-import { ISignIn, usePostSignIn } from '../../../features/auth'
-import { AuthTitle } from '../../../shared/ui/auth-titles/auth-title'
-import { Notification } from '../../../shared/ui/notification/notification'
+import { useNavigate } from 'react-router'
+import { ISignIn, useSignIn } from '../../../features/auth'
 import { SignInForm } from '../../../widgets/auth'
+import { useEffect } from 'react'
+import { ROUTES } from '../../../shared/model/constants'
 
 export function SignInPage() {
-	const { signIn, signInIsLoading, signInIsSuccess, signInIsError } =
-		usePostSignIn()
+	const navigate = useNavigate()
+	const { signIn, signInIsLoading, signInIsSuccess } = useSignIn()
 
-	const handleSignIn = (data: ISignIn) => {
+
+	// const { showNotification } = useContext(NotificationContext)
+
+	useEffect(() => {
+		if (signInIsLoading) {
+			// showNotification({ message: 'загрузка...', type: 'loading' })
+		}
+		if (signInIsSuccess) {
+			navigate(ROUTES.teachers)
+			// showNotification({ message: 'успешно', type: 'success' })
+		}
+	}, [signInIsLoading, signInIsSuccess, navigate])
+
+	const onSubmit = (data: ISignIn) => {
 		signIn(data)
 	}
 
 	return (
-		<div className='w-screen h-screen flex items-center justify-center'>
-			<section
-				className='w-screen sm:w-[calc((1vh_+_1vw)*25)] xl:w-[500px]
-			 h-screen sm:h-[90vh]
-			 bg-zinc-600 flex flex-col items-center justify-center sm:rounded-xl relative  sm:border-4 sm:border-zinc-500 '
-			>
-				<AuthTitle className='absolute top-0 left-0'>Вход</AuthTitle>
-				<SignInForm onSignIn={handleSignIn} />
-			</section>
-
-			<Notification
-				className='absolute left-0 bottom-0'
-				isSuccess={signInIsSuccess}
-				isLoading={signInIsLoading}
-				isError={signInIsError}
-			/>
+		<div className='text-white backdrop-blur-3xl bg-[rgba(52,116,132,0.4)] w-full min-[400px]:w-[400px] h-3/4 rounded-2xl border-solid border-4 border-cyan-500'>
+			<SignInForm onSubmit={onSubmit} />
 		</div>
 	)
 }

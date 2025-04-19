@@ -1,11 +1,11 @@
-export type { ISignUp, ISignIn } from './model/interfaces/auth.interfaces'
-export {
-	usePostSignUp,
-	usePostSignIn,
-	useSignOut,
-} from './api/queries/auth.queries'
+export type {
+	ISignUp,
+	ISignIn,
+	ISignUpForm,
+} from './model/interfaces/auth.interfaces'
+export { useSignIn, useSignUp, useSignOut } from './api/queries/auth.queries'
 
 export { RoleWrapper } from './ui/role-check'
-export { signinSchema, signupSchema } from './model/schemas/auth.schema'
-export { InputSignIn } from './ui/input-sign-in.tsx'
+export { signInSchema, signUpSchema } from './model/schemas/schemas.ts'
 export { InputSignUp } from './ui/input-sign-up.tsx'
+export { InputSignIn } from './ui/input-sign-in.tsx'

@@ -13,6 +13,12 @@ export const QUERY_KEYS = {
 	postReview: 'post-review',
 }
 
+export const ROUTES = {
+	signin: '/sign-in',
+	signup: '/',
+	teachers: '/teachers',
+}
+
 export const CATEGORIES: ICategoryNames = [
 	{
 		rusName: 'Дружелюбность',
