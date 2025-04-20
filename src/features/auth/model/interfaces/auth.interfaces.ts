@@ -4,7 +4,7 @@ import { signInSchema, signUpSchema } from '../schemas/schemas'
 
 export type ISignIn = z.infer<typeof signInSchema>
 export type ISignUpForm = z.infer<typeof signUpSchema>
-export type ISignUp = Pick<ISignUpForm, 'email' | 'password'| 'codeWord'>
+export type ISignUp = Omit<ISignUpForm, 'password_repeat'>
 
 
 export interface IAuthResponse {

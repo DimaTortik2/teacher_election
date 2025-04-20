@@ -1,11 +1,16 @@
 import { useForm } from 'react-hook-form'
 
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AuthButton } from '../../../shared/ui/buttons-links/auth-button'
 import { AuthBackLink } from '../../../shared/ui/auth/auth-link'
 import { AuthHeader } from '../../../shared/ui/auth/auth-header'
-import { ISignUpForm,ISignUp, InputSignUp, signUpSchema } from '../../../features/auth'
+import {
+	ISignUpForm,
+	ISignUp,
+	InputSignUp,
+	signUpSchema,
+} from '../../../features/auth'
+import { useState } from 'react'
 
 interface IProps {
 	onSubmit: (data: ISignUp) => void
@@ -21,9 +26,18 @@ export function SignUpForm({ onSubmit }: IProps) {
 		mode: 'onChange',
 	})
 
-	const handleFormSubmit = ({ email, password, codeWord }: ISignUpForm) => {
-		onSubmit({ email, password, codeWord })
+	const handleFormSubmit = ({
+		email,
+		password,
+		codeWord,
+		nickName,
+	}: ISignUpForm) => {
+		onSubmit({ email, password, codeWord, nickName: nickName || null })
 	}
+
+	const [isFirstStep, setIsFirstStep] = useState<boolean>(true)
+
+	console.log(errors)
 
 	return (
 		<form
@@ -36,37 +50,55 @@ export function SignUpForm({ onSubmit }: IProps) {
 
 			<div className='relative flex flex-col flex-1 w-full justify-center'>
 				<div className='w-full items-center flex flex-col gap-1'>
-					<InputSignUp
-						title={'Почта'}
-						errors={errors}
-						register={register}
-						registerName={'email'}
-						type={'text'}
-					/>
+					{isFirstStep ? (
+						<>
+							<InputSignUp
+								title={'Почта'}
+								errors={errors}
+								register={register}
+								registerName={'email'}
+								type={'text'}
+								key={1}
+							/>
 
-					<InputSignUp
-						title={'Пароль'}
-						errors={errors}
-						register={register}
-						registerName={'password'}
-						type={'password'}
-					/>
+							<InputSignUp
+								title={'Пароль'}
+								errors={errors}
+								register={register}
+								registerName={'password'}
+								type={'password'}
+								key={2}
+							/>
 
-					<InputSignUp
-						title={'Повторите пароль'}
-						errors={errors}
-						register={register}
-						registerName={'password_repeat'}
-						type={'password'}
-					/>
-
-					<InputSignUp
-						title={'Тайная информация'}
-						errors={errors}
-						register={register}
-						registerName={'codeWord'}
-						type={'password'}
-					/>
+							<InputSignUp
+								title={'Повторите пароль'}
+								errors={errors}
+								register={register}
+								registerName={'password_repeat'}
+								type={'password'}
+								key={3}
+							/>
+						</>
+					) : (
+						<>
+							<InputSignUp
+								title={'Тайная информация'}
+								errors={errors}
+								register={register}
+								registerName={'codeWord'}
+								type={'password'}
+								key={4}
+							/>
+							<InputSignUp
+								title={'Имя (по желанию)'}
+								errors={errors}
+								register={register}
+								registerName={'nickName'}
+								type={'text'}
+								key={5}
+							/>
+						</>
+					)}
 				</div>
 
 				<div className='w-full flex justify-center'>
@@ -81,9 +113,28 @@ export function SignUpForm({ onSubmit }: IProps) {
 				</div>
 			</div>
 
-			<AuthButton isSubmit={true} className='w-full rounded-t-none'>
-				Зарегаться
-			</AuthButton>
+			{isFirstStep ? (
+				<AuthButton
+					isSubmit={false}
+					onClick={() => setIsFirstStep(false)}
+					className='w-full rounded-t-none'
+				>
+					Далее
+				</AuthButton>
+			) : (
+				<>
+					<AuthButton
+						isSubmit={false}
+						onClick={() => setIsFirstStep(true)}
+						className='w-full rounded-none'
+					>
+						назад
+					</AuthButton>
+					<AuthButton isSubmit={true} className='w-full rounded-t-none'>
+						Зарегаться
+					</AuthButton>
+				</>
+			)}
 		</form>
 	)
 }

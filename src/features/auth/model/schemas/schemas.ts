@@ -19,7 +19,8 @@ export const signUpSchema = z
 			.string()
 			.min(6, 'Минимально 6 символов')
 			.max(32, 'Максимально 32 символа'),
-		codeWord: z.string(),
+		codeWord: z.string().min(1,'Обязательно'),
+		nickName: z.string().optional().nullable(),
 	})
 	.refine(data => data.password === data.password_repeat, {
 		message: 'Пароли должны совпадать',
