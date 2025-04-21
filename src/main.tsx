@@ -15,28 +15,31 @@ import { TeachersPage } from './pages/teachers-page'
 import { TeacherPage } from './pages/teacher-page'
 import { RoleWrapper } from './features/auth'
 import { TestPage } from './pages/test-page'
+import { HydrateAtoms } from './shared/lib/theme'
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<BrowserRouter>
-			<Routes location={location}>
-				<Route element={<Layout />}>
-					<Route element={<AuthLayout />}>
-						<Route path='/' element={<SignUpPage />} />
-						<Route path='/sign-in' element={<SignInPage />} />
+			<HydrateAtoms>
+				<Routes location={location}>
+					<Route element={<Layout />}>
+						<Route element={<AuthLayout />}>
+							<Route path='/' element={<SignUpPage />} />
+							<Route path='/sign-in' element={<SignInPage />} />
+						</Route>
+						<Route element={<RoleWrapper />}>
+							<Route path='/admin' element={<AdminPage />} />
+							<Route path='/admin/subjects' element={<AdminSubjectsPage />} />
+							<Route path='/admin/teachers' element={<AdminTeachersPage />} />
+							<Route path='/admin/review' element={<AdminReviewPage />} />
+						</Route>
+						<Route path='/teachers' element={<TeachersPage />} />
+						<Route path='/teacher/:id' element={<TeacherPage />} />
 					</Route>
-					<Route element={<RoleWrapper />}>
-						<Route path='/admin' element={<AdminPage />} />
-						<Route path='/admin/subjects' element={<AdminSubjectsPage />} />
-						<Route path='/admin/teachers' element={<AdminTeachersPage />} />
-						<Route path='/admin/review' element={<AdminReviewPage />} />
-					</Route>
-					<Route path='/teachers' element={<TeachersPage />} />
-					<Route path='/teacher/:id' element={<TeacherPage />} />
-				</Route>
 
-				<Route path='/test' element={<TestPage />} />
-			</Routes>
+					<Route path='/test' element={<TestPage />} />
+				</Routes>
+			</HydrateAtoms>
 		</BrowserRouter>
 	</StrictMode>
 )

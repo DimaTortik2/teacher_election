@@ -11,6 +11,7 @@ import {
 	signUpSchema,
 } from '../../../features/auth'
 import { useState } from 'react'
+import { ThemeSwitcher } from '../../../shared/lib/theme'
 
 interface IProps {
 	onSubmit: (data: ISignUp) => void
@@ -76,6 +77,7 @@ export function SignUpForm({ onSubmit }: IProps) {
 								type={'password'}
 								key={3}
 							/>
+							<ThemeSwitcher />
 						</>
 					) : (
 						<>
@@ -100,7 +102,7 @@ export function SignUpForm({ onSubmit }: IProps) {
 				</div>
 
 				<div className='w-full flex justify-center'>
-					<div className='h-px w-4/5 bg-cyan-100'></div>
+					<div className='h-px w-4/5 bg-cyan-100 '></div>
 				</div>
 
 				<div className='w-full flex justify-center mt-2'>
