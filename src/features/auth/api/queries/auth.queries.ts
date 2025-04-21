@@ -9,6 +9,7 @@ export const useSignUp = () => {
 		isPending: signUpIsLoading,
 		isSuccess: signUpIsSuccess,
 		isError: signUpIsError,
+		error,
 	} = useMutation({
 		mutationKey: [QUERY_KEYS.auth],
 		mutationFn: async (data: ISignUp) => await authService.signUp(data),
@@ -19,6 +20,7 @@ export const useSignUp = () => {
 		signUpIsLoading,
 		signUpIsSuccess,
 		signUpIsError,
+		error,
 	}
 }
 
@@ -28,6 +30,7 @@ export const useSignIn = () => {
 		isPending: signInIsLoading,
 		isSuccess: signInIsSuccess,
 		isError: signInIsError,
+		error,
 	} = useMutation({
 		mutationKey: [QUERY_KEYS.auth],
 		mutationFn: async (data: ISignIn) => await authService.signIn(data),
@@ -38,15 +41,17 @@ export const useSignIn = () => {
 		signInIsLoading,
 		signInIsSuccess,
 		signInIsError,
+		error,
 	}
 }
 
 export const useSignOut = () => {
 	const {
-		mutate : signOut,
+		mutate: signOut,
 		isPending: signOutIsLoading,
 		isSuccess: signOutIsSuccess,
 		isError: signOutIsError,
+		error,
 	} = useMutation({
 		mutationKey: [QUERY_KEYS.auth],
 		mutationFn: async () => await authService.signOut(),
@@ -57,5 +62,6 @@ export const useSignOut = () => {
 		signOutIsLoading,
 		signOutIsSuccess,
 		signOutIsError,
+		error,
 	}
 }

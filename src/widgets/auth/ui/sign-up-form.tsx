@@ -44,9 +44,7 @@ export function SignUpForm({ onSubmit }: IProps) {
 			onSubmit={handleSubmit(handleFormSubmit)}
 			className='relative h-full w-full flex flex-col justify-center'
 		>
-			<AuthHeader className='absolute top-0 rounded-b-none'>
-				Регистрация
-			</AuthHeader>
+			<AuthHeader className='rounded-b-none'>Регистрация</AuthHeader>
 
 			<div className='relative flex flex-col flex-1 w-full justify-center'>
 				<div className='w-full items-center flex flex-col gap-1'>
@@ -117,7 +115,7 @@ export function SignUpForm({ onSubmit }: IProps) {
 				<AuthButton
 					isSubmit={false}
 					onClick={() => setIsFirstStep(false)}
-					className='w-full rounded-t-none'
+					className='w-full rounded-b-xl'
 				>
 					Далее
 				</AuthButton>
@@ -126,11 +124,11 @@ export function SignUpForm({ onSubmit }: IProps) {
 					<AuthButton
 						isSubmit={false}
 						onClick={() => setIsFirstStep(true)}
-						className='w-full rounded-none'
+						className='w-full '
 					>
 						назад
 					</AuthButton>
-					<AuthButton isSubmit={true} className='w-full rounded-t-none'>
+					<AuthButton isSubmit={true} className='w-full rounded-b-xl'>
 						Зарегаться
 					</AuthButton>
 				</>

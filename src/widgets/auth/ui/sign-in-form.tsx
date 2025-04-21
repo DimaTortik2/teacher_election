@@ -19,13 +19,12 @@ export function SignInForm({ onSubmit }: IProps) {
 		resolver: zodResolver(signInSchema),
 	})
 
-
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
 			className='relative h-full w-full flex flex-col justify-center'
 		>
-			<AuthHeader className='absolute top-0 rounded-b-none'>Вход</AuthHeader>
+			<AuthHeader className='rounded-b-none'>Вход</AuthHeader>
 			<div className='relative flex flex-col flex-1 w-full justify-center'>
 				<div className='w-full items-center flex flex-col gap-1'>
 					<InputSignIn
@@ -55,7 +54,7 @@ export function SignInForm({ onSubmit }: IProps) {
 					</div>
 				</div>
 			</div>
-			<AuthButton isSubmit={true} className='mt-auto w-full rounded-t-none'>
+			<AuthButton isSubmit={true} className='mt-auto w-full rounded-b-xl'>
 				Войти
 			</AuthButton>
 		</form>

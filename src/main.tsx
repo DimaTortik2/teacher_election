@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import { SignUpPage } from './pages/sign-up'
-import { Layout } from './app'
+import { AuthLayout, Layout } from './app'
 import { SignInPage } from './pages/sign-in'
 import {
 	AdminPage,
@@ -21,8 +21,10 @@ createRoot(document.getElementById('root')!).render(
 		<BrowserRouter>
 			<Routes location={location}>
 				<Route element={<Layout />}>
-					<Route path='/' element={<SignUpPage />} />
-					<Route path='/sign-in' element={<SignInPage />} />
+					<Route element={<AuthLayout />}>
+						<Route path='/' element={<SignUpPage />} />
+						<Route path='/sign-in' element={<SignInPage />} />
+					</Route>
 					<Route element={<RoleWrapper />}>
 						<Route path='/admin' element={<AdminPage />} />
 						<Route path='/admin/subjects' element={<AdminSubjectsPage />} />

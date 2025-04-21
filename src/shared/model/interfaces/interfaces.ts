@@ -11,3 +11,9 @@ export interface PaginationData<T> {
 
 export type PromiseInfinity<T> = Promise<InfinityData<T>>
 export type PromisePagination<T> = Promise<PaginationData<T>>
+
+export interface IErrorData {
+	message: string
+	statusCode: number
+	error: string
+}
