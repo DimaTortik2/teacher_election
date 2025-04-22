@@ -4,7 +4,7 @@ export default {
 	theme: {
 		extend: {
 			height: {
-				svh: '100svh',
+				window: 'var(--window-height)',
 			},
 			boxShadow: {
 				'soft-up': '0 -10px 15px -3px rgba(0, 0, 0, 0.3)', // Мягкая тень вверх
