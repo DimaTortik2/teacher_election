@@ -50,7 +50,7 @@ export function SignInForm({ onSubmit }: IProps) {
 				<div className='w-full flex justify-center mt-2'>
 					<div className='w-3/4 flex gap-3'>
 						<span className='opacity-85 text-gray-100'>нет аккаунта?</span>
-						<AuthBackLink className='hover:text-cyan-200' type='tosignup' />
+						<AuthBackLink className='hover:text-theme-200' type='tosignup' />
 					</div>
 				</div>
 			</div>

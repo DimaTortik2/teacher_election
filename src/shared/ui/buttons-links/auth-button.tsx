@@ -12,7 +12,7 @@ export function AuthButton({ children, className, onClick, isSubmit }: IProps) {
 	return (
 		<button
 			className={clsx(
-				'px-4 py-2 bg-cyan-600 hover:bg-cyan-800 transition-colors',
+				'px-4 py-2 bg-theme-600 hover:bg-theme-800 transition-colors',
 				className
 			)}
 			onClick={onClick}

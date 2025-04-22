@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import crossIcon from '../../../../public/cross-icon.svg'
 import editIcon from '../../../../public/edit-icon.svg'
+import { CrossIcon } from '../../../shared/ui/icons'
 
 interface IProps {
 	teacherName: string
@@ -30,7 +30,8 @@ export function AdminTeacherCard({
 				</button>
 
 				<button onClick={onDelete}>
-					<img src={crossIcon} className='h-8' />
+					<CrossIcon className='h-8 text-theme-500' />
+					
 				</button>
 			</div>
 		</li>

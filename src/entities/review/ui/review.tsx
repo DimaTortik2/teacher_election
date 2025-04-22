@@ -38,7 +38,7 @@ export function Review({ text, onLikelick, ratingArr }: IProps) {
 			/>
 			{text && (
 				<div className='w-full'>
-					<div className='w-full  flex bg-zinc-700 rounded-t-2xl p-2 items-end justify-between '>
+					<div className='w-full  flex bg-theme-700 rounded-t-2xl p-2 items-end justify-between '>
 						<div className='h-full flex flex-col justify-center items-start mr-2 '>
 							<p className='word-wrap w-full'>
 								{isWrappedText ? wrappedText : text}
@@ -54,7 +54,7 @@ export function Review({ text, onLikelick, ratingArr }: IProps) {
 							)}
 						</div>
 					</div>
-					<div className='flex justify-end w-full rounded-b-2xl border-solid border-b-2 border-zinc-700 shadow-lg bg-[#4c4c54]'>
+					<div className='flex justify-end w-full rounded-b-2xl border-solid border-b-2 border-theme-700 shadow-lg bg-theme-500'>
 						{isLikesCountVisible && (
 							<span className='text-[1.1rem] text-[rgba(255,255,255,0.5)]'>
 								123k

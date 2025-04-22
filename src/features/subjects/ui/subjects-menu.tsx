@@ -34,7 +34,7 @@ export function SubjectsMenu({ buttonText, register, isRequired }: IProps) {
 
 	return (
 		<Dropdown>
-			<MenuButton className='bg-zinc-700 w-40 p-2 rounded-xl'>
+			<MenuButton className='bg-theme-700 w-40 p-2 rounded-xl'>
 				{buttonText}
 			</MenuButton>
 			<Menu className='pt-3 z-[2]'>

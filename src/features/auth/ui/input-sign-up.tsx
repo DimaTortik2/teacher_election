@@ -30,7 +30,7 @@ export function InputSignUp({ type, title, register, registerName, errors }: IPr
 							required: true,
 						})}
 						type={isChecked ? 'text' : type}
-						className='w-full rounded-xl border-solid border-2 border-cyan-400 text-slate-950 text-2xl text-center custom-input'
+						className='w-full rounded-xl border-solid border-2 border-theme-400 text-slate-950 text-2xl text-center custom-input'
 					/>
 				</div>
 				{errors[registerName] ? (

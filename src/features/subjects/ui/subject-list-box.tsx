@@ -21,8 +21,8 @@ export function SubjectListBox({
 		<select
 			{...(register ? register('subject', { required: isRequired }) : {})}
 			size={7}
-			className=' bg-[rgba(63,63,70,0.96)] w-40 rounded-2xl text-white text-center
-		 border-zinc-400 custom-scrollbar rounded-scrollbar border-2 overflow-auto overflow-x-hidden'
+			className=' bg-theme-600 w-40 rounded-2xl text-white text-center
+		 border-theme-400 custom-scrollbar rounded-scrollbar border-2 overflow-auto overflow-x-hidden'
 			style={{
 				maxHeight: '30vh', // Ограничение высоты
 				overflowY: 'auto', // Прокрутка по вертикали
@@ -32,7 +32,7 @@ export function SubjectListBox({
 				subjects.data?.map((subject: ISubject, index: number) => (
 					<option
 						key={index}
-						className='p-2 cursor-pointer hover:bg-zinc-800 transition-colors my-wrap-text'
+						className='p-2 cursor-pointer hover:bg-theme-800 transition-colors my-wrap-text'
 						value={JSON.stringify({
 							subjectId: subject.id,
 							title: subject.title,

@@ -21,7 +21,7 @@ export function TeacherCard({
 		<li
 			className={clsx(
 				className,
-				'rounded-2xl w-[200px] bg-zinc-600 border-zinc-800 border-2 flex flex-col items-start justify-start p-1'
+				'rounded-2xl w-[200px] bg-zinc-600 flex flex-col items-start justify-start p-1'
 			)}
 		>
 			<Link to={`/teacher/${teacherId}`}>

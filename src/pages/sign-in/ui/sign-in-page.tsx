@@ -20,7 +20,6 @@ export function SignInPage() {
 		}
 		if (signInIsSuccess) {
 			displayNotification({ text: 'Успешно', type: 'success', time: 5000 })
-			navigate(ROUTES.signin)
 		}
 		if (signInIsError) {
 			const axiosError = error as AxiosError
@@ -33,16 +32,22 @@ export function SignInPage() {
 		signInIsLoading,
 		signInIsSuccess,
 		signInIsError,
-		navigate,
 		displayNotification,
 		error,
 	])
+
+	useEffect(() => {
+		if (signInIsSuccess) {
+			navigate(ROUTES.teachers)
+		}
+	}, [navigate, signInIsSuccess])
+
 	const onSubmit = (data: ISignIn) => {
 		signIn(data)
 	}
 
 	return (
-		<div className='text-white backdrop-blur-3xl bg-[rgba(52,116,132,0.4)] w-full min-[500px]:w-[400px] h-full min-[500px]:h-5/6 min-[500px]:rounded-2xl'>
+		<div className='text-white backdrop-blur-3xl bg-theme-authform w-full min-[500px]:w-[400px] h-full min-[500px]:h-5/6 min-[500px]:rounded-2xl'>
 			<SignInForm onSubmit={onSubmit} />
 		</div>
 	)

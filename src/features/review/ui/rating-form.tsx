@@ -39,7 +39,7 @@ export function RatingForm({ register, watch, setValue, errors }: IProps) {
 							{...register(el.engName, { required: true })}
 						/>
 						<p>{el.rusName}</p>
-						<div className='flex gap-3'>
+						<div className='flex gap-3 items-center'>
 							<Rating
 								key={index}
 								value={Number(watch(el.engName))}
@@ -58,9 +58,9 @@ export function RatingForm({ register, watch, setValue, errors }: IProps) {
 								}}
 							/>
 							{errors[el.engName] && (
-								<p className='text-red-400 transition-all'>
-									{errors[el.engName]?.message}
-								</p>
+								<div className='bg-red-400 transition-all h-2 w-2 rounded-full'>
+									
+								</div>
 							)}
 						</div>
 					</div>

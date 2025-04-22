@@ -7,7 +7,7 @@ import { TeacherPreview } from '../../../features/admin'
 import { FilePicker } from '../../../shared/ui/file-picker/file-picker'
 import { ITeacherForm } from '../../../features/teachers'
 import { useGetTeacher } from '../../../shared/api/queries/teachers.queries'
-import resetIcon from '../../../../public/reset-icon.svg'
+import { ResetIcon } from '../../../shared/ui/icons'
 
 interface IProps {
 	onSubmit: (editData: Partial<ITeacherForm>) => void
@@ -111,7 +111,7 @@ export function EditTeacherForm({ onSubmit, id }: IProps) {
 						/>
 					</div>
 					<button type='button' onClick={resetPreviewInfo}>
-						<img src={resetIcon} className='h-8 mr-4' />
+						<ResetIcon className='h-8 mr-4 text-theme-500' />
 					</button>
 				</div>
 

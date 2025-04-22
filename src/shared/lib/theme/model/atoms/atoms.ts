@@ -1,7 +1,7 @@
 import { atom } from 'jotai'
 
-export type ITheme = 'zinc' | 'purple' | 'red'| 'green'
-const themeAtom = atom<ITheme>('zinc')
+export type ITheme = 'purple' | 'black' | 'white' |'gray'
+const themeAtom = atom<ITheme>('gray')
 
 export const themeSyncAtom = atom(
 	get => get(themeAtom),
@@ -16,6 +16,6 @@ export const initializeThemeAtom = atom(null, (_, set) => {
 	if (savedTheme) {
 		set(themeSyncAtom, savedTheme)
 	} else {
-		set(themeSyncAtom, 'zinc')
+		set(themeSyncAtom, 'black')
 	}
 })

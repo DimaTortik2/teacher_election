@@ -11,7 +11,6 @@ import {
 	signUpSchema,
 } from '../../../features/auth'
 import { useState } from 'react'
-import { ThemeSwitcher } from '../../../shared/lib/theme'
 
 interface IProps {
 	onSubmit: (data: ISignUp) => void
@@ -77,7 +76,6 @@ export function SignUpForm({ onSubmit }: IProps) {
 								type={'password'}
 								key={3}
 							/>
-							<ThemeSwitcher />
 						</>
 					) : (
 						<>
@@ -108,7 +106,7 @@ export function SignUpForm({ onSubmit }: IProps) {
 				<div className='w-full flex justify-center mt-2'>
 					<div className='w-3/4 flex gap-3'>
 						<span className='opacity-85 text-gray-100'>есть аккаунт?</span>
-						<AuthBackLink className='hover:text-cyan-200' type='tosignin' />
+						<AuthBackLink className='hover:text-theme-200' type='tosignin' />
 					</div>
 				</div>
 			</div>
