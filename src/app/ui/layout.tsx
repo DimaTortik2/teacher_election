@@ -13,7 +13,7 @@ export function Layout() {
 				style={{ backgroundImage: `url(${bgPath})` }}
 				className={clsx(
 					'flex items-center justify-center',
-					'bg-zinc-900 h-screen w-screen text-white',
+					'bg-zinc-900 h-svh w-screen text-white',
 					`bg-no-repeat bg-center`,
 					'bg-cover overflow-hidden'
 				)}
