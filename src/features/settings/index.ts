@@ -1,1 +1,1 @@
-export { LogOutModal } from './ui/log-out-modal'
+export { LogOutSetting } from './ui/log-out-setting'

@@ -24,7 +24,7 @@ export function TeacherInfo({ className, defaultImgSrc, id }: IProps) {
 				className
 			)}
 		>
-			<div className=' w-[200px] h-[200px] rounded-b-2xl border-solid border-b-2 border-zinc-700 shadow-lg'>
+			<div className=' w-[200px] h-[200px] rounded-b-2xl border-solid border-b-2 border-zinc-700 '>
 				<img
 					src={
 						data
@@ -37,14 +37,16 @@ export function TeacherInfo({ className, defaultImgSrc, id }: IProps) {
 			</div>
 
 			<div className='w-full'>
-				{data?.avgRating && (
+				{!data?.avgRating && (
 					<div className='lg:p-2 p-2 flex flex-col sm:absolute lg:relative sm:top-0 sm:right-0 sm:p-4 w-full sm:w-auto lg:order-1'>
 						<Rating
 							name='size-small'
 							readOnly
-							defaultValue={data.avgRating}
+							// defaultValue={data.avgRating}
+							defaultValue={4}
 							precision={1}
-							sx={{ color: getRatingColor(data.avgRating) }}
+							// sx={{ color: getRatingColor(data.avgRating) }}
+							sx={{ color: getRatingColor(4) }}
 						/>
 						<p className='text-left text-[rgba(255,255,255,0.5)] my-wrap-text'>
 							{'ср. оценка'}

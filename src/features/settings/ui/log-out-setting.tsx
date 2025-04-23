@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
@@ -5,12 +6,8 @@ import { Box } from '@mui/material'
 import { Button } from '../../../shared/ui/buttons-links/button'
 import { useSignOut } from '../../auth'
 
-interface IProps {
-	isVisible: boolean
-	onClose: () => void
-}
-
-export function LogOutModal({ isVisible, onClose }: IProps) {
+export function LogOutSetting() {
+	const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
 	const { signOut } = useSignOut()
 
 	const navigate = useNavigate()
@@ -33,11 +30,19 @@ export function LogOutModal({ isVisible, onClose }: IProps) {
 		boxShadow: 24,
 		p: 4,
 	}
+
 	return (
 		<>
+			<button
+				className='bg-theme-700 flex justify-center text-white rounded-2xl'
+				onClick={() => setIsModalVisible(true)}
+			>
+				Выйти
+			</button>
+
 			<Modal
-				open={isVisible}
-				onClose={onClose}
+				open={isModalVisible}
+				onClose={() => setIsModalVisible(false)}
 				aria-labelledby='modal-modal-title'
 				aria-describedby='modal-modal-description'
 			>

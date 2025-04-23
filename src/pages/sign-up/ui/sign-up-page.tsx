@@ -44,7 +44,7 @@ export function SignUpPage() {
 	}
 
 	return (
-		<div className='text-white backdrop-blur-3xl bg-theme-authform w-full min-[500px]:w-[400px] h-full min-[500px]:h-5/6 min-[500px]:rounded-2xl '>
+		<div className='text-white backdrop-blur-3xl bg-theme-authform w-full min-[500px]:w-[400px] h-full min-[500px]:h-5/6 max-h-[700px] min-[500px]:rounded-2xl '>
 			<SignUpForm onSubmit={onSubmit} />
 		</div>
 	)

@@ -72,7 +72,7 @@ export function TeacherPage() {
 					<TeacherInfo
 						id={id}
 						defaultImgSrc='/undefined-person-icon.jpg'
-						className='bg-[rgba(0,0,0,0.2)] border-solid border-b-2 border-zinc-700 shadow-lg'
+						className='bg-zinc-800 border-solid border-b-2 border-zinc-700 shadow-lg'
 					/>
 					{data && (
 						<>

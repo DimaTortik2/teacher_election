@@ -73,7 +73,7 @@ export function ReviewForm({ onTextAreaTouch, id, formRef, onSubmit }: IProps) {
 	return (
 		<form
 			className={clsx(
-				'bg-zinc-600 transition-colors text-white  text-xl flex items-start flex-col',
+				'bg-zinc-700 transition-colors text-white  text-xl flex items-start flex-col',
 				'bottom-0 fixed w-full sm:w-[90vw] lg:w-[1000px] border-t-2 border-zinc-500 shadow-soft-up'
 			)}
 			onSubmit={handleSubmit(handleFormSubmit)}
@@ -87,7 +87,7 @@ export function ReviewForm({ onTextAreaTouch, id, formRef, onSubmit }: IProps) {
 			>
 				{!isRatingVisible && (
 					<Button
-						className='w-full bg-theme-500'
+						className='w-full bg-theme-600'
 						onClick={() => setIsRatingVisible(true)}
 					>
 						Оценить

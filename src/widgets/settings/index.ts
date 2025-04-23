@@ -1,1 +1,1 @@
-export { SettingsButton } from './ui/settings-button'
+export { SettingsMenu } from './ui/settings-menu'
