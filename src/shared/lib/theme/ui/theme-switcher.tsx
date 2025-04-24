@@ -11,7 +11,7 @@ export function ThemeSwitcher() {
 		<>
 			<div className='flex gap-2 mt-4'>
 				{THEMES_ARR.map(t => (
-					<div className='flex flex-col gap-1 items-center'>
+					<div key={t} className='flex flex-col gap-1 items-center'>
 						<button
 							key={t}
 							onClick={() => setTheme(t)}
