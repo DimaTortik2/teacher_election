@@ -34,7 +34,7 @@ export function LogOutSetting() {
 	return (
 		<>
 			<button
-				className='bg-theme-700 flex justify-center text-white rounded-2xl'
+				className='border-4 border-theme-500 flex justify-center text-white rounded-xl px-4 py-[10px]'
 				onClick={() => setIsModalVisible(true)}
 			>
 				Выйти

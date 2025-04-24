@@ -5,7 +5,6 @@ import { TeacherFilter } from '../../../widgets/teachers/ui/teachers-filter'
 import { useGetTeachers } from '../../../shared/api/queries/teachers.queries'
 import { TeacherCardList } from '../../../features/teachers'
 
-
 export function TeachersPage() {
 	const { data, getTeachersIsSuccess, hasNextPage, fetchNextPage } =
 		useGetTeachers()
@@ -19,10 +18,10 @@ export function TeachersPage() {
 	}, [inView, fetchNextPage, hasNextPage])
 
 	if (getTeachersIsSuccess) console.log('teachers = ', data?.pages)
-		
+
 	return (
-		<div className='h-full w-full flex flex-col items-center justify-center'>
-			<div className='w-full h-16 flex justify-between bg-zinc-800 py-2 relative '>
+		<div className='h-full w-full flex flex-col items-center justify-start'>
+			<div className='w-full h-16 flex justify-between bg-zinc-800 py-2 relative'>
 				<TeacherFilter />
 				<SettingsMenu />
 			</div>

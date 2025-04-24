@@ -1,37 +1,32 @@
 import { useAtom } from 'jotai'
 import { themeSyncAtom } from '../model/atoms/atoms'
-import { THEMES_ARR } from '../model/theme-consts'
+import { THEMES_ARR, THEMES_COLOR_CLASSNAME } from '../model/theme-consts'
 import clsx from 'clsx'
-import { useState } from 'react'
-import { ResetIcon } from '../../../ui/icons'
 
 export function ThemeSwitcher() {
-	const [isClicked, setIsClicked] = useState<boolean>(false)
+	// const [isClicked, setIsClicked] = useState<boolean>(false)
 	const [theme, setTheme] = useAtom(themeSyncAtom)
-
+	THEMES_ARR.map(t => console.log(t, theme === t))
 	return (
 		<>
-			{!isClicked ? (
-				<button onClick={() => setIsClicked(true)}>
-					<ResetIcon className='h-8 m-2 text-theme-500' />
-				</button>
-			) : (
-				<div className='flex gap-2 mt-4'>
-					{THEMES_ARR.map(t => (
+			<div className='flex gap-2 mt-4'>
+				{THEMES_ARR.map(t => (
+					<div className='flex flex-col gap-1 items-center'>
 						<button
 							key={t}
 							onClick={() => setTheme(t)}
 							className={clsx(
-								'px-4 py-2 rounded',
-								theme === t ? 'bg-theme-500' : 'bg-theme-400'
+								'px-4 py-4 rounded-full',
+								THEMES_COLOR_CLASSNAME[t]
 							)}
 							type='button'
-						>
-							{t}
-						</button>
-					))}
-				</div>
-			)}
+						></button>
+						{theme === t && (
+							<div className='h-[3px] rounded-2xl w-5/6 bg-white opacity-20'></div>
+						)}
+					</div>
+				))}
+			</div>
 		</>
 	)
 }
