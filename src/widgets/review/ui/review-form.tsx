@@ -72,7 +72,7 @@ export function ReviewForm({ id, onSubmit }: IProps) {
 		<form
 			className={clsx(
 				'bg-zinc-700 text-white text-xl flex items-start flex-col',
-				'bottom-0 fixed w-full sm:w-[90vw] lg:w-[1000px] z-30'
+				'bottom-0 fixed w-full sm:w-[90vw] lg:w-[1000px] z-50'
 			)}
 			onSubmit={handleSubmit(handleFormSubmit)}
 		>
@@ -80,7 +80,7 @@ export function ReviewForm({ id, onSubmit }: IProps) {
 				className={clsx(
 					'text-xl flex items-start flex-col',
 					'w-full sm:w-[90vw] lg:w-[1000px] sm:rounded-b-xl py-2 px-2 sm:px-5 ',
-					'border-t-2 border-t-zinc-500'
+					'border-t-2 border-t-zinc-500 '
 				)}
 			>
 				{!isRatingVisible && (
@@ -115,13 +115,13 @@ export function ReviewForm({ id, onSubmit }: IProps) {
 								className='flex items-center justify-center px-2 py-2'
 								onClick={handleSendBtn}
 							>
-								<SendIcon className='bg-theme-500 h-14 w-14' />
+								<SendIcon className='bg-theme-600 h-14 w-14' />
 							</Button>
 						</div>
 						{!isInputVisible && (
 							<Button
 								type='button'
-								className='w-full bg-theme-500'
+								className='w-full bg-theme-600'
 								onClick={() => setIsInputVisible(true)}
 							>
 								Добавить коммент
@@ -150,7 +150,7 @@ export function ReviewForm({ id, onSubmit }: IProps) {
 								className='flex items-center justify-center'
 								onClick={handleInputCrossBtn}
 							>
-								<CrossIcon className='h-10 bg-theme-500' />
+								<CrossIcon className='h-8 w-8 bg-theme-600' />
 							</button>
 						</div>
 					</>

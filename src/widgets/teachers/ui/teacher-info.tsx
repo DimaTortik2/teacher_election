@@ -30,7 +30,7 @@ export function TeacherInfo({
 	const { data } = useGetTeacher(id)
 	const avgRating = data ? getAvgRating(data.avgRatings) : null
 	const subjectTitle = data ? getSubjectTitle(data.subject) : ''
-
+	const fullName = isSticky ? data?.fullName.split(' ')[0] : data?.fullName
 	return (
 		<div
 			className={clsx(
@@ -60,7 +60,7 @@ export function TeacherInfo({
 						isSticky ? 'flex-row p-2 gap-2' : 'flex-row lg:flex-col p-2 gap-2'
 					)}
 				>
-					<p className='text-left my-wrap-text'>{data?.fullName}</p>
+					<p className='text-left my-wrap-text'>{fullName}</p>
 					{!isSticky && (
 						<p className='text-left text-[rgba(255,255,255,0.5)] my-wrap-text'>
 							{subjectTitle}
