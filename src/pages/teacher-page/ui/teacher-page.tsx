@@ -60,6 +60,7 @@ export function TeacherPage() {
 			<div className='w-full h-full flex flex-col gap-4 items-center justify-start sm:rounded-xl relative '>
 				<div className='w-full flex flex-col items-center justify-start '>
 					<TeacherHeader
+						isSticky={isScrolled}
 						ReviewFilterSlider={
 							<ReviewFilterSlider className='w-full border-b-4 rounded-2xl border-zinc-700' />
 						}
@@ -75,7 +76,6 @@ export function TeacherPage() {
 
 					{data && (
 						<>
-							{/* <ReviewFilterSlider className='w-full border-b-4 rounded-2xl border-zinc-700' /> */}
 							<ReviewList className='pb-20' messages={messageDatas}>
 								<li ref={ref}>⠀</li>
 							</ReviewList>
