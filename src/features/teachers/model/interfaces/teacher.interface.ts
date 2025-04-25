@@ -1,4 +1,5 @@
 import { PromiseInfinity } from '../../../../shared/model/interfaces/interfaces'
+import { ICategories } from '../../../review'
 import { ITeacherForm } from './teacher-form.interface'
 
 export interface ICreateTeacher {
@@ -14,10 +15,10 @@ export interface IEditTeacher {
 
 export interface ITeacher {
 	id: string
-	fullName: string
-	subject: { title: string; id: string } | string
 	photo: string
-	avgRating: number
+	subject: { title: string; id: string } | string
+	fullName: string
+	avgRatings: { [key in keyof ICategories]: number }
 }
 
 export type ITeachersResponse = PromiseInfinity<ITeacher>

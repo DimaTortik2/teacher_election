@@ -10,5 +10,6 @@ export interface IReviewResponse extends ICategories {
 	isChecked: boolean
 	message?: string | null
 	likesCount: 0
+	teacherId: string
 	user: IUser
 }

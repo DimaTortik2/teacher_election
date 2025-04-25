@@ -13,13 +13,11 @@ import {
 import { CrossIcon, SendIcon } from '../../../shared/ui/icons'
 
 interface IProps {
-	onTextAreaTouch: () => void
 	id: string | undefined
-	formRef: React.MutableRefObject<HTMLDivElement | null>
 	onSubmit: () => void
 }
 
-export function ReviewForm({ onTextAreaTouch, id, formRef, onSubmit }: IProps) {
+export function ReviewForm({ id, onSubmit }: IProps) {
 	const [isRatingVisible, setIsRatingVisible] = useState<boolean>(false)
 	const [isInputVisible, setIsInputVisible] = useState<boolean>(false)
 
@@ -73,25 +71,27 @@ export function ReviewForm({ onTextAreaTouch, id, formRef, onSubmit }: IProps) {
 	return (
 		<form
 			className={clsx(
-				'bg-zinc-700 transition-colors text-white  text-xl flex items-start flex-col',
-				'bottom-0 fixed w-full sm:w-[90vw] lg:w-[1000px] border-t-2 border-zinc-500 shadow-soft-up'
+				'bg-zinc-700 text-white text-xl flex items-start flex-col',
+				'bottom-0 fixed w-full sm:w-[90vw] lg:w-[1000px] z-30'
 			)}
 			onSubmit={handleSubmit(handleFormSubmit)}
 		>
 			<div
 				className={clsx(
 					'text-xl flex items-start flex-col',
-					'w-full sm:w-[90vw] lg:w-[1000px] sm:border-zinc-500 sm:border-x-4 sm:border-b-4 sm:rounded-b-xl pb-4 pt-2 px-2 sm:px-5'
+					'w-full sm:w-[90vw] lg:w-[1000px] sm:rounded-b-xl py-2 px-2 sm:px-5 ',
+					'border-t-2 border-t-zinc-500'
 				)}
-				ref={formRef}
 			>
 				{!isRatingVisible && (
-					<Button
-						className='w-full bg-theme-600'
-						onClick={() => setIsRatingVisible(true)}
-					>
-						Оценить
-					</Button>
+					<div className='w-full flex justify-center'>
+						<Button
+							className='w-5/6 md:w-2/3 lg:w-1/2 bg-theme-600'
+							onClick={() => setIsRatingVisible(true)}
+						>
+							Оценить
+						</Button>
+					</div>
 				)}
 
 				{isRatingVisible && (
@@ -142,7 +142,6 @@ export function ReviewForm({ onTextAreaTouch, id, formRef, onSubmit }: IProps) {
 							<div className='border-b-theme-400 border-b-2 px-1 w-full'>
 								<MessageInput
 									errorMessage={errors.message?.message}
-									onTextAreaTouch={onTextAreaTouch}
 									control={control}
 								/>
 							</div>

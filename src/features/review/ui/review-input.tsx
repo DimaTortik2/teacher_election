@@ -6,21 +6,15 @@ import { IPostTeacherReview } from '../model/interfaces/teacher-review.interface
 
 interface IProps {
 	control: Control<Omit<IPostTeacherReview, 'teacherId'>>
-	onTextAreaTouch: () => void
 	errorMessage: string | undefined
 }
 
-export function MessageInput({
-	control,
-	onTextAreaTouch,
-	errorMessage,
-}: IProps) {
+export function MessageInput({ control, errorMessage }: IProps) {
 	const inputRef = useRef<HTMLTextAreaElement | null>(null)
 	const [inputText, setInputText] = useState<string>('')
 
-	console.log(inputText)//пока так 
+	console.log(inputText) //пока так
 
-	
 	//функция обернута в debounce для оптимизации, она тут нужна!
 	const handleInput = debounce(
 		(event: React.FormEvent<HTMLTextAreaElement>) => {
@@ -57,7 +51,6 @@ export function MessageInput({
 						errorMessage && 'placeholder:text-red-400'
 					)}
 					id='messageInput'
-					onClick={onTextAreaTouch}
 				/>
 			)}
 		/>

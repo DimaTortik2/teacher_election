@@ -18,22 +18,19 @@ export function ReviewFilterSlider({ className }: IProps) {
 	}, [])
 
 	const arr = [
-		'только комменты',
-		'еще звезды ',
-		'самые новые',
-		'самые старые',
-		'от лучших',
-		'с плохих',
+		'комменты',
+		'звезды ',
+		'новые',
+		'старые',
+		'лучшиe',
+		'плохиe',
 	]
 
 	return (
 		<div className={clsx(className || 'w-full ')}>
-			<div className='w-full h-1/2 bg-theme-700 rounded-t-2xl p-2 text-center'>
-				<p>Фильтрация</p>
-			</div>
-			<div className='w-full h-1/2 bg-theme-600 rounded-b-2xl border-solid border-b-2 border-theme-700 shadow-lg p-2'>
+			<div className='w-full bg-zinc-600 rounded-b-2xl p-2 '>
 				<Swiper
-					slidesPerView={isMobile ? 2 : 5}
+					slidesPerView={isMobile ? 3 : 5}
 					spaceBetween={10}
 					className='w-full'
 					freeMode={true}

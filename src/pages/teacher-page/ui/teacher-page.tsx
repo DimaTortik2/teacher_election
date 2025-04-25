@@ -1,28 +1,23 @@
 import { useParams } from 'react-router'
 import { ReviewForm } from '../../../widgets/review'
-import { TeacherInfo } from '../../../shared/ui/teacher/teacher-info'
 import {
 	ReviewFilterSlider,
 	ReviewList,
 	useGetReviews,
-	useHeightControl,
 } from '../../../features/review'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { TeacherHeader, TeacherInfo } from '../../../widgets/teachers'
+import { useStickyHeader } from '../../../shared/lib/sticky-header'
 
 export function TeacherPage() {
+	const { isScrolled, scrollContainerRef } = useStickyHeader()
+	console.log({ isScrolled })
+
 	const { id } = useParams()
 	const teacherId = id ?? ''
 
-	const [inputHeight, setInputHeight] = useState<number>(0)
-	const handleHeightChange = (height: number) => {
-		setInputHeight(height)
-	}
 
-	const { contentRef, handleTextareaTouch, formRef } = useHeightControl({
-		handleHeightChange,
-		inputHeight,
-	})
 
 	const {
 		data,
@@ -59,37 +54,36 @@ export function TeacherPage() {
 
 	return (
 		<div
-			className={`w-screen sm:w-[90vw] lg:w-[1000px] h-screen justify-start sm:rounded-xl bg-[url('/back.svg')] bg-no-repeat bg-center bg-cover`}
+			className={`w-screen sm:w-[90vw] lg:w-[1000px] h-screen justify-start sm:rounded-xl bg-zinc-700 custom-scrollbar dark-colors-crollbar overflow-y-auto`}
+			ref={scrollContainerRef}
 		>
-			<div
-				className='w-full h-full flex flex-col gap-4 items-center justify-start sm:rounded-xl sm:border-4 sm:border-zinc-500 relative '
-				style={{ paddingBottom: `${inputHeight}px` }}
-			>
-				<div
-					ref={contentRef}
-					className='w-full h-full flex flex-col gap-4 items-center justify-start custom-scrollbar rounded-scrollbar overflow-y-auto'
-				>
-					<TeacherInfo
-						id={id}
-						defaultImgSrc='/undefined-person-icon.jpg'
-						className='bg-zinc-800 border-solid border-b-2 border-zinc-700 shadow-lg'
+			<div className='w-full h-full flex flex-col gap-4 items-center justify-start sm:rounded-xl relative '>
+				<div className='w-full flex flex-col items-center justify-start '>
+					<TeacherHeader
+						ReviewFilterSlider={
+							<ReviewFilterSlider className='w-full border-b-4 rounded-2xl border-zinc-700' />
+						}
+						TeacherInfo={
+							<TeacherInfo
+								id={id}
+								defaultImgSrc='/undefined-person-icon.jpg'
+								className='bg-zinc-600 border-solid border-b-2 border-zinc-500 shadow-lg'
+								isSticky={isScrolled}
+							/>
+						}
 					/>
+
 					{data && (
 						<>
-							<ReviewFilterSlider className='w-full p-2' />
-							<ReviewList messages={messageDatas} className='mt-10'>
+							{/* <ReviewFilterSlider className='w-full border-b-4 rounded-2xl border-zinc-700' /> */}
+							<ReviewList className='pb-20' messages={messageDatas}>
 								<li ref={ref}>⠀</li>
 							</ReviewList>
 						</>
 					)}
 				</div>
 			</div>
-			<ReviewForm
-				onSubmit={handleSubmit}
-				id={id}
-				onTextAreaTouch={handleTextareaTouch}
-				formRef={formRef}
-			/>
+			<ReviewForm onSubmit={handleSubmit} id={id} />
 		</div>
 	)
 }

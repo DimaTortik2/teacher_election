@@ -33,6 +33,8 @@ export function ReviewList({ className, children, messages }: IProps) {
 						m.smartless,
 						m.strictness,
 					]}
+					nickName={m.user.nickName}
+					likesCount={m.likesCount}
 				/>
 			))}
 			{children}
