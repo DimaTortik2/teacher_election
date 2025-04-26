@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { TeacherHeader, TeacherInfo } from '../../../widgets/teachers'
 import { useStickyHeader } from '../../../shared/lib/sticky-header'
+import clsx from 'clsx'
 
 export function TeacherPage() {
 	const { isScrolled, scrollContainerRef } = useStickyHeader()
@@ -16,8 +17,6 @@ export function TeacherPage() {
 
 	const { id } = useParams()
 	const teacherId = id ?? ''
-
-
 
 	const {
 		data,
@@ -60,10 +59,6 @@ export function TeacherPage() {
 			<div className='w-full h-full flex flex-col gap-4 items-center justify-start sm:rounded-xl relative '>
 				<div className='w-full flex flex-col items-center justify-start '>
 					<TeacherHeader
-						isSticky={isScrolled}
-						ReviewFilterSlider={
-							<ReviewFilterSlider className='w-full border-b-4 rounded-2xl border-zinc-700 h-[50px]' />
-						}
 						TeacherInfo={
 							<TeacherInfo
 								id={id}
@@ -72,11 +67,17 @@ export function TeacherPage() {
 								isSticky={isScrolled}
 							/>
 						}
+						isSticky={isScrolled}
+						ReviewFilterSlider={
+							<ReviewFilterSlider className='w-full border-b-4 rounded-2xl border-zinc-700 h-[50px]' />
+						}
 					/>
-
 					{data && (
 						<>
-							<ReviewList className='pb-20' messages={messageDatas}>
+							<ReviewList
+								className={clsx('pb-20', isScrolled && 'pt-[235px]')} // 350(teacherInfo - 300px + reviewFilter - 50px) - 115px(teacherInfoMinimaze - 65px ,reviewFilter - 50px)
+								messages={messageDatas}
+							>
 								<li ref={ref}>⠀</li>
 							</ReviewList>
 						</>

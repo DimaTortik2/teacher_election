@@ -17,7 +17,6 @@ export function useStickyHeader() {
 			container.addEventListener('scroll', handleScroll)
 		}
 
-		// Очищаем слушатель при размонтировании
 		return () => {
 			if (container) {
 				container.removeEventListener('scroll', handleScroll)
