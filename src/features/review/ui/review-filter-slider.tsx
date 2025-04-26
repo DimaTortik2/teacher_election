@@ -28,7 +28,7 @@ export function ReviewFilterSlider({ className }: IProps) {
 
 	return (
 		<div className={clsx(className || 'w-full ')}>
-			<div className='w-full bg-zinc-600 rounded-b-2xl p-2 '>
+			<div className='w-full bg-zinc-600 rounded-b-2xl p-2 h-[50px] border-solid border-b-[3px] border-zinc-700'>
 				<Swiper
 					slidesPerView={isMobile ? 3 : 5}
 					spaceBetween={10}

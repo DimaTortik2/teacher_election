@@ -54,7 +54,7 @@ export function TeacherPage() {
 
 	return (
 		<div
-			className={`w-screen sm:w-[90vw] lg:w-[1000px] h-screen justify-start sm:rounded-xl bg-zinc-700 custom-scrollbar dark-colors-crollbar overflow-y-auto`}
+			className={`w-screen sm:w-[90vw] lg:w-[1000px] h-screen justify-start sm:rounded-xl bg-zinc-700 cdark-colors-crollbar overflow-y-auto`}
 			ref={scrollContainerRef}
 		>
 			<div className='w-full h-full flex flex-col gap-4 items-center justify-start sm:rounded-xl relative '>
