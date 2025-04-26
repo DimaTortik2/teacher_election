@@ -62,7 +62,7 @@ export function TeacherPage() {
 					<TeacherHeader
 						isSticky={isScrolled}
 						ReviewFilterSlider={
-							<ReviewFilterSlider className='w-full border-b-4 rounded-2xl border-zinc-700' />
+							<ReviewFilterSlider className='w-full border-b-4 rounded-2xl border-zinc-700 h-[50px]' />
 						}
 						TeacherInfo={
 							<TeacherInfo

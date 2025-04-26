@@ -11,7 +11,7 @@ export function TeacherHeader({ ReviewFilterSlider, TeacherInfo, isSticky }: IPr
 	return (
 		<div
 			className={clsx(
-				'flex flex-col w-full  z-40 max-[640px]:h-[400px] max-[1024px]:h-[320px] h-[280px]',
+				'flex flex-col w-full  z-40 h-[350px]', //teacherInfo - 300px + reviewFilter - 50px
 				isSticky && 'sticky top-0'
 			)}
 		>

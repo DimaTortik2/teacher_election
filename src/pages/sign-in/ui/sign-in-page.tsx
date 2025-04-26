@@ -16,14 +16,14 @@ export function SignInPage() {
 
 	useEffect(() => {
 		if (signInIsLoading) {
-			displayNotification({ text: 'Загрузка...', type: 'loading', time: 5000 })
+			displayNotification({ text: 'Загрузка...', type: 'loading'})
 		}
 		if (signInIsSuccess) {
 			displayNotification({ text: 'Успешно', type: 'success', time: 5000 })
 		}
 		if (signInIsError) {
 			const axiosError = error as AxiosError
-			console.log(error)
+			// console.log(error)
 			const errorData = axiosError.response?.data as IErrorData
 			const errorMessage = errorData.message
 			displayNotification({ text: errorMessage, type: 'error' })

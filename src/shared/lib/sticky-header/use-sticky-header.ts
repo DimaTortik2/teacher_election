@@ -8,7 +8,7 @@ export function useStickyHeader() {
 		const handleScroll = () => {
 			if (scrollContainerRef.current) {
 				const scrollPosition = scrollContainerRef.current.scrollTop
-				setIsScrolled(scrollPosition > 200)
+				setIsScrolled(scrollPosition > 235) // 350(teacherInfo - 300px + reviewFilter - 50px) - 115px(teacherInfoMinimaze - 65px ,reviewFilter - 50px)
 			}
 		}
 

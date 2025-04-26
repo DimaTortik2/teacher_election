@@ -6,8 +6,8 @@ export function UiNotification({ className }: { className: string }) {
 	const text = useAtomValue(notificationTextAtom)
 	const type = useAtomValue(notificationTypeAtom)
 
-	console.log({ type })
-	console.log({ text })
+	// console.log({ type })
+	// console.log({ text })
 
 	const bgStyle = {
 		error: 'bg-red-400 shadow-red-400 shadow-lg',

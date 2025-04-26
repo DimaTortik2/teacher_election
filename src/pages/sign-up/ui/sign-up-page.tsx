@@ -17,7 +17,7 @@ export function SignUpPage() {
 
 	useEffect(() => {
 		if (signUpIsLoading) {
-			displayNotification({ text: 'Загрузка...', type: 'loading', time: 5000 })
+			displayNotification({ text: 'Загрузка...', type: 'loading' })
 		}
 		if (signUpIsSuccess) {
 			displayNotification({ text: 'Успешно', type: 'success', time: 5000 })
@@ -25,7 +25,7 @@ export function SignUpPage() {
 		}
 		if (signUpIsError) {
 			const axiosError = error as AxiosError
-			console.log(error)
+			// console.log(error)
 			const errorData = axiosError.response?.data as IErrorData
 			const errorMessage = errorData.message
 			displayNotification({ text: errorMessage, type: 'error' })
