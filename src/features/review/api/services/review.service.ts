@@ -29,6 +29,7 @@ export const reviewService = {
 		if (id) {
 			params.append('teacherId', id)
 		}
+		params.append('includeComments', 'true')
 		return await this.axios
 			.get(`/${QUERY_KEYS.review}?${params.toString()}&limit=5`)
 			.then(res => res.data)

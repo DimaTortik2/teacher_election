@@ -1,9 +1,11 @@
 import { useParams } from 'react-router'
 import { ReviewForm } from '../../../widgets/review'
 import {
+	IPostTeacherReview,
 	ReviewFilterSlider,
 	ReviewList,
 	useGetReviews,
+	usePostReview,
 } from '../../../features/review'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
@@ -43,9 +45,19 @@ export function TeacherPage() {
 		}
 	}, [inView, fetchNextPage, hasNextPage])
 
-	const handleSubmit = () => {
-		console.log('ve here')
-		refetchReviews()
+	const { postReview, postReviewIsSuccess } = usePostReview()
+
+	useEffect(() => {
+		if (postReviewIsSuccess) refetchReviews()
+	}, [refetchReviews, postReviewIsSuccess])
+
+	const handleSubmit = (data: Omit<IPostTeacherReview, 'teacherId'>) => {
+		if (id) {
+			postReview({
+				...data,
+				teacherId: id,
+			})
+		}
 	}
 
 	const messageDatas = data?.pages.flatMap(el => el.data)

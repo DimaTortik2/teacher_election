@@ -45,7 +45,7 @@ export function TeacherInfo({
 				<div className='w-[200px] h-[200px] rounded-b-2xl border-solid border-b-2 border-zinc-700'>
 					<img
 						src={
-							data ? `${BASE_URL}${data.photo}&version_id=null` : defaultImgSrc
+							data ? `${BASE_URL}${data.photo}` : defaultImgSrc
 						}
 						alt='Превью препода'
 						className='w-full h-full object-cover object-center rounded-2xl border-4 border-zinc-500'

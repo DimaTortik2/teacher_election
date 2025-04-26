@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import { Autoplay } from 'swiper/modules'
 import clsx from 'clsx'
+import { REWIEV_FILTER_ARR } from '../model/review-consts'
 
 interface IProps {
 	className?: string
@@ -16,15 +17,6 @@ export function ReviewFilterSlider({ className }: IProps) {
 		window.addEventListener('resize', handleResize)
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
-
-	const arr = [
-		'комменты',
-		'звезды ',
-		'новые',
-		'старые',
-		'лучшиe',
-		'плохиe',
-	]
 
 	return (
 		<div className={clsx(className || 'w-full ')}>
@@ -41,7 +33,7 @@ export function ReviewFilterSlider({ className }: IProps) {
 						disableOnInteraction: false,
 					}}
 				>
-					{arr.map((text, i) => (
+					{REWIEV_FILTER_ARR.map((text, i) => (
 						<SwiperSlide key={i} className=' text-center'>
 							<button>{text}</button>
 						</SwiperSlide>

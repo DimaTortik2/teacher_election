@@ -8,20 +8,17 @@ import { Button } from '../../../shared/ui/buttons-links/button'
 import {
 	createTeacherReviewSchema,
 	IPostTeacherReview,
-	usePostReview,
 } from '../../../features/review'
 import { CrossIcon, SendIcon } from '../../../shared/ui/icons'
 
 interface IProps {
 	id: string | undefined
-	onSubmit: () => void
+	onSubmit: (data: Omit<IPostTeacherReview, 'teacherId'>) => void
 }
 
 export function ReviewForm({ id, onSubmit }: IProps) {
 	const [isRatingVisible, setIsRatingVisible] = useState<boolean>(false)
 	const [isInputVisible, setIsInputVisible] = useState<boolean>(false)
-
-	const { postReview } = usePostReview()
 
 	const {
 		register,
@@ -39,13 +36,11 @@ export function ReviewForm({ id, onSubmit }: IProps) {
 		Omit<IPostTeacherReview, 'teacherId'>
 	> = data => {
 		if (id) {
-			postReview({
+			const preparedData = {
 				...data,
-				message:
-					data.message == '' || isInputVisible === false ? null : data.message,
-				teacherId: id,
-			})
-			onSubmit()
+				message: data.message === '' || !isInputVisible ? null : data.message,
+			}
+			onSubmit(preparedData)
 			setIsInputVisible(false)
 			setIsRatingVisible(false)
 			reset()
