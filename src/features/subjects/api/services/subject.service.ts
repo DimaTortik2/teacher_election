@@ -1,9 +1,10 @@
 import { instance } from '../../../../shared/api/api.instance'
 import { QUERY_KEYS } from '../../../../shared/model/constants'
-import { PromiseInfinity, PromisePagination } from '../../../../shared/model/interfaces/interfaces'
 import {
-	ISubject,
-} from '../../model/interfaces/subject.interfaces'
+	PromiseInfinity,
+	PromisePagination,
+} from '../../../../shared/model/interfaces/interfaces'
+import { ISubject } from '../../model/interfaces/subject.interfaces'
 
 export const subjectService = {
 	axios: instance,
@@ -54,6 +55,10 @@ export const subjectService = {
 
 	deleteOne: async function (id: string): Promise<void> {
 		return await this.axios.delete(`/${QUERY_KEYS.subject}/${id}`)
+	},
+	deleteMany: async function (ids: string[]): Promise<void> {
+		// return await this.axios.delete(`/${QUERY_KEYS.manySubjects}/${id}`)
+		console.log(ids)
 	},
 	editOne: async function ({
 		id,

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Button } from '../../../shared/ui/buttons-links/button'
 import { useForm } from 'react-hook-form'
 import { ChangeEvent } from 'react'
 import { SubjectsMenu } from '../../../features/subjects'
@@ -7,7 +6,8 @@ import { TeacherPreview } from '../../../features/admin'
 import { FilePicker } from '../../../shared/ui/file-picker/file-picker'
 import { ITeacherForm } from '../../../features/teachers'
 import { useGetTeacher } from '../../../shared/api/queries/teachers.queries'
-import { ResetIcon } from '../../../shared/ui/icons'
+import { STYLE_CONSTANTS } from '../../../app/style/style-constants'
+import RefreshIcon from '@mui/icons-material/Refresh'
 
 interface IProps {
 	onSubmit: (editData: Partial<ITeacherForm>) => void
@@ -62,7 +62,7 @@ export function EditTeacherForm({ onSubmit, id }: IProps) {
 		'/undefined-person-icon.jpg'
 	)
 
-	const handleFileChenge = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
 		if (file) {
 			const reader = new FileReader()
@@ -77,8 +77,7 @@ export function EditTeacherForm({ onSubmit, id }: IProps) {
 		<>
 			<form
 				onSubmit={handleSubmit(handleClick)}
-				className='flex flex-col content-center items-center w-full h-full gap-2'
-				// onKeyDown={handlerKeyDown}
+				className='flex flex-col content-center items-center w-[90vw] max-w-xl gap-2'
 			>
 				<div className='py-4 bg-zinc-700 transition-colors text-white px-5 rounded-xl text-xl w-full flex items-start mb-4 flex-col'>
 					<p>Имя учителя</p>
@@ -90,7 +89,7 @@ export function EditTeacherForm({ onSubmit, id }: IProps) {
 								message: 'имя учителя > 3 букв',
 							},
 						})}
-						className='py-3 bg-zinc-400 transition-colors px-10 rounded-xl text-2xl text-zinc-800 w-full flex items-start'
+						className={STYLE_CONSTANTS.input}
 					/>
 					{errors.fullName && (
 						<p className='mt-2 text-red-500'>{errors.fullName.message}</p>
@@ -98,34 +97,39 @@ export function EditTeacherForm({ onSubmit, id }: IProps) {
 				</div>
 
 				<div className='w-full flex justify-between'>
-					<div className=' flex gap-3 px-2'>
+					<div className='w-full flex gap-3 px-2'>
 						<SubjectsMenu
-							isRequired={false}
 							register={register}
 							buttonText='Выбрать предмет'
+							isRequired={true}
+							className='bg-theme-600 hover:bg-theme-500'
 						/>
 						<FilePicker
-							isRequired={false}
-							onChange={handleFileChenge}
+							onChange={handleFileChange}
 							register={register}
+							isRequired={false}
 						/>
 					</div>
-					<button type='button' onClick={resetPreviewInfo}>
-						<ResetIcon className='h-8 mr-4 text-theme-500' />
+					<button
+						type='button'
+						onClick={resetPreviewInfo}
+						className='m-2 p-1 rounded-full hover:bg-zinc-600 transition-colors mr-4'
+					>
+						<RefreshIcon fontSize='large' className='text-theme-400' />
 					</button>
 				</div>
 
-				<Button type='submit' className='m-3 absolute bottom-0'>
+				<TeacherPreview
+					fullName={watch('fullName')}
+					subject={watch('subject') && JSON.parse(watch('subject')).title}
+					imgSrc={imagePreview}
+				/>
+				<button
+					type='submit'
+					className=' mt-auto w-full py-4 rounded-b-2xl bg-zinc-600 hover:bg-zinc-500 transition-colors'
+				>
 					Сохранить изменения
-				</Button>
-
-				<div className='w-2/3 h-1/6'>
-					<TeacherPreview
-						fullName={watch('fullName')}
-						subject={watch('subject') && JSON.parse(watch('subject')).title}
-						imgSrc={imagePreview}
-					/>
-				</div>
+				</button>
 			</form>
 		</>
 	)

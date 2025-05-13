@@ -23,7 +23,7 @@ export function TeacherCardList({ children, teachersArray }: IProps) {
 							subject={
 								typeof teacher.subject === 'string'
 									? teacher.subject
-									: teacher.subject.title
+									: teacher.subject?.title
 							}
 						/>
 					))

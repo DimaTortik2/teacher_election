@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
-import EditIcon from '../../../../public/settings-icon.svg'
+import { useState } from 'react'
+import SettingsIcon from '@mui/icons-material/Settings'
 import { ThemeSwitcher } from '../../../shared/lib/theme'
 import { LogOutSetting } from '../../../features/settings'
+import { useIsMobile } from '../../../shared/lib/mobile'
 
 export function SettingsMenu() {
 	const settingItems = [
@@ -17,15 +18,8 @@ export function SettingsMenu() {
 		},
 	]
 
-	const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 	const [openItems, setOpenItems] = useState<{ [key: number]: boolean }>({})
-
-	useEffect(() => {
-		const handleResize = () => setIsMobile(window.innerWidth < 768)
-		window.addEventListener('resize', handleResize)
-		handleResize()
-		return () => window.removeEventListener('resize', handleResize)
-	}, [])
+	const { isMobile } = useIsMobile(768)
 
 	const toggleItem = (idx: number) => {
 		if (!isMobile) return
@@ -39,14 +33,22 @@ export function SettingsMenu() {
 
 	return (
 		<div>
-			<button onClick={() => setIsMenuVisible(prev => !prev)}>
-				<img src={EditIcon} alt='settings' className='h-8 m-2' />
+			<button
+				onClick={() => setIsMenuVisible(prev => !prev)}
+				className='m-2 p-1 rounded-full hover:bg-zinc-600 transition-colors'
+			>
+				<SettingsIcon className='text-theme-300'/>
+				{/* <img src={EditIcon} alt='settings' className='h-8 m-2' /> */}
 			</button>
 			{isMenuVisible && (
 				<div className='absolute w-full h-screen bg-zinc-800 rounded-b-2xl top-0 right-0 z-10 flex flex-col gap-3 pt-2'>
 					<div className='w-full flex justify-end'>
-						<button onClick={() => setIsMenuVisible(prev => !prev)}>
-							<img src={EditIcon} alt='settings' className='h-8 m-2' />
+						<button
+							onClick={() => setIsMenuVisible(prev => !prev)}
+							className='m-2 p-1 rounded-full hover:bg-zinc-600 transition-colors'
+						>
+							{/* <img src={EditIcon} alt='settings' className='h-8 m-2' /> */}
+							<SettingsIcon className='text-theme-300'/>
 						</button>
 					</div>
 					{/* main */}

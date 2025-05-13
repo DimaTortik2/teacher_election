@@ -44,9 +44,7 @@ export function TeacherInfo({
 			{!isSticky && (
 				<div className='w-[200px] h-[200px] rounded-b-2xl border-solid border-b-2 border-zinc-700'>
 					<img
-						src={
-							data ? `${BASE_URL}${data.photo}` : defaultImgSrc
-						}
+						src={data ? `${BASE_URL}${data.photo}` : defaultImgSrc}
 						alt='Превью препода'
 						className='w-full h-full object-cover object-center rounded-2xl border-4 border-zinc-500'
 					/>

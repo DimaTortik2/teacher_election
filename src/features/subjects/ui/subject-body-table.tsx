@@ -1,23 +1,30 @@
+import { AdminSubjectTableRow } from '../../../entities/subject'
 import { TableBody } from '@mui/material'
-import { useEffect } from 'react'
-import { AdminSubjectCardsList } from '../../../entities/subject'
-import { ISubjects } from '../model/interfaces/subject.interfaces'
+import { useAdminSubjectsBodyTableLogic } from '../model/use-admin-subject-head-body-logic'
 
 interface IProps {
-	subjectsArray?: ISubjects
+	limit: number
 }
-export function SubjectBodyTable({ subjectsArray }: IProps) {
-	useEffect(() => {
-		if (subjectsArray) {
-			console.log('subjectsArray = ', subjectsArray)
-		}
-	}, [subjectsArray])
+export function SubjectBodyTable({ limit }: IProps) {
+	const { selectedSubjectsIds, subjects, onSelectSubject } =
+		useAdminSubjectsBodyTableLogic()
 
 	return (
-		<TableBody>
-			<AdminSubjectCardsList
-				subjectsArray={subjectsArray}
-			></AdminSubjectCardsList>
+		<TableBody sx={{ height: limit === 5 ? '350px' : '450px' }}>
+			{subjects?.map(subject => {
+				const isChecked = selectedSubjectsIds?.some(id => subject.id === id)
+
+				return (
+					<AdminSubjectTableRow
+						subject={subject}
+						isChecked={isChecked}
+						onSelect={onSelectSubject}
+						key={subject.id}
+					/>
+				)
+			})}
+
+			
 		</TableBody>
 	)
 }

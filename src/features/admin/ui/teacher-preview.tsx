@@ -10,13 +10,11 @@ interface IProps {
 export function TeacherPreview({ rating, subject, fullName, imgSrc }: IProps) {
 	return (
 		<div className='w-full p-2 flex flex-col lg:flex-row items-start '>
-			<div className=' w-[200px] h-[200px] '>
-				<img
-					src={imgSrc}
-					alt='Превью препода'
-					className='w-full h-full object-cover object-center rounded-2xl border-4 border-zinc-500 '
-				/>
-			</div>
+			<img
+				src={imgSrc}
+				alt='Превью препода'
+				className='w-[200px] h-[200px] object-cover object-center rounded-2xl border-4 border-zinc-500 flex-shrink-0'
+			/>
 
 			<div className='w-full'>
 				{rating && (

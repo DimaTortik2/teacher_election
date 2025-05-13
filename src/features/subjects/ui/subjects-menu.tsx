@@ -8,14 +8,16 @@ import { useGetSubjects } from '../../../shared/api/queries/subject.queries'
 
 import { ITeacherForm } from '../../teachers'
 import { SubjectListBox } from './subject-list-box'
+import clsx from 'clsx'
 
 interface IProps {
 	buttonText: string
 	register?: UseFormRegister<ITeacherForm>
 	isRequired?: boolean
+	className?: string
 }
 
-export function SubjectsMenu({ buttonText, register, isRequired }: IProps) {
+export function SubjectsMenu({ buttonText, register, isRequired, className }: IProps) {
 	const {
 		data,
 		hasNextPage,
@@ -34,10 +36,10 @@ export function SubjectsMenu({ buttonText, register, isRequired }: IProps) {
 
 	return (
 		<Dropdown>
-			<MenuButton className='bg-theme-700 w-40 p-2 rounded-xl'>
+			<MenuButton className={clsx('w-40 p-2 rounded-xl', className)}>
 				{buttonText}
 			</MenuButton>
-			<Menu className='pt-3 z-[2]'>
+			<Menu className='pt-3 z-[51]'>
 				<SubjectListBox
 					subjectsArray={data?.pages}
 					register={register}

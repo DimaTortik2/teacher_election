@@ -21,7 +21,7 @@ export function SignUpPage() {
 		}
 		if (signUpIsSuccess) {
 			displayNotification({ text: 'Успешно', type: 'success', time: 5000 })
-			navigate(ROUTES.signin)
+			navigate(ROUTES.teachers)
 		}
 		if (signUpIsError) {
 			const axiosError = error as AxiosError

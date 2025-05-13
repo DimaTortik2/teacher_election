@@ -3,6 +3,7 @@ import { ICategoryNames } from '../../features/review'
 export const QUERY_KEYS = {
 	auth: 'auth',
 	subject: 'subjects',
+	manySubjects: 'manysubjects',
 	role: 'role',
 	teacher: 'teachers',
 	token: 'token',

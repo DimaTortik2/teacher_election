@@ -1,7 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { subjectService } from "../services/subject.service"
-import { ISubject } from "../../model/interfaces/subject.interfaces"
-import { QUERY_KEYS } from "../../../../shared/model/constants"
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { subjectService } from '../services/subject.service'
+import { ISubject } from '../../model/interfaces/subject.interfaces'
+import { QUERY_KEYS } from '../../../../shared/model/constants'
 
 export const useGetPaginatedSubjects = ({
 	page,
@@ -32,7 +32,6 @@ export const useGetPaginatedSubjects = ({
 		refetchPaginatedSubjects,
 	}
 }
-
 
 export const useEditSubject = () => {
 	const queryClient = useQueryClient()
@@ -78,6 +77,29 @@ export const useDeleteSubject = () => {
 		deleteSubjectIsLoading,
 		deleteSubjectIsSuccess,
 		deleteSubjectIsError,
+	}
+}
+
+export const useDeleteSubjects = () => {
+	const queryClient = useQueryClient()
+
+	const {
+		mutate: deleteSubjects,
+		isPending: deleteSubjectsIsLoading,
+		isSuccess: deleteSubjectsIsSuccess,
+		isError: deleteSubjectsIsError,
+	} = useMutation({
+		onSettled: () =>
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.subject }),
+		mutationKey: [QUERY_KEYS.subject],
+		mutationFn: async (ids: string[]) => await subjectService.deleteMany(ids),
+	})
+
+	return {
+		deleteSubjects,
+		deleteSubjectsIsLoading,
+		deleteSubjectsIsSuccess,
+		deleteSubjectsIsError,
 	}
 }
 

@@ -4,7 +4,6 @@ import {
 	ITeacherForm,
 	useAdminTeachers,
 } from '../../../features/teachers'
-import { Button } from '../../../shared/ui/buttons-links/button'
 import { BasicModal } from '../../../shared/ui/modal/basic-modal'
 import { AdminLayout } from '../../../widgets/layouts/admin/ui/admin-layout'
 import { CreateTeacherForm, EditTeacherForm } from '../../../widgets/teachers'
@@ -49,28 +48,25 @@ export function AdminTeachersPage() {
 	return (
 		<AdminLayout text='Управление учителями'>
 			<div
-				className='w-screen md:w-[80vw]
-		 h-[90vh]handleClick
-		 bg-zinc-600 flex flex-col items-center justify-start rounded-xl relative border-4 border-zinc-500 p-2'
+				className='w-screen md:w-[80vw] h-[90vh]
+		 bg-zinc-600 flex flex-col items-center justify-start rounded-xl border-4 border-zinc-500 p-2'
 			>
-				<Button onClick={() => handleBtnClick()} className='mb-2'>
+				<button
+					onClick={() => handleBtnClick()}
+					className='mb-2 py-4 w-full rounded-2xl bg-zinc-700 hover:bg-zinc-500 transition-colors'
+				>
 					Добавить учителя
-				</Button>
+				</button>
 
 				{createToolsAreVisible && (
-					<BasicModal
-						className='w-full h-full absolute top-0 p-1'
-						onClose={handleCloseBtn}
-					>
+					<BasicModal title={'добавление'} onClose={handleCloseBtn}>
 						<CreateTeacherForm onSubmit={handlePostTeacher} />
 					</BasicModal>
+					// <CreateTeacherForm onSubmit={handlePostTeacher} />
 				)}
 
 				{editToolsAreVisible && (
-					<BasicModal
-						className='w-full h-full absolute top-0 p-1'
-						onClose={handleCloseBtn}
-					>
+					<BasicModal title={'редактирование'} onClose={handleCloseBtn}>
 						<EditTeacherForm
 							onSubmit={handleEditTeacher}
 							id={ediingTeacherId}
