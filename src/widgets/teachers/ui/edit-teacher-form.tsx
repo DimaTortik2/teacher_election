@@ -79,7 +79,7 @@ export function EditTeacherForm({ onSubmit, id }: IProps) {
 				onSubmit={handleSubmit(handleClick)}
 				className='flex flex-col content-center items-center w-[90vw] max-w-xl gap-2'
 			>
-				<div className='py-4 bg-zinc-700 transition-colors text-white px-5 rounded-xl text-xl w-full flex items-start mb-4 flex-col'>
+				<div className='py-4 bg-zinc-700 transition-colors text-white px-4 rounded-xl text-xl w-full flex items-start mb-4 flex-col'>
 					<p>Имя учителя</p>
 					<input
 						type='text'
@@ -97,7 +97,7 @@ export function EditTeacherForm({ onSubmit, id }: IProps) {
 				</div>
 
 				<div className='w-full flex justify-between'>
-					<div className='w-full flex gap-3 px-2'>
+					<div className='w-full flex gap-3 px-4'>
 						<SubjectsMenu
 							register={register}
 							buttonText='Выбрать предмет'

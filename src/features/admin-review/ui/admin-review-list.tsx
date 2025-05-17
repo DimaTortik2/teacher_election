@@ -1,7 +1,7 @@
+import { AdminReview } from '@/entities/review'
 import clsx from 'clsx'
 import { ReactNode } from 'react'
-import { AdminReview } from '../../../entities/review'
-import { IReviewSolution } from '../model/interfaces/admin-solution.interface'
+import { IReviewSolution } from '@/features/admin-review/model/interfaces/admin-solution.interface'
 
 interface IProps {
 	className?: string

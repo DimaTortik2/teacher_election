@@ -3,7 +3,7 @@ import Checkbox from '@mui/material/Checkbox'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { ChangeEvent, useState } from 'react'
-import { ISignIn } from '../model/interfaces/auth.interfaces'
+import { ISignIn } from '@/features/auth/model/interfaces/auth.interfaces'
 
 interface IProps {
 	type: 'text' | 'password'
@@ -13,7 +13,13 @@ interface IProps {
 	errors: FieldErrors<ISignIn>
 }
 
-export function InputSignIn({ type, title, register, registerName, errors }: IProps) {
+export function InputSignIn({
+	type,
+	title,
+	register,
+	registerName,
+	errors,
+}: IProps) {
 	const [isChecked, setIsChecked] = useState<boolean>(false)
 
 	const handleEyeClick = (e: ChangeEvent<HTMLInputElement>) => {

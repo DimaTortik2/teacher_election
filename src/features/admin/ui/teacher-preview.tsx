@@ -9,7 +9,7 @@ interface IProps {
 
 export function TeacherPreview({ rating, subject, fullName, imgSrc }: IProps) {
 	return (
-		<div className='w-full p-2 flex flex-col lg:flex-row items-start '>
+		<div className='w-full py-2 px-4 flex flex-col lg:flex-row items-start '>
 			<img
 				src={imgSrc}
 				alt='Превью препода'
