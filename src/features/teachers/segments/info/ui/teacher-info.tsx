@@ -5,6 +5,7 @@ import { getAvgRating } from '@/shared/helpers/get-avg-rating'
 import { useGetTeacher } from '@/features/teachers'
 import { TEACHER_IMG } from '@/app/model/constants'
 import { COMPONENTS_CLASSNAMES } from '@/app/model/style-constants'
+import { SceletonWrapper } from '@/shared/ui/loaders/sceleton-wrapper'
 
 interface IProps {
 	id: string | undefined
@@ -13,7 +14,7 @@ interface IProps {
 }
 
 export function TeacherInfo({ className, id, isSticky }: IProps) {
-	const { data } = useGetTeacher(id)
+	const { data, getTeacherIsLoading } = useGetTeacher(id)
 	const avgRating = data ? getAvgRating(data.avgRatings) : null
 	const subjectTitle = data ? 'на бэке норм присылай предмет' : null
 	const fullName = isSticky ? data?.fullName.split(' ')[0] : data?.fullName
@@ -29,18 +30,25 @@ export function TeacherInfo({ className, id, isSticky }: IProps) {
 			)}
 		>
 			{!isSticky && (
-				<div className=' rounded-b-2xl border-solid border-b-2 border-zinc-700'>
-					<img
-						src={data ? TEACHER_IMG.base + data.photo : TEACHER_IMG.error}
-						alt='Превью препода'
-						className={COMPONENTS_CLASSNAMES.img}
-						width={200}
-						height={200}
-						onError={e => {
-							e.currentTarget.src = TEACHER_IMG.error
-						}}
-					/>
-				</div>
+				<SceletonWrapper
+					isLoading={getTeacherIsLoading}
+					width={200}
+					height={200}
+					className='pl-2'
+				>
+					<div className=' rounded-b-2xl border-solid border-b-2 border-zinc-700 '>
+						<img
+							src={data ? TEACHER_IMG.base + data.photo : TEACHER_IMG.error}
+							alt='Превью препода'
+							className={COMPONENTS_CLASSNAMES.img}
+							width={200}
+							height={200}
+							onError={e => {
+								e.currentTarget.src = TEACHER_IMG.error
+							}}
+						/>
+					</div>
+				</SceletonWrapper>
 			)}
 
 			<div className={clsx('w-full', isSticky && 'flex justify-between')}>
@@ -50,11 +58,24 @@ export function TeacherInfo({ className, id, isSticky }: IProps) {
 						isSticky ? 'flex-row p-2 gap-2' : 'flex-row lg:flex-col p-2 gap-2'
 					)}
 				>
-					<p className='text-left my-wrap-text'>{fullName}</p>
+					<SceletonWrapper
+						isLoading={getTeacherIsLoading}
+						variant='text'
+						width={100}
+					>
+						<p className='text-left my-wrap-text'>{fullName}</p>
+					</SceletonWrapper>
+
 					{!isSticky && (
-						<p className='text-left text-[rgba(255,255,255,0.5)] my-wrap-text'>
-							{subjectTitle}
-						</p>
+						<SceletonWrapper
+							isLoading={getTeacherIsLoading}
+							variant='text'
+							width={200}
+						>
+							<p className='text-left text-[rgba(255,255,255,0.5)] my-wrap-text'>
+								{subjectTitle}
+							</p>
+						</SceletonWrapper>
 					)}
 				</div>
 
@@ -66,13 +87,19 @@ export function TeacherInfo({ className, id, isSticky }: IProps) {
 								'lg:p-2 flex flex-col sm:absolute lg:relative sm:top-0 sm:right-0 sm:p-4 w-full sm:w-auto lg:order-1'
 						)}
 					>
-						<Rating
-							name='size-small'
-							readOnly
-							defaultValue={avgRating}
-							precision={0.5}
-							sx={{ color: getRatingColor(avgRating) }}
-						/>
+						<SceletonWrapper
+							isLoading={getTeacherIsLoading}
+							variant='text'
+							width={135}
+						>
+							<Rating
+								name='size-small'
+								readOnly
+								defaultValue={avgRating}
+								precision={0.5}
+								sx={{ color: getRatingColor(avgRating) }}
+							/>
+						</SceletonWrapper>
 						{!isSticky && (
 							<p className='text-left text-[rgba(255,255,255,0.5)] my-wrap-text'>
 								{'ср. оценка'}
