@@ -2,44 +2,54 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import { SignUpPage } from './pages/sign-up'
-import { AuthLayout, Layout } from './app'
-import { SignInPage } from './pages/sign-in'
-import {
-	AdminPage,
-	AdminReviewPage,
-	AdminSubjectsPage,
-	AdminTeachersPage,
-} from './pages/admin-page'
-import { TeachersPage } from './pages/teachers-page'
-import { TeacherPage } from './pages/teacher-page'
-import { RoleWrapper } from './features/auth'
+import { SignUpPage } from './pages/auth/sign-up'
+import { SignInPage } from './pages/auth/sign-in'
+import { TeachersPage } from './pages/teachers'
+import { TeacherPage } from './pages/teacher'
 import { TestPage } from './pages/test-page'
-import { HydrateAtoms } from './shared/lib/theme'
+import { RolesProvider } from './app/providers/roles.provider'
+import { MainProvider } from './app/providers/main.provider'
+import { AuthNotificationsProvider } from './app/providers/auth-notifications.provider'
+
+import { SubjectsTableProvider } from './app/providers/subjects-table-porvider'
+import { AdminPanelPage } from './pages/admin/panel'
+import { AdminSubjectsPage } from './pages/admin/subjects'
+import { AdminTeachersPage } from './pages/admin/teachers'
+import { AdminReviewPage } from './pages/admin/reviews'
+import { ReviewsApprovementPorvider } from './app/providers/reviews-approvement-porvider'
+import { AdminTeachersProvider } from './app/providers/admin-teachers.provider'
+import { ThemesProvider } from './app/providers/themes.provider'
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<BrowserRouter>
-			<HydrateAtoms>
+			<ThemesProvider>
 				<Routes location={location}>
-					<Route element={<Layout />}>
-						<Route element={<AuthLayout />}>
-							<Route path='/' element={<SignUpPage />} />
+					<Route element={<MainProvider />}>
+						<Route element={<AuthNotificationsProvider />}>
+							<Route path='/sign-up' element={<SignUpPage />} />
 							<Route path='/sign-in' element={<SignInPage />} />
 						</Route>
-						<Route element={<RoleWrapper />}>
-							<Route path='/admin' element={<AdminPage />} />
-							<Route path='/admin/subjects' element={<AdminSubjectsPage />} />
-							<Route path='/admin/teachers' element={<AdminTeachersPage />} />
-							<Route path='/admin/review' element={<AdminReviewPage />} />
+						<Route element={<RolesProvider />}>
+							<Route path='/admin' element={<AdminPanelPage />} />
+							<Route element={<SubjectsTableProvider />}>
+								<Route path='/admin/subjects' element={<AdminSubjectsPage />} />
+							</Route>
+
+							<Route element={<AdminTeachersProvider />}>
+								<Route path='/admin/teachers' element={<AdminTeachersPage />} />
+							</Route>
+							<Route element={<ReviewsApprovementPorvider />}>
+								<Route path='/admin/reviews' element={<AdminReviewPage />} />
+							</Route>
 						</Route>
-						<Route path='/teachers' element={<TeachersPage />} />
+						<Route path='/' element={<TeachersPage />} />
 						<Route path='/teacher/:id' element={<TeacherPage />} />
 					</Route>
 
 					<Route path='/test' element={<TestPage />} />
 				</Routes>
-			</HydrateAtoms>
+			</ThemesProvider>
 		</BrowserRouter>
 	</StrictMode>
 )

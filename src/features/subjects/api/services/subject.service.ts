@@ -1,21 +1,13 @@
-import { instance } from '../../../../shared/api/api.instance'
-import { QUERY_KEYS } from '../../../../shared/model/constants'
+import { instance } from '@/shared/api/api.instance'
+import { QUERY_KEYS } from '@/app/model/constants'
 import {
 	PromiseInfinity,
 	PromisePagination,
-} from '../../../../shared/model/interfaces/interfaces'
-import { ISubject } from '../../model/interfaces/subject.interfaces'
+} from '@/shared/model/interfaces/interfaces'
+import { ISubject } from '@/features/subjects'
 
 export const subjectService = {
 	axios: instance,
-
-	createOne: async function (
-		data: Omit<ISubject, 'id' | 'createdAt'>
-	): Promise<ISubject> {
-		return await this.axios
-			.post(`/${QUERY_KEYS.subject}`, data)
-			.then(res => res.data)
-	},
 
 	findMany: async function (cursor: string): PromiseInfinity<ISubject> {
 		const params = new URLSearchParams()
@@ -27,7 +19,7 @@ export const subjectService = {
 			.then(res => res.data)
 	},
 
-	findManyPaged: async function ({
+	findManyPaginated: async function ({
 		page,
 		limit,
 		title,
@@ -51,24 +43,5 @@ export const subjectService = {
 		return await this.axios
 			.get(`/${QUERY_KEYS.subject}?${params.toString()}`)
 			.then(res => res.data)
-	},
-
-	deleteOne: async function (id: string): Promise<void> {
-		return await this.axios.delete(`/${QUERY_KEYS.subject}/${id}`)
-	},
-	deleteMany: async function (ids: string[]): Promise<void> {
-		// return await this.axios.delete(`/${QUERY_KEYS.manySubjects}/${id}`)
-		console.log(ids)
-	},
-	editOne: async function ({
-		id,
-		title,
-	}: {
-		id: string
-		title: string
-	}): Promise<void> {
-		return await this.axios.put(`/${QUERY_KEYS.subject}/${id}`, {
-			title: title,
-		})
 	},
 }

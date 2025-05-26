@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { tokenService } from '../services/token.service'
-import { QUERY_KEYS } from '../../../../shared/model/constants'
+import { QUERY_KEYS } from '../../../../app/model/constants'
 
 export const useRefreshTokens = () => {
-
 	const {
 		isPending: refreshTokensIsLoading,
 		isSuccess: refreshTokensIsSuccess,

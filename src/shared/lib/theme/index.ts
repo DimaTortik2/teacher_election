@@ -1,6 +1,0 @@
-export type { ITheme } from './model/atoms/atoms'
-export { themeSyncAtom, initializeThemeAtom } from './model/atoms/atoms'
-export { THEMES_ARR, THEMES_COLOR_CLASSNAME } from './model/theme-consts'
-export { ThemeSwitcher } from './ui/theme-switcher'
-export { HydrateAtoms } from './ui/hydrate-atoms-provider'
-export { useGetBgPath } from './helpers/use-get-bg-path'

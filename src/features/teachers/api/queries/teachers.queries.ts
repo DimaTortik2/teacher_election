@@ -1,76 +1,57 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { QUERY_KEYS } from '../../../../shared/model/constants'
-import { ITeacherForm } from '../../model/interfaces/teacher-form.interface'
-import { teacherService } from '../services/teacher.service'
-import { IEditTeacher } from '../../model/interfaces/teacher.interface'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { teacherService } from '../service/teachers.service'
+import { QUERY_KEYS } from '@/app/model/constants'
+import { ITeacher } from '../../model/interfaces/teachers.interface'
+import { formatInfinityData } from '@/shared/model/hooks/format-infinity-data/format-infinity-data'
 
-export const usePostTeacher = () => {
-	const queryClient = useQueryClient()
-
+export const useGetTeachers = () => {
 	const {
-		mutate: postTeacher,
-		isPending: postTeacherIsLoading,
-		isSuccess: postTeacherIsSuccess,
-		isError: postTeacherIsError,
-	} = useMutation({
-		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.adminTeacher }),
-		mutationKey: [QUERY_KEYS.teacher],
-		mutationFn: async (data: ITeacherForm) =>
-			await teacherService.createOne(data),
+		data: rawData,
+		isPending: getTeachersIsLoading,
+		isSuccess: getTeachersIsSuccess,
+		isError: getTeachersIsError,
+		hasNextPage,
+		isFetchingNextPage,
+		refetch: refetchTeachers,
+		fetchNextPage,
+	} = useInfiniteQuery({
+		queryKey: [QUERY_KEYS.teacher],
+		queryFn: async ({ pageParam }) =>
+			await teacherService.findMany(pageParam.toString()),
+		initialPageParam: 0,
+		getNextPageParam: lastPage => lastPage.nextCursor,
 	})
 
+	const data = formatInfinityData<ITeacher>(rawData)
+
 	return {
-		postTeacher,
-		postTeacherIsLoading,
-		postTeacherIsSuccess,
-		postTeacherIsError,
+		data,
+		getTeachersIsLoading,
+		getTeachersIsSuccess,
+		getTeachersIsError,
+		hasNextPage,
+		isFetchingNextPage,
+		refetchTeachers,
+		fetchNextPage,
 	}
 }
 
-export const useDeleteTeacher = () => {
-	const queryClient = useQueryClient()
-
+export const useGetTeacher = (id?: string) => {
 	const {
-		mutate: deleteTeacher,
-		isPending: deleteTeacherIsLoading,
-		isSuccess: deleteTeacherIsSuccess,
-		isError: deleteTeacherIsError,
-	} = useMutation({
-		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.adminTeacher }),
-		mutationKey: [QUERY_KEYS.teacher],
-		mutationFn: async (id: string) => await teacherService.deleteOne(id),
+		data,
+		isPending: getTeacherIsLoading,
+		isSuccess: getTeacherIsSuccess,
+		isError: getTeacherIsError,
+	} = useQuery({
+		queryKey: [QUERY_KEYS.teacher, id],
+		queryFn: async () => await teacherService.findOne(id),
+		enabled: !!id,
 	})
 
 	return {
-		deleteTeacher,
-		deleteTeacherIsLoading,
-		deleteTeacherIsSuccess,
-		deleteTeacherIsError,
-	}
-}
-
-export const useEditTeacher = () => {
-	const queryClient = useQueryClient()
-
-	const {
-		mutate: editTeacher,
-		isPending: editTeacherIsLoading,
-		isSuccess: editTeacherIsSuccess,
-		isError: editTeacherIsError,
-	} = useMutation({
-		onSettled: () =>
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.adminTeacher }),
-		mutationKey: [QUERY_KEYS.teacher],
-		mutationFn: async ({ id, data }: IEditTeacher) =>
-			await teacherService.editOne({ id, data }),
-	})
-
-	return {
-		editTeacher,
-		editTeacherIsLoading,
-		editTeacherIsSuccess,
-		editTeacherIsError,
+		data,
+		getTeacherIsLoading,
+		getTeacherIsSuccess,
+		getTeacherIsError,
 	}
 }

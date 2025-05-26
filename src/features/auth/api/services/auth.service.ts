@@ -1,7 +1,10 @@
-import { instance } from "../../../../shared/api/api.instance"
-import { QUERY_KEYS } from "../../../../shared/model/constants"
-import { IAuthResponse, ISignIn, ISignUp } from "../../model/interfaces/auth.interfaces"
-
+import { instance } from '../../../../shared/api/api.instance'
+import { QUERY_KEYS } from '../../../../app/model/constants'
+import {
+	IAuthResponse,
+	ISignIn,
+	ISignUp,
+} from '../../model/interfaces/auth.interfaces'
 
 export const authService = {
 	axios: instance,

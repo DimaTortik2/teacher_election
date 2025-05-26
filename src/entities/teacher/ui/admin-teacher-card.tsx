@@ -1,7 +1,8 @@
 import clsx from 'clsx'
-import editIcon from '../../../../public/edit-icon.svg'
-import { CrossIcon } from '../../../shared/ui/icons'
-
+import EditIcon from '@mui/icons-material/Edit'
+import { IconButton } from '@/shared/ui/icons/icon-button'
+import { COLORS } from '@/app/model/style-constants'
+import DeleteIcon from '@mui/icons-material/Delete'
 interface IProps {
 	teacherName: string
 	className?: string
@@ -19,20 +20,23 @@ export function AdminTeacherCard({
 		<li
 			className={clsx(
 				className,
-				'py-4 px-4 bg-zinc-700 transition-colors text-white rounded-xl text-xl w-full flex justify-between'
+				'p-2 bg-zinc-700 transition-colors text-white rounded-xl text-xl w-full flex justify-between h-20'
 			)}
 		>
-			<div className='w-4/6 my-wrap-text'>{teacherName}</div>
+			<div className='w-4/6 h-full flex items-center'>
+				<p className='my-wrap-text'>{teacherName}</p>
+			</div>
 
-			<div className='flex gap-3'>
-				<button onClick={onEdit}>
-					<img src={editIcon} className='h-8' />
-				</button>
+			<div className='flex justify-center items-center'>
+				<IconButton
+					icon={<EditIcon sx={{ color: COLORS.gray500 }} />}
+					onClick={onEdit}
+				/>
 
-				<button onClick={onDelete}>
-					<CrossIcon className='h-8 text-theme-500' />
-					
-				</button>
+				<IconButton
+					icon={<DeleteIcon sx={{ color: COLORS.gray500 }} />}
+					onClick={onDelete}
+				/>
 			</div>
 		</li>
 	)

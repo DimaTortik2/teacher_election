@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { userService } from '../services/user.service'
-import { QUERY_KEYS } from '../../../../shared/model/constants'
+import { QUERY_KEYS } from '../../../../app/model/constants'
 
 export const useGetRole = () => {
 	const {

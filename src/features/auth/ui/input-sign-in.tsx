@@ -3,14 +3,14 @@ import Checkbox from '@mui/material/Checkbox'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { ChangeEvent, useState } from 'react'
-import { ISignIn } from '@/features/auth/model/interfaces/auth.interfaces'
+import { ISignInForm } from '@/features/auth/model/interfaces/auth.interfaces'
 
 interface IProps {
 	type: 'text' | 'password'
 	title: string
-	register: UseFormRegister<ISignIn>
-	registerName: keyof ISignIn
-	errors: FieldErrors<ISignIn>
+	register: UseFormRegister<ISignInForm>
+	registerName: keyof ISignInForm
+	errors: FieldErrors<ISignInForm>
 }
 
 export function InputSignIn({

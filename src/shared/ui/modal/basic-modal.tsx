@@ -1,19 +1,31 @@
 import clsx from 'clsx'
 import { ReactNode } from 'react'
 import ClearIcon from '@mui/icons-material/Clear'
+import { Modal } from '@mui/material'
+import { IconButton } from '@/shared/ui/icons/icon-button'
 
 interface IProps {
 	children: ReactNode
 	className?: string
 	onClose: () => void
 	title?: string
+	isVisible: boolean
 }
 
-export function BasicModal({ children, className, onClose, title }: IProps) {
+export function BasicModal({
+	children,
+	className,
+	onClose,
+	title,
+	isVisible,
+}: IProps) {
 	return (
-		<div
-			className='w-screen h-screen absolute top-0 flex items-center justify-center bg-[rgba(0,0,0,0.8)] z-50 '
-			onClick={onClose}
+		<Modal
+			open={isVisible}
+			onClose={onClose}
+			aria-labelledby='modal-modal-title'
+			aria-describedby='modal-modal-description'
+			className=' flex items-center justify-center bg-[rgba(0,0,0,0.8)] text-white'
 		>
 			<div
 				className={clsx('bg-zinc-700 rounded-2xl flex flex-col', className)}
@@ -30,16 +42,11 @@ export function BasicModal({ children, className, onClose, title }: IProps) {
 							{title}
 						</label>
 					)}
-					<button
-						onClick={onClose}
-						className='m-2 p-1 rounded-full hover:bg-zinc-600 transition-colors'
-					>
-						<ClearIcon />
-					</button>
+					<IconButton icon={<ClearIcon />} onClick={onClose} />
 				</div>
 
 				{children}
 			</div>
-		</div>
+		</Modal>
 	)
 }

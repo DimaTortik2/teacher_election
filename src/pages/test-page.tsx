@@ -1,3 +1,3 @@
 export function TestPage() {
-	return <div></div>
+	return <div>test</div>
 }

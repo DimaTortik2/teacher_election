@@ -1,4 +1,4 @@
-import { ICategories } from '../../features/review'
+import { ICategories } from '@/features/reviews/segments/create-form'
 
 export function getAvgRating(avgRatings?: {
 	[key in keyof ICategories]: number
@@ -8,13 +8,15 @@ export function getAvgRating(avgRatings?: {
 		avgRatings?.friendliness &&
 		avgRatings?.smartless &&
 		avgRatings?.strictness
-		? Math.floor(
-				(avgRatings.experienced +
-					avgRatings.freebie +
-					avgRatings.friendliness +
-					avgRatings.smartless +
-					avgRatings.strictness) /
+		? Number(
+				(
+					(avgRatings.experienced +
+						avgRatings.freebie +
+						avgRatings.friendliness +
+						avgRatings.smartless +
+						avgRatings.strictness) /
 					5
+				).toFixed(1)
 		  )
 		: 0
 }

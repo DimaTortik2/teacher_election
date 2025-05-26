@@ -1,0 +1,1 @@
+export {TeacherFilter} from './ui/fasade/teachers-filter'

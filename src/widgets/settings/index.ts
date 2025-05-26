@@ -1,1 +1,1 @@
-export { SettingsMenu } from './ui/settings-menu'
+export { SettingsButton } from './fasade/settings-button'

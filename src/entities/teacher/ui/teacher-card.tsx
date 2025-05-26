@@ -1,3 +1,5 @@
+import { TEACHER_IMG } from '@/app/model/constants'
+import { COMPONENTS_CLASSNAMES } from '@/app/model/style-constants'
 import { Rating } from '@mui/material'
 import clsx from 'clsx'
 import { Link } from 'react-router'
@@ -7,6 +9,7 @@ interface IProps {
 	teacherName: string
 	subject: string
 	teacherId: string
+	avgRating: number
 	className?: string
 }
 
@@ -16,34 +19,40 @@ export function TeacherCard({
 	subject,
 	className,
 	teacherId,
+	avgRating,
 }: IProps) {
 	return (
-		<li
+		<Link
+			to={`/teacher/${teacherId}`}
 			className={clsx(
-				className,
-				'rounded-2xl w-[200px] bg-zinc-600 flex flex-col items-start justify-start p-1'
+				'flex flex-col gap-1 items-start justify-start w-[200px] rounded-2xl bg-theme-600 p-1',
+				className
 			)}
 		>
-			<Link to={`/teacher/${teacherId}`}>
-				<div className='w-full h-[200px] '>
-					<img
-						src={imgSrc}
-						alt='картинка учителя'
-						className='w-full h-full object-cover object-center rounded-2xl border-4 border-zinc-500 '
-					/>
-				</div>
+			<img
+				src={imgSrc}
+				alt='картинка учителя'
+				className={clsx(
+					COMPONENTS_CLASSNAMES.img,
+					Math.round(Math.random()) ? 'sepia' : 'sepia-0'
+				)}
+				onError={e => {
+					e.currentTarget.src = TEACHER_IMG.error
+				}}
+			/>
+			<div>
 				<p className='w-full pl-3 text-left'>{teacherName}</p>
 				<p className='w-full pl-3 text-left text-[rgba(255,255,255,0.5)]'>
 					{subject}
 				</p>
-				<Rating
-					name='size-small'
-					readOnly
-					defaultValue={3.5}
-					precision={0.5}
-					className=' pl-3'
-				/>
-			</Link>
-		</li>
+			</div>
+			<Rating
+				name='size-small'
+				readOnly
+				defaultValue={avgRating ? avgRating : 0}
+				precision={0.5}
+				className='pl-3 mb-2'
+			/>
+		</Link>
 	)
 }
