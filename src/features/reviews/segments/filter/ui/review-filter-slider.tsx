@@ -19,27 +19,30 @@ export function ReviewFilterSlider({ className }: IProps) {
 	}, [])
 
 	return (
-		<div className={clsx(className || 'w-full ')}>
-			<div className='w-full bg-zinc-600 rounded-b-2xl p-2 h-[50px] border-solid border-b-[3px] border-zinc-700'>
-				<Swiper
-					slidesPerView={isMobile ? 3 : 5}
-					spaceBetween={10}
-					className='w-full'
-					freeMode={true}
-					loop={isMobile}
-					modules={[Autoplay]}
-					autoplay={{
-						delay: 3000,
-						disableOnInteraction: false,
-					}}
-				>
-					{REVIEW_FILTER_ARR.map((text, i) => (
-						<SwiperSlide key={i} className=' text-center'>
-							<button>{text}</button>
-						</SwiperSlide>
-					))}
-				</Swiper>
-			</div>
+		<div
+			className={clsx(
+				'w-full rounded-b-2xl p-2 h-[50px] border-solid border-b-[3px] border-zinc-700',
+				className
+			)}
+		>
+			<Swiper
+				slidesPerView={isMobile ? 2 : 5}
+				spaceBetween={10}
+				className='w-full'
+				freeMode={true}
+				loop={isMobile}
+				modules={[Autoplay]}
+				autoplay={{
+					delay: 3000,
+					disableOnInteraction: false,
+				}}
+			>
+				{REVIEW_FILTER_ARR.map((text, i) => (
+					<SwiperSlide key={i} className=' text-center'>
+						<button>{text}</button>
+					</SwiperSlide>
+				))}
+			</Swiper>
 		</div>
 	)
 }

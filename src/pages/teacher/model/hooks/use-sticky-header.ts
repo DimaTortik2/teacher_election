@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export function useStickyHeader() {
+export function useStickyHeader(scrollPos: number) {
 	const [isScrolled, setIsScrolled] = useState(false)
 	const scrollContainerRef = useRef<HTMLDivElement>(null)
 
@@ -8,7 +8,7 @@ export function useStickyHeader() {
 		const handleScroll = () => {
 			if (scrollContainerRef.current) {
 				const scrollPosition = scrollContainerRef.current.scrollTop
-				setIsScrolled(scrollPosition > 235) // 350(teacherInfo - 300px + reviewFilter - 50px) - 115px(teacherInfoMinimaze - 65px ,reviewFilter - 50px)
+				setIsScrolled(scrollPosition > scrollPos)
 			}
 		}
 
@@ -22,7 +22,7 @@ export function useStickyHeader() {
 				container.removeEventListener('scroll', handleScroll)
 			}
 		}
-	}, [])
+	}, [scrollPos])
 
 	return {
 		isScrolled,
