@@ -1,7 +1,4 @@
-import { useEffect } from 'react'
 
-import { useGetTeachers } from '@/features/teachers'
-import { useInView } from 'react-intersection-observer'
 import {
 	isDeleteTeacherModalVisibleAtom,
 	isEditTeacherModalVisibleAtom,
@@ -16,15 +13,6 @@ export function useAdminTeachersList() {
 
 	const setDeleteModalIsVisible = useSetAtom(isDeleteTeacherModalVisibleAtom)
 
-	const [ref, inView] = useInView()
-	const { data, hasNextPage, fetchNextPage } = useGetTeachers()
-
-	useEffect(() => {
-		if (inView && hasNextPage) {
-			fetchNextPage()
-		}
-	}, [inView, fetchNextPage, hasNextPage])
-
 	const handleEdit = (id: string) => {
 		setEditModalIsVisible(true)
 		setSelectedTeacherId(id)
@@ -36,8 +24,6 @@ export function useAdminTeachersList() {
 	}
 
 	return {
-		ref,
-		data,
 		handleEdit,
 		handleDelete,
 	}

@@ -64,9 +64,10 @@
 	word-wrap: break-word;
 	word-break: break-word;
 	display: -webkit-box;
-	-webkit-line-clamp: 3;
+	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
+
 .word-wrap {
 	word-break: break-word;
 	overflow-wrap: break-word;

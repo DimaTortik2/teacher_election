@@ -3,7 +3,7 @@ import { getRatingColor } from '@/entities/review/lib/get-rating-color'
 import clsx from 'clsx'
 import { getAvgRating } from '@/shared/helpers/get-avg-rating'
 import { useGetTeacher } from '@/features/teachers'
-import { SceletonWrapper } from '@/shared/ui/loaders/sceleton-wrapper'
+import { SkeletonWrapper } from '@/shared/ui/loaders/skeleton-wrapper'
 
 interface IProps {
 	id: string | undefined
@@ -24,18 +24,18 @@ export function TeacherStickyInfo({ className, id }: IProps) {
 		>
 			<div className='w-full flex justify-between'>
 				<div className='flex flex-row p-2 gap-2'>
-					<SceletonWrapper
+					<SkeletonWrapper
 						isLoading={getTeacherIsLoading}
 						variant='text'
 						width={100}
 					>
 						<p className='text-left my-wrap-text'>{fullName}</p>
-					</SceletonWrapper>
+					</SkeletonWrapper>
 				</div>
 
 				{avgRating && (
 					<div className='p-2 flex'>
-						<SceletonWrapper
+						<SkeletonWrapper
 							isLoading={getTeacherIsLoading}
 							variant='text'
 							width={135}
@@ -47,7 +47,7 @@ export function TeacherStickyInfo({ className, id }: IProps) {
 								precision={0.5}
 								sx={{ color: getRatingColor(avgRating) }}
 							/>
-						</SceletonWrapper>
+						</SkeletonWrapper>
 					</div>
 				)}
 			</div>

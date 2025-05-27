@@ -25,7 +25,7 @@ export function TeacherCard({
 		<Link
 			to={`/teacher/${teacherId}`}
 			className={clsx(
-				'flex flex-col gap-1 items-start justify-start w-[200px] rounded-2xl bg-theme-600 p-1',
+				'flex flex-col gap-1 items-center justify-center w-[220px] rounded-2xl bg-theme-600 p-3',
 				className
 			)}
 		>
@@ -40,19 +40,19 @@ export function TeacherCard({
 					e.currentTarget.src = TEACHER_IMG.error
 				}}
 			/>
-			<div>
+			<div className='items-start justify-start w-full '>
 				<p className='w-full pl-3 text-left'>{teacherName}</p>
 				<p className='w-full pl-3 text-left text-[rgba(255,255,255,0.5)]'>
 					{subject}
 				</p>
+				<Rating
+					name='size-small'
+					readOnly
+					defaultValue={avgRating ? avgRating : 0}
+					precision={0.5}
+					className='pl-3 mb-2'
+				/>
 			</div>
-			<Rating
-				name='size-small'
-				readOnly
-				defaultValue={avgRating ? avgRating : 0}
-				precision={0.5}
-				className='pl-3 mb-2'
-			/>
 		</Link>
 	)
 }

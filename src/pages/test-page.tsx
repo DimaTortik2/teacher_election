@@ -1,3 +1,5 @@
+import { SyncLoader } from "react-spinners";
+
 export function TestPage() {
-	return <div>test</div>
+	return <SyncLoader size={15} />
 }

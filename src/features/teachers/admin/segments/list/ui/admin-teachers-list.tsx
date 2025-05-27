@@ -1,14 +1,27 @@
 import { AdminTeacherCard } from '@/entities/teacher'
-import { OptimisticTeachers } from '@/features/optimistic-legacy'
 import { useAdminTeachersList } from '../model/hooks/use-admin-teachers-list'
+import { InfinityList } from '@/shared/ui/list/infinity-list'
+
+import { useGetTeachers } from '@/features/teachers'
 
 export function AdminTeachersList() {
-	const { ref, data, handleEdit, handleDelete } = useAdminTeachersList()
+	const { handleEdit, handleDelete } = useAdminTeachersList()
+
+	const {
+		data,
+		hasNextPage,
+		fetchNextPage,
+		isFetchingNextPage,
+		getTeachersIsLoading,
+	} = useGetTeachers()
 
 	return (
-		<ul className='overflow-auto w-full h-[70vh] rounded-xl custom-scrollbar p-4 pb-20'>
-			<OptimisticTeachers />
-			{data?.map(teacher => (
+		<InfinityList
+			fetchNextPage={fetchNextPage}
+			hasNextPage={hasNextPage}
+			isFetchingNextPage={isFetchingNextPage}
+			isLoading={getTeachersIsLoading}
+			renderItem={teacher => (
 				<AdminTeacherCard
 					key={teacher.id}
 					className='mt-2 mb-2'
@@ -16,8 +29,11 @@ export function AdminTeachersList() {
 					onDelete={() => handleDelete(teacher.id)}
 					onEdit={() => handleEdit(teacher.id)}
 				/>
-			))}
-			<li ref={ref}>⠀</li>
-		</ul>
+			)}
+			items={data}
+			className={
+				'overflow-auto w-full h-[70vh] rounded-xl custom-scrollbar p-4 pb-20 '
+			}
+		/>
 	)
 }

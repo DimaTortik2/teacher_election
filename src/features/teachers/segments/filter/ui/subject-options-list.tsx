@@ -20,7 +20,6 @@ export function SubjectOptionsList({ register, isRequired }: IProps) {
 		}
 	}, [inView, fetchNextPage, refetchSubjects, hasNextPage])
 
-	console.log({ data })
 
 	return (
 		<select

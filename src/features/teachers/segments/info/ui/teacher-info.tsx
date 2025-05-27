@@ -5,7 +5,7 @@ import { getAvgRating } from '@/shared/helpers/get-avg-rating'
 import { useGetTeacher } from '@/features/teachers'
 import { TEACHER_IMG } from '@/app/model/constants'
 import { COMPONENTS_CLASSNAMES } from '@/app/model/style-constants'
-import { SceletonWrapper } from '@/shared/ui/loaders/sceleton-wrapper'
+import { SkeletonWrapper } from '@/shared/ui/loaders/skeleton-wrapper'
 
 interface IProps {
 	id: string | undefined
@@ -25,7 +25,7 @@ export function TeacherInfo({ className, id }: IProps) {
 				className
 			)}
 		>
-			<SceletonWrapper
+			<SkeletonWrapper
 				isLoading={getTeacherIsLoading}
 				width={200}
 				height={200}
@@ -43,19 +43,19 @@ export function TeacherInfo({ className, id }: IProps) {
 						}}
 					/>
 				</div>
-			</SceletonWrapper>
+			</SkeletonWrapper>
 
 			<div className='w-full'>
 				<div className='flex flex-row lg:flex-col p-2 gap-2'>
-					<SceletonWrapper
+					<SkeletonWrapper
 						isLoading={getTeacherIsLoading}
 						variant='text'
 						width={100}
 					>
 						<p className='text-left my-wrap-text'>{fullName}</p>
-					</SceletonWrapper>
+					</SkeletonWrapper>
 
-					<SceletonWrapper
+					<SkeletonWrapper
 						isLoading={getTeacherIsLoading}
 						variant='text'
 						width={200}
@@ -63,12 +63,12 @@ export function TeacherInfo({ className, id }: IProps) {
 						<p className='text-left text-[rgba(255,255,255,0.5)] my-wrap-text'>
 							{subjectTitle}
 						</p>
-					</SceletonWrapper>
+					</SkeletonWrapper>
 				</div>
 
 				{avgRating && (
 					<div className='p-2 lg:p-2 flex flex-col sm:absolute lg:relative sm:top-0 sm:right-0 sm:p-4 w-full sm:w-auto lg:order-1'>
-						<SceletonWrapper
+						<SkeletonWrapper
 							isLoading={getTeacherIsLoading}
 							variant='text'
 							width={135}
@@ -80,7 +80,7 @@ export function TeacherInfo({ className, id }: IProps) {
 								precision={0.5}
 								sx={{ color: getRatingColor(avgRating) }}
 							/>
-						</SceletonWrapper>
+						</SkeletonWrapper>
 
 						<p className='text-left text-[rgba(255,255,255,0.5)] my-wrap-text'>
 							{'ср. оценка'}

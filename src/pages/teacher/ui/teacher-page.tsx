@@ -21,7 +21,7 @@ export function TeacherPage() {
 				<TeacherHeader id={teacherId} />,
 				<TeacherStickyHeader id={teacherId} isScrolled={isScrolled} />,
 			]}
-			list={<ReviewList className='pb-20' id={teacherId} />}
+			list={<ReviewList id={teacherId} />}
 			form={<CreateReviewButton id={id} />}
 		/>
 	)

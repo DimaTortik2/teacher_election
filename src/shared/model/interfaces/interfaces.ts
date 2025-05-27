@@ -1,7 +1,13 @@
+import {
+	FetchNextPageOptions,
+	InfiniteData,
+	InfiniteQueryObserverResult,
+} from '@tanstack/react-query'
+
 export interface InfinityData<T> {
 	data: T[]
 	nextCursor: number | null
-} 
+}
 
 export interface PaginationData<T> {
 	items: T[]
@@ -17,3 +23,9 @@ export interface IErrorData {
 	statusCode: number
 	error: string
 }
+
+export type IFetchNextPage<T> = (
+	options?: FetchNextPageOptions
+) => Promise<
+	InfiniteQueryObserverResult<InfiniteData<InfinityData<T>, unknown>, Error>
+>

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import Skeleton from '@mui/material/Skeleton'
 
-export function SceletonWrapper({
+export function SkeletonWrapper({
 	children,
 	isLoading,
 	variant = 'rounded',
