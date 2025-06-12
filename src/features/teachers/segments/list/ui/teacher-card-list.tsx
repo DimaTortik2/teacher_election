@@ -20,16 +20,18 @@ export function TeacherCardList() {
 			isFetchingNextPage={isFetchingNextPage}
 			items={data}
 			SkeletonComponent={SkeletonTeacherCard}
-			renderItem={teacher => (
-				<TeacherCard
-					key={teacher.id}
-					imgSrc={TEACHER_IMG.base + teacher.photo}
-					teacherName={teacher.fullName}
-					teacherId={teacher.id}
-					avgRating={teacher.avgRating}
-					subject={'пофикси на бэке'}
-				/>
-			)}
+			renderItem={teacher =>
+				teacher && (
+					<TeacherCard
+						key={teacher.id}
+						imgSrc={TEACHER_IMG.base + teacher.photo}
+						teacherName={teacher.fullName}
+						teacherId={teacher.id}
+						avgRating={teacher.avgRating}
+						subjects={teacher.subjects.map(sub => sub.title)}
+					/>
+				)
+			}
 		/>
 	)
 }

@@ -10,7 +10,6 @@ export function AdminReviewApprovementModal() {
 		<BasicModal
 			isVisible={isVisible}
 			onClose={() => setIsVisible(false)}
-			title='Подтверждение'
 		>
 			<AdminReviewApprovementForm />
 		</BasicModal>

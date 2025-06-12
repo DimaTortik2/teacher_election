@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '@/app/model/constants'
 import {
+	ICreateTeacher,
 	IEditTeacher,
-	ITeacherForm,
 } from '../../model/interfaces/admin-teacher.interface'
 import { adminTeachersService } from '../services/admin-teachers.service'
 import { useGetTeachers } from '@/features/teachers'
@@ -20,7 +20,7 @@ export const usePostTeacher = () => {
 		onSettled: () =>
 			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.adminTeacher }),
 		mutationKey: [QUERY_KEYS.teacher],
-		mutationFn: async (data: ITeacherForm) =>
+		mutationFn: async (data: ICreateTeacher) =>
 			await adminTeachersService.createOne(data),
 		onSuccess: () => refetchTeachers(),
 	})

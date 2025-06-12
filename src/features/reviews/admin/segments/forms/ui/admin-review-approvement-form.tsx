@@ -38,7 +38,7 @@ export function AdminReviewApprovementForm() {
 
 	return (
 		<>
-			<div className='h-[70vh] w-full sm:w-[90vw] custom-scrollbar rounded-scrollbar overflow-auto overflow-x-hidden pb-5'>
+			<div className='h-[70vh] w-[90vw] sm:w-[90vw] custom-scrollbar rounded-scrollbar overflow-auto overflow-x-hidden pb-5'>
 				<Review
 					className='bg-zinc-700'
 					actions={null}

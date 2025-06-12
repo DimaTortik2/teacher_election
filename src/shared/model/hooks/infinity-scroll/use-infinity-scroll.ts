@@ -1,6 +1,6 @@
-import { useEffect } from "react"
-import { useInView } from "react-intersection-observer"
-import { IFetchNextPage } from "../../interfaces/interfaces"
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { IFetchNextPage } from '../../interfaces/interfaces'
 
 export function useInfiniteScroll<T>({
 	fetchNextPage,
@@ -14,8 +14,9 @@ export function useInfiniteScroll<T>({
 	useEffect(() => {
 		if (inView && hasNextPage) {
 			fetchNextPage()
+			console.log({ inView })
 		}
 	}, [inView, fetchNextPage, hasNextPage])
 
-  return ref
+	return ref
 }

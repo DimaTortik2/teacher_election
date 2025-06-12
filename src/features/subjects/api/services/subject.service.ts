@@ -15,7 +15,7 @@ export const subjectService = {
 			params.append('cursor', cursor)
 		}
 		return await this.axios
-			.get(`/${QUERY_KEYS.subject}?${params.toString()}&limit=5`)
+			.get(`/${QUERY_KEYS.subject}?${params.toString()}&limit=15`)
 			.then(res => res.data)
 	},
 

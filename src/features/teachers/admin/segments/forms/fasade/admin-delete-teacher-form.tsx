@@ -26,7 +26,7 @@ export function AdminDeleteTeacherForm() {
 			</p>
 			<TeacherPreview
 				fullName={data?.fullName}
-				subject={data?.subject}
+				subjects={data?.subjects.map(sub => sub.title)}
 				imgSrc={data?.photo}
 			/>
 			<ModalBottomButton

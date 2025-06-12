@@ -1,19 +1,19 @@
 import { TEACHER_IMG } from '@/app/model/constants'
 import { COMPONENTS_CLASSNAMES } from '@/app/model/style-constants'
+import { ListShorter } from '@/shared/ui/list-shorter/fasade/list-shorter'
 import { Rating } from '@mui/material'
 import clsx from 'clsx'
 
 interface IProps {
 	rating?: number
-	subject?: string | { title: string; id: string } | null
+	subjects?: string[]
 	fullName?: string | null
 	imgSrc?: string
 }
 
-export function TeacherPreview({ rating, subject, fullName, imgSrc }: IProps) {
-	console.log({ subject })
+export function TeacherPreview({ rating, subjects, fullName, imgSrc }: IProps) {
 	return (
-		<div className='w-full py-2 px-4 flex flex-col sm:flex-row sm:items-start items-center'>
+		<div className='w-full py-2 sm:px-4 flex flex-col sm:flex-row sm:items-start items-center'>
 			<img
 				src={imgSrc}
 				alt='Превью препода'
@@ -37,11 +37,17 @@ export function TeacherPreview({ rating, subject, fullName, imgSrc }: IProps) {
 						</p>
 					</div>
 				)}
-				<div className='flex flex-row sm:flex-col justify-center p-2 gap-2'>
-					<p className='text-left my-wrap-text'>{fullName}</p>
+				<div className='flex flex-col justify-center px-1 sm:px-2 py-2 gap-2'>
+					{fullName ? (
+						<p className='text-center sm:text-left my-wrap-text '>{fullName}</p>
+					) : (
+						<p>⠀</p>
+					)}
 					<p className='text-left text-[rgba(255,255,255,0.5)] my-wrap-text'>
-						{/* {subject} */}
-						{<p>исправь на бэке, непонятно массив или один предмет</p>}
+						<ListShorter
+							list={subjects}
+							className='w-full justify-center sm:justify-start'
+						/>
 					</p>
 				</div>
 			</div>

@@ -6,6 +6,7 @@ import { useGetTeacher } from '@/features/teachers'
 import { TEACHER_IMG } from '@/app/model/constants'
 import { COMPONENTS_CLASSNAMES } from '@/app/model/style-constants'
 import { SkeletonWrapper } from '@/shared/ui/loaders/skeleton-wrapper'
+import { ListShorter } from '@/shared/ui/list-shorter/fasade/list-shorter'
 
 interface IProps {
 	id: string | undefined
@@ -15,7 +16,7 @@ interface IProps {
 export function TeacherInfo({ className, id }: IProps) {
 	const { data, getTeacherIsLoading } = useGetTeacher(id)
 	const avgRating = data ? getAvgRating(data.avgRatings) : null
-	const subjectTitle = data ? 'на бэке норм присылай предмет' : null
+	const subjectTitles = data ? data.subjects.map(sub => sub.title) : null
 	const fullName = data?.fullName
 
 	return (
@@ -61,7 +62,7 @@ export function TeacherInfo({ className, id }: IProps) {
 						width={200}
 					>
 						<p className='text-left text-[rgba(255,255,255,0.5)] my-wrap-text'>
-							{subjectTitle}
+							{subjectTitles && <ListShorter list={subjectTitles} />}
 						</p>
 					</SkeletonWrapper>
 				</div>

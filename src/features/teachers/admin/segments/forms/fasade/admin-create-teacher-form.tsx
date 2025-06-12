@@ -1,4 +1,4 @@
-import {  useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ChangeEvent } from 'react'
 import { FilePicker } from '@/features/teachers/admin/segments/forms/ui/file-picker'
@@ -7,26 +7,42 @@ import { TeacherPreview } from '@/features/teachers/admin/segments/forms/ui/teac
 import { Layout } from '../ui/layout'
 import { SubjectsSelectButton } from '@/features/subjects/admin/segments/select'
 import { usePostTeacher } from '../../../api/queries/admin-teachers.queries'
-import { ITeacherForm } from '../../../model/interfaces/admin-teacher.interface'
+import {
+	ICreateTeacherForm,
+	ISelectedSubject,
+} from '../../../model/interfaces/admin-teacher.interface'
 import { COMPONENTS_CLASSNAMES } from '@/app/model/style-constants'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { CreateTeacherSchema } from '../../../model/schemas/create-teacher.schema'
+import { formatCreateData } from '../lib/format-create-data'
+import { TEACHER_IMG } from '@/app/model/constants'
 
 export function AdminCreateTeacherForm() {
 	const { postTeacher } = usePostTeacher()
 
-	const onSubmit = (data: ITeacherForm) => {
-		postTeacher(data)
+	const onSubmit = (data: ICreateTeacherForm) => {
+		const formatedData = formatCreateData(data)
+		postTeacher(formatedData)
 	}
 
 	const {
 		handleSubmit,
 		register,
+		control,
 		watch,
+		setValue,
 		formState: { errors },
-	} = useForm<ITeacherForm>({
+	} = useForm<ICreateTeacherForm>({
+		resolver: zodResolver(CreateTeacherSchema),
+		defaultValues: {
+			file: null,
+			fullName: '',
+			selectedSubjects: [],
+		},
 		mode: 'onChange',
 	})
 
-	const [imagePreview, setImagePreview] = useState('/undefined-person-icon.jpg')
+	const [imagePreview, setImagePreview] = useState(TEACHER_IMG.error)
 
 	const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
@@ -56,16 +72,18 @@ export function AdminCreateTeacherForm() {
 				/>
 			}
 			errorsMessage={
-				errors.fullName && (
-					<p className='mt-2 text-red-500'>{errors.fullName.message}</p>
+				errors.fullName ? (
+					<p className='mt-2 text-red-500 text-mb'>{errors.fullName.message}</p>
+				) : (
+					<p className='mt-2 text-mb'>⠀</p>
 				)
 			}
 			actionsRow={
 				<div className='w-full flex gap-3 px-4'>
 					<SubjectsSelectButton
-						register={register}
+						control={control}
+						setValue={setValue}
 						buttonText='Выбрать предмет'
-						isRequired={true}
 						className='bg-theme-600 hover:bg-theme-500'
 					/>
 					<FilePicker
@@ -78,7 +96,9 @@ export function AdminCreateTeacherForm() {
 			preview={
 				<TeacherPreview
 					fullName={watch('fullName')}
-					subject={watch('subject') && JSON.parse(watch('subject')).title}
+					subjects={watch('selectedSubjects').map(
+						(subject: ISelectedSubject) => subject.title
+					)}
 					imgSrc={imagePreview}
 				/>
 			}

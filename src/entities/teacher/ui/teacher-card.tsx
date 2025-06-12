@@ -1,5 +1,6 @@
 import { TEACHER_IMG } from '@/app/model/constants'
 import { COMPONENTS_CLASSNAMES } from '@/app/model/style-constants'
+import { ListShorter } from '@/shared/ui/list-shorter/fasade/list-shorter'
 import { Rating } from '@mui/material'
 import clsx from 'clsx'
 import { Link } from 'react-router'
@@ -7,7 +8,7 @@ import { Link } from 'react-router'
 interface IProps {
 	imgSrc: string
 	teacherName: string
-	subject: string
+	subjects: string[]
 	teacherId: string
 	avgRating: number
 	className?: string
@@ -16,7 +17,7 @@ interface IProps {
 export function TeacherCard({
 	imgSrc,
 	teacherName,
-	subject,
+	subjects,
 	className,
 	teacherId,
 	avgRating,
@@ -43,7 +44,7 @@ export function TeacherCard({
 			<div className='items-start justify-start w-full '>
 				<p className='w-full pl-3 text-left'>{teacherName}</p>
 				<p className='w-full pl-3 text-left text-[rgba(255,255,255,0.5)]'>
-					{subject}
+					<ListShorter list={subjects} />
 				</p>
 				<Rating
 					name='size-small'

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ChangeEvent } from 'react'
 import { FilePicker } from '@/features/teachers/admin/segments/forms/ui/file-picker'
@@ -7,74 +7,73 @@ import { ModalBottomButton } from '@/shared/ui/buttons/modal-bottom-button'
 import { TeacherPreview } from '@/features/teachers/admin/segments/forms/ui/teacher-preview'
 import { Layout } from '../ui/layout'
 import { SubjectsSelectButton } from '@/features/subjects/admin/segments/select'
-import { ITeacherForm } from '../../../model/interfaces/admin-teacher.interface'
+import {
+	ICreateTeacherForm,
+	ISelectedSubject,
+} from '../../../model/interfaces/admin-teacher.interface'
 import { useGetTeacher } from '@/features/teachers/api/queries/teachers.queries'
 import { useEditTeacher } from '../../../api/queries/admin-teachers.queries'
 import { useAtomValue } from 'jotai'
 import { selectedTeacherIdAtom } from '@/app/store/admin-teachers.store'
 import { COMPONENTS_CLASSNAMES } from '@/app/model/style-constants'
+import { TEACHER_IMG } from '@/app/model/constants'
+import { IconButton } from '@/shared/ui/icons/icon-button'
+import { formatEditData } from '../lib/format-edit-data'
 
 export function AdminEditTeacherForm() {
 	const id = useAtomValue(selectedTeacherIdAtom)
 
 	const { editTeacher } = useEditTeacher()
+	const { data } = useGetTeacher(id)
 
-	const onSubmit = (editData: Partial<ITeacherForm>) => {
+	const onSubmit = (editData: Partial<ICreateTeacherForm>) => {
 		if (!id) return
 
-		if (editData.file?.length === 0) editData.file = undefined
-		console.log('editData', editData)
-		editTeacher({ data: editData, id })
-	}
+		const formatedData = formatEditData({ data, editData })
 
-	const { data } = useGetTeacher(id)
+		if (Object.keys(formatedData).length === 0) {
+			console.log('вы ничего не поменяли')
+			return
+		}
+
+		editTeacher({ data: formatedData, id })
+	}
 
 	const {
 		handleSubmit,
 		register,
+		control,
+		setValue,
 		watch,
 		formState: { errors },
 		reset,
-	} = useForm<ITeacherForm>({
+	} = useForm<ICreateTeacherForm>({
 		mode: 'onChange', // Валидировать при изменении
 		defaultValues: {
-			fullName: 'загрузка...',
-			subject: JSON.stringify({ title: 'загрузка...' }),
+			file: null,
+			fullName: '',
+			selectedSubjects: [],
 		},
 	})
 
-	const resetPreviewInfo = () => {
+	const resetPreviewInfo = useCallback(() => {
 		if (data) {
 			reset({
 				fullName: data.fullName,
-				subject: JSON.stringify({
-					title: data.subject,
-					subjectId: undefined,
-				}),
+				selectedSubjects: data.subjects,
+				file: null,
 			})
 			setImagePreview(data.photo)
 		}
-	}
+	}, [data, reset])
 
 	useEffect(() => {
 		if (data) {
 			resetPreviewInfo()
 		}
-	}, [data])
+	}, [data, resetPreviewInfo])
 
-	useEffect(() => {
-		console.log(
-			'errors',
-			errors.file,
-			errors.root,
-			errors.fullName,
-			errors.subject
-		)
-	}, [errors])
-
-	const [imagePreview, setImagePreview] = useState<string>(
-		'/undefined-person-icon.jpg'
-	)
+	const [imagePreview, setImagePreview] = useState(TEACHER_IMG.error)
 
 	const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
@@ -103,17 +102,19 @@ export function AdminEditTeacherForm() {
 				/>
 			}
 			errorsMessage={
-				errors.fullName && (
-					<p className='mt-2 text-red-500'>{errors.fullName.message}</p>
+				errors.fullName ? (
+					<p className='mt-2 text-red-500 text-mb'>{errors.fullName.message}</p>
+				) : (
+					<p className='mt-2 text-mb'>⠀</p>
 				)
 			}
 			actionsRow={
 				<div className='w-full flex justify-between'>
 					<div className='w-full flex gap-3 px-4'>
 						<SubjectsSelectButton
-							register={register}
+							control={control}
+							setValue={setValue}
 							buttonText='Выбрать предмет'
-							isRequired={true}
 							className='bg-theme-600 hover:bg-theme-500'
 						/>
 						<FilePicker
@@ -122,19 +123,18 @@ export function AdminEditTeacherForm() {
 							isRequired={false}
 						/>
 					</div>
-					<button
-						type='button'
+					<IconButton
 						onClick={resetPreviewInfo}
-						className='m-2 p-1 rounded-full hover:bg-zinc-600 transition-colors mr-4'
-					>
-						<RefreshIcon fontSize='large' className='text-theme-400' />
-					</button>
+						icon={<RefreshIcon fontSize='large' className='text-theme-400' />}
+					/>
 				</div>
 			}
 			preview={
 				<TeacherPreview
 					fullName={watch('fullName')}
-					subject={watch('subject') && JSON.parse(watch('subject')).title}
+					subjects={watch('selectedSubjects').map(
+						(subject: ISelectedSubject) => subject.title
+					)}
 					imgSrc={imagePreview}
 				/>
 			}

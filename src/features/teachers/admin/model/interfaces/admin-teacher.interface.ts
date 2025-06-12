@@ -1,17 +1,23 @@
+import { z } from 'zod'
+import { CreateTeacherSchema } from '../schemas/create-teacher.schema'
 
-export interface ITeacherForm {
-	fullName: string
-	subject: string
-	file?: File[]
-}
+export type ICreateTeacherForm = z.infer<typeof CreateTeacherSchema>
+export type ISelectedSubjects = ICreateTeacherForm['selectedSubjects']
+export type ISelectedSubject = ISelectedSubjects[number]
 
 export interface ICreateTeacher {
 	fullName: string
-	subjectId: string
-	photo: File
+	subjectIds: string[] // на бэкэнде это ещё один предмет....
+	file?: File | null
 }
+
+// export interface ICreateTeacher {
+// 	fullName: string
+// 	subjectId: string
+// 	photo: File
+// }
 
 export interface IEditTeacher {
 	id: string
-	data: Partial<ITeacherForm>
+	data: Partial<ICreateTeacher>
 }

@@ -9,7 +9,7 @@ export function IconButton({
 }: {
 	className?: string
 	icon: ReactNode
-	onClick: () => void
+	onClick?: () => void
 	type?: 'submit' | 'button'
 }) {
 	return (
@@ -17,7 +17,7 @@ export function IconButton({
 			type={type}
 			onClick={onClick}
 			className={clsx(
-				'm-2 p-1 rounded-full hover:bg-zinc-600 transition-colors',
+				'mx-2 p-1 rounded-full hover:bg-zinc-600 transition-colors',
 				className
 			)}
 		>

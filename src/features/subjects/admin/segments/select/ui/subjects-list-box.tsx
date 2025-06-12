@@ -1,15 +1,23 @@
-import { UseFormRegister } from 'react-hook-form'
-import { ITeacherForm } from '@/features/teachers/admin'
 import { useGetSubjects } from '@/features/subjects'
 import { InfinityList } from '@/shared/ui/list/infinity-list'
 import { SubjectItem } from './subject-item'
+import clsx from 'clsx'
+import {
+	ISelectedSubject,
+	ISelectedSubjects,
+} from '@/features/teachers/admin/model/interfaces/admin-teacher.interface'
+import { getUpdatedselectedSubjects } from '../lib/get-updated-selected-subjects'
+import { isSelected } from '../lib/is-selected'
 
-interface IProps {
-	register?: UseFormRegister<ITeacherForm>
-	isRequired?: boolean
-}
-
-export function SubjectsListBox({ register, isRequired }: IProps) {
+export function SubjectsListBox({
+	className,
+	onChange,
+	selectedSubjects,
+}: {
+	className?: string
+	onChange: (value: ISelectedSubjects) => void
+	selectedSubjects: ISelectedSubjects
+}) {
 	const {
 		data,
 		hasNextPage,
@@ -18,33 +26,15 @@ export function SubjectsListBox({ register, isRequired }: IProps) {
 		isFetchingNextPage,
 	} = useGetSubjects()
 
-	console.log(register, isRequired) // пока так
+	const handleSubjectItemClick = (subject: ISelectedSubject) => {
+		const updatedselectedSubjects = getUpdatedselectedSubjects({
+			selectedSubjects,
+			subject,
+		})
+		onChange(updatedselectedSubjects)
+	}
 
 	return (
-		// <select
-		// 	{...(register ? register('subject', { required: isRequired }) : {})}
-		// 	size={7}
-		// 	className=' bg-theme-600 w-40 rounded-2xl text-white text-center
-		//  border-theme-400 custom-scrollbar rounded-scrollbar border-2 overflow-auto overflow-x-hidden'
-		// 	style={{
-		// 		maxHeight: '30vh', // Ограничение высоты
-		// 		overflowY: 'auto', // Прокрутка по вертикали
-		// 	}}
-		// >
-		// 	{data?.map((subject: ISubject) => (
-		// 		<option
-		// 			key={subject.id}
-		// 			className='p-2 cursor-pointer hover:bg-theme-800 transition-colors my-wrap-text'
-		// 			value={JSON.stringify({
-		// 				subjectId: subject.id,
-		// 				title: subject.title,
-		// 			})}
-		// 		>
-		// 			{subject.title}
-		// 		</option>
-		// 	))}
-		// </select>
-
 		<InfinityList
 			fetchNextPage={fetchNextPage}
 			hasNextPage={hasNextPage}
@@ -54,16 +44,15 @@ export function SubjectsListBox({ register, isRequired }: IProps) {
 				<SubjectItem
 					key={subject.id}
 					title={subject.title}
-					value={JSON.stringify({
-						subjectId: subject.id,
-						title: subject.title,
-					})}
+					onClick={() => handleSubjectItemClick(subject)}
+					isSelected={isSelected({ selectedSubjects, id: subject.id })}
 				/>
 			)}
 			items={data}
-			className={
-				'bg-theme-600 w-40 rounded-2xl text-white text-center border-theme-400 custom-scrollbar rounded-scrollbar border-2 overflow-auto overflow-x-hidden max-h-[30vh]'
-			}
+			className={clsx(
+				'text-center custom-scrollbar rounded-scrollbar overflow-auto overflow-x-hidden',
+				className
+			)}
 			loaderSize={10}
 		/>
 	)

@@ -6,7 +6,7 @@ import { TeacherFilter } from '@/features/teachers/segments/filter'
 export function TeachersPage() {
 	return (
 		<Layout
-			filter={<TeacherFilter />}
+			filter={<></>}
 			menu={<SettingsButton />}
 			list={<TeacherCardList />}
 		/>

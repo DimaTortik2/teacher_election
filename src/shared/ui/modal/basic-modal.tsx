@@ -10,6 +10,9 @@ interface IProps {
 	onClose: () => void
 	title?: string
 	isVisible: boolean
+	zIndex?: number
+	headerOptionsComponent?: ReactNode
+	hasCloseButton?: boolean
 }
 
 export function BasicModal({
@@ -18,6 +21,9 @@ export function BasicModal({
 	onClose,
 	title,
 	isVisible,
+	zIndex,
+	headerOptionsComponent,
+	hasCloseButton = true,
 }: IProps) {
 	return (
 		<Modal
@@ -26,6 +32,7 @@ export function BasicModal({
 			aria-labelledby='modal-modal-title'
 			aria-describedby='modal-modal-description'
 			className=' flex items-center justify-center bg-[rgba(0,0,0,0.8)] text-white'
+			style={{ zIndex }}
 		>
 			<div
 				className={clsx('bg-zinc-700 rounded-2xl flex flex-col', className)}
@@ -42,7 +49,8 @@ export function BasicModal({
 							{title}
 						</label>
 					)}
-					<IconButton icon={<ClearIcon />} onClick={onClose} />
+					{headerOptionsComponent}
+					{hasCloseButton && <IconButton icon={<ClearIcon />} onClick={onClose} />}
 				</div>
 
 				{children}
