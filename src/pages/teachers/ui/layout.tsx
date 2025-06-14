@@ -11,7 +11,7 @@ export function Layout({
 }) {
 	return (
 		<div className='h-full w-full flex flex-col items-center justify-start'>
-			<div className='w-full h-16 flex justify-between bg-zinc-800 py-2 relative'>
+			<div className='w-full h-16 flex items-center justify-between bg-zinc-800 py-2 relative'>
 				{filter}
 				{menu}
 			</div>

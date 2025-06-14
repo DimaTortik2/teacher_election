@@ -11,12 +11,6 @@ export interface ICreateTeacher {
 	file?: File | null
 }
 
-// export interface ICreateTeacher {
-// 	fullName: string
-// 	subjectId: string
-// 	photo: File
-// }
-
 export interface IEditTeacher {
 	id: string
 	data: Partial<ICreateTeacher>

@@ -42,9 +42,9 @@ createRoot(document.getElementById('root')!).render(
 							<Route element={<ReviewsApprovementPorvider />}>
 								<Route path='/admin/reviews' element={<AdminReviewPage />} />
 							</Route>
+							<Route path='/' element={<TeachersPage />} />
+							<Route path='/teacher/:id' element={<TeacherPage />} />
 						</Route>
-						<Route path='/' element={<TeachersPage />} />
-						<Route path='/teacher/:id' element={<TeacherPage />} />
 					</Route>
 
 					<Route path='/test' element={<TestPage />} />

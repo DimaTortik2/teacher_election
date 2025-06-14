@@ -40,7 +40,7 @@ export function BasicModal({
 			>
 				<div
 					className={clsx(
-						'w-full flex  border-b-2 border-zinc-600',
+						'w-full flex  border-b-2 border-zinc-600 py-[5px]',
 						title ? 'justify-between' : 'justify-end'
 					)}
 				>
